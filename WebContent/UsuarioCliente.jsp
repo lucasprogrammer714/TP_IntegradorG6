@@ -4,14 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Administrador</title>
+<title>Insert title here</title>
 </head>
 <body>
-
-<input type="submit" name = "btnCuentas" value = "Cuentas"/>
-<input type="submit" name = "btnClientes" value = "Clientes"/>
-<input type="submit" name = "btnPrestamos" value = "Prestamos"/>
-<input type="submit" name = "btnReportes" value = "Reportes"/>
- 
+<input type="submit" name="btnCuentas" value="Cuentas"/>
+<input type="submit" name="btnTransferencias" value="Transferencias"/>
+<input type="submit" name="btnCuentas" value="Prestamos"/>
+<input type="submit" name="btnInformacionPersonal" value="Mis datos"/>
 </body>
 </html>

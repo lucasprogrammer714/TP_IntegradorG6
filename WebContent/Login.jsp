@@ -5,8 +5,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<style type="text/css">
+body {
+font-family: arial;
+background-color: rgb(185,179,175);}
+h1 {
+color: rgb(255,255,255);}
+input {
+    width: 133px;
+    }
+</style>
 </head>
 <body>
-<h1>Bienvenido</h1>
+<h1>Bienvenido a Banco Golden Age</h1>
+
+
+Usuario:     <input type="text" name="txtUsuario" "> <br><br>
+Contraseña: <input type="text" name="txtContraseña" " />
+
 </body>
 </html>
