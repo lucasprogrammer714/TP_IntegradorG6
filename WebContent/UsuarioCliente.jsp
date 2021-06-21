@@ -4,12 +4,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Clientes</title>
 </head>
 <body>
+<h1>bienvenido/a</h1>
+<!--  ingresar aqui despues el nombre del administrador -->
+
+seleccione y observe el historial de movimientos de sus <a href="">cuentas</a> <br>
+realizar <a href="">tranferencias</a> a otros clientes <br>
+pida un <a href="">prestamo</a> ahora!<br>
+<a href="">pague sus prestamos</a>pendientes<br>
+visualizar <a href="DatosCliente.jsp">mis datos</a><br>
+<!--
 <input type="submit" name="btnCuentas" value="Cuentas"/>
 <input type="submit" name="btnTransferencias" value="Transferencias"/>
 <input type="submit" name="btnCuentas" value="Prestamos"/>
 <input type="submit" name="btnInformacionPersonal" value="Mis datos"/>
+-->
 </body>
 </html>

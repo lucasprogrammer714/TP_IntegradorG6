@@ -8,10 +8,20 @@
 </head>
 <body>
 
-<input type="submit" name = "btnCuentas" value = "Cuentas"/>
+<h1> bienvenido/a </h1>
+<!--  ingresar aqui despues el nombre del administrador -->
+
+<h2>elija una de las siguienes opciones:</h2>
+
+menu ABML de <a href="MenuCuentas.jsp">cuentas</a> a un cliente <br>
+menu ABML de <a href="">clientes</a><br>
+autorizacion de <a>prestamos</a> <br>
+aqui encontrara los <a href="">informes/reportes</a><br>
+
+<!-- <input type="submit" name = "btnCuentas" value = "Cuentas"/> 
 <input type="submit" name = "btnClientes" value = "Clientes"/>
 <input type="submit" name = "btnPrestamos" value = "Prestamos"/>
-<input type="submit" name = "btnReportes" value = "Reportes"/>
+<input type="submit" name = "btnReportes" value = "Reportes"/> -->
  
 </body>
 </html>
