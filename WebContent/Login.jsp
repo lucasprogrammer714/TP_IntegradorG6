@@ -22,7 +22,7 @@ input {
 
 Usuario:     <input type="text" name="txtUsuario" "> <br><br>
 Contraseña: <input type="text" name="txtContraseña" " /><br><br>
-<input type="submit" name="btnLogin" value="sign in"><br>
+<input type="submit" name="btnLogin" value="iniciar sesion"><br>
 
 
 
