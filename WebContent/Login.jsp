@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Login</title>
 <style type="text/css">
 body {
 font-family: arial;
@@ -20,9 +20,15 @@ input {
 <h1>Bienvenido a Banco Golden Age</h1>
 
 
+<<<<<<< HEAD
 Usuario:     <input type="text" name="txtUsuario"> <br><br>
 Contraseña: <input type="text" name="txtContraseña"/><br><br>
 <input type="submit" name="btnLogin" value="sign in"><br>
+=======
+Usuario:     <input type="text" name="txtUsuario" "> <br><br>
+Contraseña: <input type="text" name="txtContraseña" " /><br><br>
+<input type="submit" name="btnLogin" value="iniciar sesion"><br>
+>>>>>>> 518c77faf9eadb0930c8bf4f5d727635dd47b3ed
 
 
 
