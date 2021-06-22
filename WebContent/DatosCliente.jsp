@@ -4,9 +4,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>DatosCliente</title>
 </head>
+<h1> Bienvenido </h1> <!--  Usuario -->
 <body>
-
+Nombre: <br/>
+Apellido: <br/>
+Fecha de Nacimiento: <br/>
+DNI: <br>
+CUIL: <br>
+Provincia:<br>
+Localidad:<br>
+Direccion:<br>
+Email:<br>
+Telefono:<br>
 </body>
 </html>
