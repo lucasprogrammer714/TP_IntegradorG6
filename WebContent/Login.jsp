@@ -20,8 +20,8 @@ input {
 <h1>Bienvenido a Banco Golden Age</h1>
 
 
-Usuario:     <input type="text" name="txtUsuario" "> <br><br>
-Contraseña: <input type="text" name="txtContraseña" " /><br><br>
+Usuario:     <input type="text" name="txtUsuario"> <br><br>
+Contraseña: <input type="text" name="txtContraseña"/><br><br>
 <input type="submit" name="btnLogin" value="sign in"><br>
 
 
