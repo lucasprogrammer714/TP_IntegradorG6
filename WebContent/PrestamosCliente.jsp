@@ -30,6 +30,6 @@
 	</table>
 <input type="submit" name="btnEnviar" value="Solicitar Prestamo">
 </form>
-
+<a href="UsuarioCliente">volver atras</a>
 </body>
 </html>
