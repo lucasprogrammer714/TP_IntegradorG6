@@ -8,7 +8,7 @@
 <style type="text/css">
 body {
 font-family: arial;
-background-color: rgb(185,179,175);}
+background-color: #8fb4c9;}
 h1 {
 color: rgb(255,255,255);}
 input {
@@ -20,15 +20,11 @@ input {
 <h1>Bienvenido a Banco Golden Age</h1>
 
 
-<<<<<<< HEAD
-Usuario:     <input type="text" name="txtUsuario"> <br><br>
-Contraseña: <input type="text" name="txtContraseña"/><br><br>
-<input type="submit" name="btnLogin" value="sign in"><br>
-=======
-Usuario:     <input type="text" name="txtUsuario" "> <br><br>
-Contraseña: <input type="text" name="txtContraseña" " /><br><br>
-<input type="submit" name="btnLogin" value="iniciar sesion"><br>
->>>>>>> 518c77faf9eadb0930c8bf4f5d727635dd47b3ed
+
+Usuario:     <input type="text" name="txtUsuario" /> <br><br>
+Contraseña: <input type="text" name="txtContraseña"  /><br><br>
+<input type="submit" name="btnLogin" value="Iniciar Sesion" ><br>
+
 
 
 

@@ -13,8 +13,8 @@
 
 <h2>elija una de las siguienes opciones:</h2>
 
-menu ABML de <a href="MenuCuentas.jsp">cuentas</a> a un cliente <br>
-menu ABML de <a href="">clientes</a><br>
+menu ABML de <a href="MenuCuentasAdmin.jsp">cuentas</a> a un cliente <br>
+menu ABML de <a href="MenuClientesAdmin.jsp">clientes</a><br>
 autorizacion de <a>prestamos</a> <br>
 aqui encontrara los <a href="">informes/reportes</a><br>
 

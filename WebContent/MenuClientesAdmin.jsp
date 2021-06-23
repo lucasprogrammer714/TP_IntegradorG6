@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<input type="submit" name="btnListaClientes" value="Lista de Clientes"/>
-<input type="submit" name="btnListaClientes" value="Cambiar Contraseña Cliente" />
-<input type="submit" name="btnListaClientes" value="Registrar Cliente"/>
+<a>Lista de Clientes</a>
+<a>Cambiar Contraseña Cliente</a>
+<a href="RegistroClienteAdmin.jsp">Registrar Cliente</a>
 
 </body>
 </html>
