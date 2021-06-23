@@ -11,10 +11,11 @@
 <!--  ingresar aqui despues el nombre del administrador -->
 
 seleccione y observe el historial de movimientos de sus <a href="">cuentas</a> <br>
-realizar <a href="">tranferencias</a> a otros clientes <br>
-pida un <a href="">prestamo</a> ahora!<br>
+realizar <a href="TransferenciaClientes.jsp">tranferencias</a> <br>
+pida un <a href="PrestamosCliente">prestamo</a> ahora!<br>
 <a href="">pague sus prestamos</a>pendientes<br>
-visualizar <a href="DatosCliente.jsp">mis datos</a><br>
+visualizar <a href="DatosCliente.jsp">mis datos</a><br> <br>
+<a href="Login.jsp">cerrar sesion</a>
 <!--
 <input type="submit" name="btnCuentas" value="Cuentas"/>
 <input type="submit" name="btnTransferencias" value="Transferencias"/>

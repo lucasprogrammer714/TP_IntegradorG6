@@ -7,9 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a>Lista de Clientes</a>
-<a>Cambiar Contraseña Cliente</a>
+<a href= "CambioContraseñaAdmin">Cambiar Contraseña Cliente</a>
 <a href="RegistroClienteAdmin.jsp">Registrar Cliente</a>
+<a href="">borrar cliente</a>
+<a href="">Lista de Clientes</a>
 
 </body>
 </html>

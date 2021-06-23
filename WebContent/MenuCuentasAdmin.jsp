@@ -7,8 +7,8 @@
 <title>ABML de cuentas</title>
 </head>
 <body>
-<h1>menu de cuentas</h1> <br> <br>
-elija una opcion: <br>
+<h1>menu de cuentas</h1> <br>
+<h2> elija una opcion:</h2>
 <input type="submit" name="btnAgregar" value="agregar una cuenta">
 <input type="submit" name="btnBorrar" value="borrar una cuenta">
 

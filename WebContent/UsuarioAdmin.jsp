@@ -15,8 +15,9 @@
 
 menu ABML de <a href="MenuCuentasAdmin.jsp">cuentas</a> a un cliente <br>
 menu ABML de <a href="MenuClientesAdmin.jsp">clientes</a><br>
-autorizacion de <a>prestamos</a> <br>
-aqui encontrara los <a href="">informes/reportes</a><br>
+autorizacion de <a href= "PrestamosAdmin">prestamos</a> <br>
+aqui encontrara los <a href="">informes/reportes</a><br> <br>
+<a href="Login.jsp">cerrar sesion</a>
 
 <!-- <input type="submit" name = "btnCuentas" value = "Cuentas"/> 
 <input type="submit" name = "btnClientes" value = "Clientes"/>

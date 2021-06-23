@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>DatosCliente</title>
 </head>
-<h1> Bienvenido </h1> <!--  Usuario -->
+<h1> Bienvenido/a </h1> <!-- ingresar aqui el usuario conectado -->
 <body>
 Nombre: <br/>
 Apellido: <br/>
