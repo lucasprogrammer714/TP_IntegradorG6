@@ -7,12 +7,12 @@
 <title>ABML de cuentas</title>
 </head>
 <body>
-<h1>menu de cuentas</h1> <br>
-<h2> elija una opcion:</h2>
-<input type="submit" name="btnAgregar" value="agregar una cuenta">
-<input type="submit" name="btnBorrar" value="borrar una cuenta">
+<h1>Menú de cuentas</h1> <br>
+<h2> Elija una opcion:</h2>
+<a href="AltaCuentaAdmin.jsp">Agregar una cuenta</a><br>
+<a href="BajaCuentaAdmin.jsp">Dar de baja una cuenta</a><br>
+<a>Listar todas las cuentas</a><br>
 
-<input type="submit" name="btnListar" value="listar todas cuentas">
 
 </body>
 </html>

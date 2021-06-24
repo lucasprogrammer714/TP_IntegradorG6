@@ -6,10 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <style type="text/css">
-body{
-background-color: #8fb4c9
-
-}
 
 
 div {
@@ -54,7 +50,10 @@ padding-right: 10px;
 </div>
 <div>
 <label for="Sexo" class="title"><b>Sexo:</b></label>
-<input type="text" name="txtSexo"/>
+<select name="ddlSexo">
+<option>Masculino</option>
+<option>Femenino</option>
+</select>
 </div>
 <div>
 <label for="Nacionalidad" class="title"><b>Nacionalidad:</b></label>

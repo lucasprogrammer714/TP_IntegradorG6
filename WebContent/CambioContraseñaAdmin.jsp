@@ -27,7 +27,7 @@
 </tr>
 <tr>
 <td></td>
-<td><input type="submit" name="btnCambiarContraseña" value="CambiarContraseña"/></td>
+<td><input type="submit" name="btnCambiarContraseña" value="Cambiar Contraseña"/></td>
 
 </tr>
 </table>
