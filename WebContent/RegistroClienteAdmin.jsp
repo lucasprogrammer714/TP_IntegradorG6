@@ -17,7 +17,7 @@ width: 260px;}
 .title {
 float: left;
 width: 100px;
-text-align: right;
+text-align: left;
 padding-right: 10px;
 
 }
@@ -104,6 +104,8 @@ padding-right: 10px;
 <input type="submit" name="btnRegistrarUsuario" value="Registrar Usuario"/>
 </div>
   </form>
+  
+  <a href="MenuClientesAdmin.jsp">Volver al menú anterior</a>
 
             </body>
                          </html>

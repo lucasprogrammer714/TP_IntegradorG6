@@ -9,8 +9,8 @@
 <body>
 <table>
   <tr>
-      <td> <b>Ingrese DNI del cliente:</b></td>
-      <td><input type="text" name="txtDniCliente"/></td>
+      <td> <b>Ingrese nombre de usuario del cliente:</b></td>
+      <td><input type="text" name="txtUsuarioAltaCuenta"/></td>
   </tr>
   <tr>
        <td> <b>Numero de cuenta:</b></td>

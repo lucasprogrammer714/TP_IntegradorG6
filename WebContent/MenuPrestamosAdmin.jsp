@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>bienvenido/a</p> <!-- ingresar aqui el usuario conectado -->
-
-<input type="submit" name="btnAutorizarPrestamo" value="Autorizacion de Prestamos" />
- <input type="submit" name="btnRechazarPrestamo" value="Rechazar Prestamos"/>
+<h1><b>Bienvenido/a</b></h1> <!-- ingresar aqui el usuario conectado -->
+<a>Solicitud de prestamos</a><br>
+<a href="AutorizarPrestamoAdmin.jsp">Autorizar prestamos</a><br>
+<a>Listado de prestamos</a>
  <!-- deberia ser un negar prestamos porque el administrador puede ver las solicitudes de prestamos que le llegaron
  	  de los clientes aceptarlas o rechazarlas -->		<!--   <input type="submit" name="btnAsignarMonto" value="Asignar Monto"/> -->
 </body>

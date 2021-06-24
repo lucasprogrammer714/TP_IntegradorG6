@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>bienvenido/a</p> <!-- ingresar aqui el usuario conectado -->
+ <!-- ingresar aqui el usuario conectado -->
 <table>
 
 <tr>

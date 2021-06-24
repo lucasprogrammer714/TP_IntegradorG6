@@ -10,7 +10,9 @@
 <a href= "CambioContraseñaAdmin.jsp">Cambiar Contraseña Cliente</a><br>
 <a href="RegistroClienteAdmin.jsp">Registrar Cliente</a><br>
 <a href="BajaClienteAdmin.jsp">Borrar Cliente</a><br>
-<a href="">Lista de Clientes</a>
+<a>Lista de Clientes</a>
+
+<a href="UsuarioAdmin.jsp">Volver al menu anterior</a>
 
 </body>
 </html>
