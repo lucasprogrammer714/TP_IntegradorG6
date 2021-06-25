@@ -4,16 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>ABML de cuentas</title>
+<title>Movimientos</title>
 </head>
 <body>
-<h1>Menú de cuentas</h1> <br>
-<h2> Elija una opcion:</h2>
-<a href="AltaCuentaAdmin.jsp">Agregar una cuenta</a><br>
-<a href="BajaCuentaAdmin.jsp">Dar de baja una cuenta</a><br>
-<a>Listar todas las cuenta</a><br><br>
-<a href="UsuarioAdmin.jsp">Volver al menu anterior</a>
+Seleccione su cuenta:
+<select>
 
 
+</select>
 </body>
 </html>

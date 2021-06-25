@@ -4,16 +4,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>ABML de cuentas</title>
+<title>Pagos de prestamos.</title>
 </head>
 <body>
-<h1>Menú de cuentas</h1> <br>
-<h2> Elija una opcion:</h2>
-<a href="AltaCuentaAdmin.jsp">Agregar una cuenta</a><br>
-<a href="BajaCuentaAdmin.jsp">Dar de baja una cuenta</a><br>
-<a>Listar todas las cuenta</a><br><br>
-<a href="UsuarioAdmin.jsp">Volver al menu anterior</a>
+<table>
+  <tr>
+      <td>Cuota</td>
+  <td>-</td> 
+  <td><input type="radio" name="rdbSeleccionPago" value="Seleccionar"/>Seleccionar</td>
+  </tr>
 
 
+</table>
+  Cuenta:
+  <select>
+  </select>
+  <br><br>
+  
+  <input type="submit" name="btnPagarCuenta" value="Pagar"/>
 </body>
 </html>

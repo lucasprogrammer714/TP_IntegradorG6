@@ -10,10 +10,10 @@
 <h1>bienvenido/a</h1>
 <!--  ingresar aqui despues el nombre del administrador -->
 
-seleccione y observe el historial de movimientos de sus <a href="">cuentas</a> <br>
+seleccione y observe el historial de movimientos de sus <a href="MovimientosCuentas.jsp">cuentas</a> <br>
 realizar <a href="TransferenciaClientes.jsp">tranferencias</a> <br>
-pida un <a href="PrestamosCliente">prestamo</a> ahora!<br>
-<a href="">pague sus prestamos</a>pendientes<br>
+pida un <a href="PrestamosCliente.jsp">prestamo</a> ahora!<br>
+<a href="PagosPrestamosClientes.jsp">pague sus prestamos</a>pendientes<br>
 visualizar <a href="DatosCliente.jsp">mis datos</a><br> <br>
 <a href="Login.jsp">cerrar sesion</a>
 <!--
