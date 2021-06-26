@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -13,19 +13,24 @@
 <form method="post" action="ServletCliente">  <!-- aun no cree este servlet pero es un ejemplo de carga -->
 	<table>
 		<tr>
-			<td>monto solicitado</td>
-			<td><input type="text" name="txtMonto"></td>
+			<td> Tipo de prestamo</td>
+			<td>TNA</td>
+			<td>Cant.Cuotas.Max.Min</td>
 		</tr>
 		<tr>
-			<td>cantidad de cuotas</td>
-			<td><input type="text" name="txtCuotas"></td>
+			<td> <input type="checkbox" name="prestamo-t" value="gusta">Tradicional 
+					</td>
+			<td>49%
+				</td>
+				<td> 3-72</td>
 		</tr>
 		<tr>
-			<td>tipo de cuenta a depositar</td>
-			<td><select name="TipoCuenta"> 
-					<option>cuenta corriente</option>
-					<option>Cuenta ahorro</option>
-				</select>  </td>
+			<td><input type="checkbox" name="prestamo-u" value="gusta">uva
+					
+				</td>
+			<td>5%  </td>
+				<td> 12-60</td>
+				
 		</tr>	
 	</table>
 <input type="submit" name="btnEnviar" value="Solicitar Prestamo">
