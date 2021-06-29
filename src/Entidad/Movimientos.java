@@ -1,11 +1,13 @@
 package Entidad;
 
+import java.util.Date;
+
 public class Movimientos {
 	
 	private String dni_movimiento;
 	private int nro_cuenta_movimiento;
 	private int id_movimiento;
-	private String fecha_movimiento;
+	private Date fecha_movimiento;
 	private String detalle;
 	private float importe;
 	private String tipo_movimiento;
@@ -47,12 +49,12 @@ public class Movimientos {
 	}
 
 
-	public String getFecha_movimiento() {
+	public Date getFecha_movimiento() {
 		return fecha_movimiento;
 	}
 
 
-	public void setFecha_movimiento(String fecha_movimiento) {
+	public void setFecha_movimiento(Date fecha_movimiento) {
 		this.fecha_movimiento = fecha_movimiento;
 	}
 

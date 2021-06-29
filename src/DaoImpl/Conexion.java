@@ -11,7 +11,7 @@ public class Conexion {
 	
 	private Conexion(){
 		try{
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdBanco","root","root");
+			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdbanco","root","root");
 			this.connection.setAutoCommit(false);
 		}
 		catch(Exception e){

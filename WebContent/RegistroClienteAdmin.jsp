@@ -31,7 +31,7 @@ padding-right: 10px;
 
 </head>
 <body>
-<form method="get">
+<form method="post" action=servletCliente>
 <div>
 <label for="DNI" class="title"><b>DNI:</b> </label>
 <input type="text" name="txtDni" />
@@ -90,7 +90,7 @@ padding-right: 10px;
 
 <div>
 <label for="Nombre de Usuario" class="title"><b>Nombre de Usuario:</b></label>
-<input type="text" name="txtCliente"/>
+<input type="text" name="txtUsuarioCliente"/>
 </div>
 <div>
 <label for="ContraseñaUsuario" class="title"><b>Contraseña Usuario:</b></label>

@@ -1,5 +1,7 @@
 package Entidad;
 
+import java.util.Date;
+
 public class Cliente {
 	
 	private	String dni;
@@ -7,16 +9,18 @@ public class Cliente {
 	private	String nombre;
 	private	String apellido;
 	private	String sexo;
-	private	String nacimiento;
+	private Date nacimiento;
+	private String nacionalidad;
 	private	String direccion;
 	private	String localidad;
 	private String provincia;
 	private	String email;
 	private String telefono;
-	private String usuario;
+    private String usuario;
 	private String contraseña;
 	private boolean administrador;
 	private	boolean estado;
+	private String telefono_fijo;
 
 
 	public Cliente()
@@ -75,12 +79,12 @@ public class Cliente {
 	}
 
 
-	public String getNacimiento() {
+	public Date getNacimiento() {
 		return nacimiento;
 	}
 
 
-	public void setNacimiento(String nacimiento) {
+	public void setNacimiento(Date nacimiento) {
 		this.nacimiento = nacimiento;
 	}
 
@@ -172,5 +176,25 @@ public class Cliente {
 	
 	public void setEstado(boolean estado) {
 		this.estado = estado;
+	}
+
+
+	public String getTelefono_fijo() {
+		return telefono_fijo;
+	}
+
+
+	public void setTelefono_fijo(String telefono_fijo) {
+		this.telefono_fijo = telefono_fijo;
+	}
+
+
+	public String getNacionalidad() {
+		return nacionalidad;
+	}
+
+
+	public void setNacionalidad(String nacionalidad) {
+		this.nacionalidad = nacionalidad;
 	}
 }

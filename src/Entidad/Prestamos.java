@@ -1,11 +1,13 @@
 package Entidad;
 
+import java.util.Date;
+
 public class Prestamos {
 	
 	private String dni_prestamo;
 	private int nro_cuenta_p;
 	private int id_prestamo;
-	private String fecha_p;
+	private Date fecha_p;
 	private float imp_debe_pagar;
 	private float importe_pedido;
 	private String plazo;
@@ -49,12 +51,12 @@ public class Prestamos {
 	}
 
 
-	public String getFecha_p() {
+	public Date getFecha_p() {
 		return fecha_p;
 	}
 
 
-	public void setFecha_p(String fecha_p) {
+	public void setFecha_p(Date fecha_p) {
 		this.fecha_p = fecha_p;
 	}
 
