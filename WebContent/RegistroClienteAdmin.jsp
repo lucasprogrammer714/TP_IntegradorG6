@@ -1,3 +1,4 @@
+<%@page import="Entidad.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -31,7 +32,7 @@ padding-right: 10px;
 
 </head>
 <body>
-<form method="get">
+<form action="ServletCliente" method="post">
 <div>
 <label for="DNI" class="title"><b>DNI:</b> </label>
 <input type="text" name="txtDni" />
@@ -86,7 +87,7 @@ padding-right: 10px;
 <div>
 <label for="TelefonoCelular" class="title"><b>Telefono Celular:</b></label>
 <input type="text" name="txtTelCel"/>
-</div><br>
+</div>
 
 <div>
 <label for="Nombre de Usuario" class="title"><b>Nombre de Usuario:</b></label>
@@ -104,6 +105,15 @@ padding-right: 10px;
 <input type="submit" name="btnRegistrarUsuario" value="Registrar Usuario"/>
 </div>
   </form>
+  
+  <%
+		if (request.getAttribute("estadoCliente") != null) {
+	%>
+	Cliente agregado exitosamente
+	<%
+		}
+	%>
+	<br> <br>
   
   <a href="MenuClientesAdmin.jsp">Volver al menú anterior</a>
 

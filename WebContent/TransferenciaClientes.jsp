@@ -38,7 +38,7 @@
 
 </form>
 
-<a href="UsuarioCliente">cancelar transferencia</a>
+<a href="UsuarioCliente.jsp">cancelar transferencia</a>
 
 
 </body>

@@ -7,6 +7,7 @@ public class Cliente {
 	private	String nombre;
 	private	String apellido;
 	private	String sexo;
+	private String nacionalidad;
 	private	String nacimiento;
 	private	String direccion;
 	private	String localidad;
@@ -74,6 +75,15 @@ public class Cliente {
 		this.sexo = sexo;
 	}
 
+
+	public String getNacionalidad() {
+		return nacionalidad;
+	}
+
+
+	public void setNacionalidad(String nacionalidad) {
+		this.nacionalidad = nacionalidad;
+	}
 
 	public String getNacimiento() {
 		return nacimiento;

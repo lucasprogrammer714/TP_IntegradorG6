@@ -9,7 +9,7 @@ public class Conexion {
 	public static Conexion instancia;
 	private Connection connection;
 	
-	private Conexion(){
+	public Conexion(){
 		try{
 			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdBanco","root","root");
 			this.connection.setAutoCommit(false);
