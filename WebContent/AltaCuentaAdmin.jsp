@@ -7,6 +7,7 @@
 <title>Agregar cuenta bancaria</title>
 </head>
 <body>
+<form method="post" action = "servletCuenta">
 <table>
   <tr>
       <td> <b>Ingrese nombre de usuario del cliente:</b></td>
@@ -47,5 +48,6 @@
 </table>
 
    <a href="MenuCuentasAdmin.jsp">Volver al menú</a>
+</form>
 </body>
 </html>

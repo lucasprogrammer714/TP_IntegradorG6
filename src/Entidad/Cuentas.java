@@ -1,11 +1,14 @@
 package Entidad;
 
+import java.util.Date;
+
 public class Cuentas {
 
 	
 	private String dni_cuenta;
 	private int numero_cuenta;
 	private String cbu;
+	private Date creacion;
 	private String tipo_cuenta;
 	private float saldo;
 	private boolean estado_cuenta;
@@ -39,6 +42,16 @@ public class Cuentas {
 		this.cbu = cbu;
 	}
 
+	
+	
+	public Date getCreacion() {
+		return creacion;
+	}
+
+	public void setCreacion(Date creacion) {
+		this.creacion = creacion;
+	}
+
 	public String getTipo_cuenta() {
 		return tipo_cuenta;
 	}
@@ -55,15 +68,11 @@ public class Cuentas {
 		this.saldo = saldo;
 	}
 
-	public boolean isEstado_cuenta() {
+	public boolean getEstado_cuenta() {
 		return estado_cuenta;
 	}
 
 	public void setEstado_cuenta(boolean estado_cuenta) {
 		this.estado_cuenta = estado_cuenta;
 	}
-	
-	
-	
-	
 }

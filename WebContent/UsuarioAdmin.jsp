@@ -8,7 +8,14 @@
 </head>
 <body>
 
-<h1> bienvenido/a </h1>
+<%
+String user="";
+if(request.getAttribute("Usuario")!=null)
+user=request.getAttribute("Usuario").toString();
+%>
+
+<h1> bienvenido/a <%=user %></h1>
+
 <!--  ingresar aqui despues el nombre del administrador -->
 
 <h2>elija una de las siguienes opciones:</h2>

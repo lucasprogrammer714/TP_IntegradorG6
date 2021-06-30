@@ -17,16 +17,20 @@ input {
 </style>
 </head>
 <body>
+
+<%
+String user="";
+if(request.getAttribute("Usuario")!=null)
+user="EL USUARIO NO EXISTE";
+%>
+
+<form method="post" action = "servletLogin">
 <h1>Bienvenido a Banco Golden Age</h1>
-
-
 
 Usuario:     <input type="text" name="txtUsuario" /> <br><br>
 Contraseña: <input type="text" name="txtContraseña"  /><br><br>
 <input type="submit" name="btnLogin" value="Iniciar Sesion" ><br>
-
-
-
-
+</form>
+<h1><%=user %></h1>
 </body>
 </html>

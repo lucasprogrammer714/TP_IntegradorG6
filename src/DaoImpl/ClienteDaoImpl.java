@@ -2,7 +2,11 @@ package DaoImpl;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+///mport com.mysql.cj.xdevapi.Statement;
 
 import Dao.ClienteDao;
 import Entidad.Cliente;
@@ -104,5 +108,32 @@ public class ClienteDaoImpl implements ClienteDao {
 		return false;
 	}
 
+	public int buscarUsuario(String usuario, String contraseña) throws SQLException {
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		Statement statement =conexion.createStatement();
+		ResultSet rs = statement.executeQuery("SELECT * FROM Clientes WHERE usuario='" + usuario + "' AND contrasena='" + contraseña+"'");
+		if(rs.next()) {
+			boolean admin = rs.getBoolean("admin");
+			if(admin==true) {
+				return 1;
+			}
+			else {
+				return 2;
+			}
+		}
+		
+		else {
+			return 3;
+		}
+		
+	}
 	
-	}	
+}	

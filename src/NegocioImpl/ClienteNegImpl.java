@@ -1,5 +1,7 @@
 package NegocioImpl;
 
+import java.sql.SQLException;
+
 import Dao.ClienteDao;
 import DaoImpl.ClienteDaoImpl;
 import Entidad.Cliente;
@@ -16,6 +18,14 @@ public class ClienteNegImpl implements ClienteNeg {
 	{
 		return clienteDao.insertar(cliente);
 	}
+
+
+	public int buscarUsuario(String usuario, String contraseña) throws SQLException {
+		
+		return clienteDao.buscarUsuario(usuario, contraseña);
+	}
+	
+	
 	
 
 }
