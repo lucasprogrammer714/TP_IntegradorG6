@@ -62,7 +62,7 @@ public class ClienteDaoImpl implements ClienteDao {
 			statement.setString(4, cliente.getApellido());
 			statement.setString(5, cliente.getSexo());
 			statement.setString(6, cliente.getNacionalidad());
-			statement.setDate(7,(Date) cliente.getNacimiento());
+			statement.setString(7, cliente.getNacimiento().toString());
 			statement.setString(8, cliente.getDireccion());
 			statement.setString(9, cliente.getLocalidad());
 			statement.setString(10, cliente.getProvincia());
@@ -104,10 +104,59 @@ public class ClienteDaoImpl implements ClienteDao {
 
 
 	public boolean borrar(int dni) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+ 
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isdeleteExitoso = false;
+		try 
+		{
+			statement = conexion.prepareCall("Call bajaCliente (?)");
+			statement.setString(1, Integer.toString(dni));
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isdeleteExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return isdeleteExitoso;
 	}
+	
+	public int buscar_un_cliente(int dni) throws SQLException{
 
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		  Connection cn = Conexion.getConexion().getSQLConexion();
+		  	
+		  	int clienteEncontrado=0;
+	    		String query = "SELECT DNI FROM clientes WHERE DNI ='" + dni+"'";
+	    		Statement st = cn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				if(rs.next()) {
+					clienteEncontrado=1;
+				}
+				System.out.println(clienteEncontrado);
+				return clienteEncontrado;
+	}
+	
+	
+	
+	
 	public int buscarUsuario(String usuario, String contraseña) throws SQLException {
 		
 		try {

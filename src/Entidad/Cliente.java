@@ -10,7 +10,7 @@ public class Cliente {
 	private	String nombre;
 	private	String apellido;
 	private	String sexo;
-	private Date nacimiento;
+	private LocalDate nacimiento;
 	private String nacionalidad;
 	private	String direccion;
 	private	String localidad;
@@ -80,12 +80,12 @@ public class Cliente {
 	}
 
 
-	public Date getNacimiento() {
+	public LocalDate getNacimiento() {
 		return nacimiento;
 	}
 
 
-	public void setNacimiento(Date nacimiento) {
+	public void setNacimiento(LocalDate nacimiento) {
 		this.nacimiento = nacimiento;
 	}
 

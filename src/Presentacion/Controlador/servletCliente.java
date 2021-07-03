@@ -2,8 +2,10 @@ package Presentacion.Controlador;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 ///import javax.servlet.RequestDispatcher;
 import javax.servlet.RequestDispatcher;
@@ -45,6 +47,9 @@ public class servletCliente extends HttpServlet {
 			
 			Cliente cliente = new Cliente();
 			
+			///LocalDate date = LocalDate.parse(request.getParameter("txtFechaNacimiento"));
+			
+			/*
 			
 			try {
 				SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -56,14 +61,18 @@ public class servletCliente extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			*/
 			
-			
+			///System.out.println("FECHA: " + date);
+			cliente.setNacimiento(null);
 			cliente.setDni(request.getParameter("txtDni"));
 			cliente.setCuil(request.getParameter("txtCuil"));
 			cliente.setNombre(request.getParameter("txtNombre"));
 			cliente.setApellido(request.getParameter("txtApellido"));
 			cliente.setSexo(request.getParameter("ddlSexo").toString());
 			cliente.setNacionalidad(request.getParameter("txtNacionalidad"));
+			cliente.setNacimiento(LocalDate.parse(request.getParameter("txtFechaNacimiento")));
+			///cliente.setNacimiento(null);
 			cliente.setDireccion(request.getParameter("txtDireccion"));
 			cliente.setLocalidad(request.getParameter("txtLocalidad"));
 			cliente.setProvincia(request.getParameter("txtProvincia"));
@@ -72,7 +81,7 @@ public class servletCliente extends HttpServlet {
 			cliente.setTelefono(request.getParameter("txtTelCel"));
 			cliente.setUsuario(request.getParameter("txtUsuarioCliente"));
 			cliente.setContraseña(request.getParameter("txtContraseña"));
-			cliente.setAdministrador(true);
+			cliente.setAdministrador(false);
 			cliente.setEstado(true);
 			clienteNeg.insertar(cliente);
 			
@@ -81,6 +90,40 @@ public class servletCliente extends HttpServlet {
 		
 		}
 		
+		if (request.getParameter("btnBajaCliente")!= null)
+		{
+			
+			boolean baja = false;
+			int cliente_existe;
+			try {
+				cliente_existe = clienteNeg.buscar_un_cliente(Integer.parseInt(request.getParameter("txtDniBajaCliente")));
+				System.out.println("CLIENTE_EXISTE: " +cliente_existe);
+				if(cliente_existe == 1){
+				
+					baja = clienteNeg.borrar(Integer.parseInt(request.getParameter("txtDniBajaCliente")));
+					if(baja=true) {
+					int baja1=1;
+					System.out.println("ESTADO: " + baja);
+					request.setAttribute("baja_cliente", baja1);
+					}
+				
+				}
+				else {
+				   request.setAttribute("noExiste", cliente_existe);
+				}
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/BajaClienteAdmin.jsp");
+				dispatcher.forward(request, response);
+				
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
 
 
 }

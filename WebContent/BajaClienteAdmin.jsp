@@ -7,10 +7,11 @@
 <title>Dar de baja cliente</title>
 </head>
 <body>
+ <form method = "post" action = "servletCliente">
   <table>
         <tr>
            <td><b>Ingrese DNI de cliente:</b></td>
-           <td><input type="text" name="txtDniBajaCliente" /></td>
+           <td><input type="text" name="txtDniBajaCliente" required /></td>
         </tr>
        <tr>
             <td></td>
@@ -19,6 +20,47 @@
         
          
   </table>
-  <a href="MenuClientesAdmin.jsp">Volver al menú</a>
+  
+ </form> 
+ 
+ <%
+ int baja = 0;
+ int existe = 1;
+ 
+ if (request.getAttribute("baja_cliente")!= null)
+ 
+ {
+ 
+ baja = Integer.parseInt(request.getAttribute("baja_cliente").toString());
+ 
+ }
+ 
+ if (request.getAttribute("noExiste")!=null)
+ {
+	 
+	 existe = Integer.parseInt(request.getAttribute("noExiste").toString());
+	 
+ }
+ 
+ 
+ %>
+ 
+ <%
+ if (baja == 1)
+ {
+ %>
+ 
+ <h2>El cliente fue dado de baja exitosamente</h2>
+ 
+ 
+<% } %>
+
+
+<% if (existe == 0) { %>
+  
+  <h2>El cliente no existe </h2>
+  
+  <%}%>
+ <a href="MenuClientesAdmin.jsp">Volver al menú</a>
 </body>
 </html>
