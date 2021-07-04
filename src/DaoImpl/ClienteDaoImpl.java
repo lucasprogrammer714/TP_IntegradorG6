@@ -97,10 +97,6 @@ public class ClienteDaoImpl implements ClienteDao {
 	}
 
 	
-	public boolean editar(Cliente cliente) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 
 	public boolean borrar(int dni) {
@@ -184,5 +180,78 @@ public class ClienteDaoImpl implements ClienteDao {
 		}
 		
 	}
-	
+
+
+	@Override
+	public boolean cambiar_contrasena(String nombreUsuario, String contrasena) throws SQLException {
+		
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		
+		PreparedStatement statement;
+
+		Connection conectar = Conexion.getConexion().getSQLConexion();
+		boolean cambioExitoso = false;
+		
+		try {
+			
+			statement = conectar.prepareCall("Call cambioContraseña (?,?)");
+			statement.setString(1, contrasena);
+			statement.setString(2, nombreUsuario);
+			
+			if (statement.executeUpdate()>0)
+			{
+				conectar.commit();
+				cambioExitoso = true;
+				
+			}
+			
+		}
+		catch(SQLException e)
+		{
+		   e.printStackTrace();	
+		}
+		
+		
+		
+		return cambioExitoso;
+	}
+
+
+
+
+	@Override
+	public int buscarNombreUsuarioCliente(String usuario) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		//System.out.println("USUARIO: " + usuario);
+		//String dni="";
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		Statement statement;
+               int userEncontrado = 0;
+		try {
+			statement = conexion.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * FROM Clientes WHERE usuario='" + usuario+"'");
+			if(rs.next()) {
+				userEncontrado = 1;
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return userEncontrado;
+	}
+
+
+
 }	

@@ -20,7 +20,6 @@ public class ClienteNegImpl implements ClienteNeg {
 	}
 
 
-	@Override
 	public boolean borrar(int dni) {
 		
 		return clienteDao.borrar(dni);
@@ -36,6 +35,20 @@ public class ClienteNegImpl implements ClienteNeg {
 	public int buscarUsuario(String usuario, String contraseña) throws SQLException {
 		
 		return clienteDao.buscarUsuario(usuario, contraseña);
+	}
+
+
+	@Override
+	public boolean cambiar_contrasena(String nombreUsuario, String contrasena) throws SQLException {
+		
+		return clienteDao.cambiar_contrasena(nombreUsuario, contrasena);
+	}
+
+
+	@Override
+	public int buscarNombreUsuarioCliente(String usuario) {
+	
+		return clienteDao.buscarNombreUsuarioCliente(usuario);
 	}
 	
 	

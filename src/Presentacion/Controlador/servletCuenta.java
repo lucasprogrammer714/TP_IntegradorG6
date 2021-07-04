@@ -1,6 +1,8 @@
 package Presentacion.Controlador;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Entidad.Cuentas;
+import Negocio.ClienteNeg;
 import Negocio.CuentaNeg;
+import NegocioImpl.ClienteNegImpl;
 import NegocioImpl.CuentaNegImpl;
 
 @WebServlet("/servletCuenta")
@@ -19,6 +23,9 @@ public class servletCuenta extends HttpServlet {
 
 	
 	CuentaNeg cuenta_N = new CuentaNegImpl();
+	Cuentas cuenta = new Cuentas();
+	ClienteNeg cliente_N = new ClienteNegImpl();
+	
 	
     public servletCuenta() {
         super();
@@ -34,13 +41,14 @@ public class servletCuenta extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	if(request.getParameter("btnAgregarCuenta")!=null)
 		{
-			
-			Cuentas cuenta = new Cuentas();		
-			cuenta.setDni_cuenta(request.getParameter("txtUsuarioAltaCuenta"));
+		      boolean cuentaAgregada = false;
+		     
+		
+		    cuenta.setDni_cuenta(request.getParameter("txtDniAltaCuenta"));
 			cuenta.setNumero_cuenta(Integer.parseInt(request.getParameter("txtNroCuenta")));
 			cuenta.setTipo_cuenta(request.getParameter(("ddlTipoCuenta").toString()));
 			cuenta.setCbu(request.getParameter("txtCBU"));
-			cuenta.setCreacion(null);
+			cuenta.setCreacion(LocalDate.parse(request.getParameter("txtFechaCreacionCuenta").toString()));
 			cuenta.setSaldo(Float.parseFloat(request.getParameter("txtSaldo")));
 			cuenta.setEstado_cuenta(true);
 			
@@ -52,13 +60,57 @@ public class servletCuenta extends HttpServlet {
 			System.out.println("SALDO: " + cuenta.getSaldo());
 			System.out.println("ESTADO: " + cuenta.getEstado_cuenta());
 			
-			cuenta_N.insert(cuenta);
+			cuentaAgregada = cuenta_N.insert(cuenta);
 			
+			if (cuentaAgregada == true)
+			{
+				request.setAttribute("cuentaAgregada", cuentaAgregada);
+			}
+		       
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaCuentaAdmin.jsp");
 			dispatcher.forward(request, response);
 			
 		}
+	
+	
+	if (request.getParameter("btnBajaCuenta")!=null)
+	   {
 		
+		 int existeCuenta = 0;
+		 
+		 try { 
+			 boolean bajaCuenta = false;
+				existeCuenta = cuenta_N.buscar_una_cuenta(Integer.parseInt(request.getParameter("txtNroCuentaEliminar")));
+				System.out.println("Cuenta_EXISTE: " + existeCuenta);
+				if(existeCuenta == 1){
+				
+					bajaCuenta = cuenta_N.borrarCuenta(Integer.parseInt(request.getParameter("txtNroCuentaEliminar")));
+					if(bajaCuenta=true) {
+					int baja=1;
+					System.out.println("ESTADO: " + baja);
+					request.setAttribute("baja_cuenta", baja);
+					}
+				
+				}
+				else {
+				   request.setAttribute("noExiste", existeCuenta);
+				}
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/BajaCuentaAdmin.jsp");
+				dispatcher.forward(request, response);
+				
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		
+		
+		
+	   }
+	
 	}
 }

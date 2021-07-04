@@ -64,14 +64,14 @@ public class servletCliente extends HttpServlet {
 			*/
 			
 			///System.out.println("FECHA: " + date);
-			cliente.setNacimiento(null);
+			//cliente.setNacimiento(null);
 			cliente.setDni(request.getParameter("txtDni"));
 			cliente.setCuil(request.getParameter("txtCuil"));
 			cliente.setNombre(request.getParameter("txtNombre"));
 			cliente.setApellido(request.getParameter("txtApellido"));
 			cliente.setSexo(request.getParameter("ddlSexo").toString());
 			cliente.setNacionalidad(request.getParameter("txtNacionalidad"));
-			cliente.setNacimiento(LocalDate.parse(request.getParameter("txtFechaNacimiento")));
+			cliente.setNacimiento(LocalDate.parse(request.getParameter("txtFechaNacimiento").toString()));
 			///cliente.setNacimiento(null);
 			cliente.setDireccion(request.getParameter("txtDireccion"));
 			cliente.setLocalidad(request.getParameter("txtLocalidad"));
@@ -122,6 +122,50 @@ public class servletCliente extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+			
+		}
+		
+		
+		if (request.getParameter("btnCambiarContraseña")!= null)
+		{
+			
+			boolean contrasenaCambiada = false;
+
+			String user = request.getParameter("txtUsuario");
+			String pass = request.getParameter("txtContraseña");
+			String pass2 = request.getParameter("txtConfirmarContraseña");
+	
+			int iguales = 0;
+			int usuarioExiste = 0;
+			
+			
+			try {
+			
+				usuarioExiste = clienteNeg.buscarNombreUsuarioCliente(user);
+				if (usuarioExiste == 1) {
+					if (pass2 == pass) {
+		
+					iguales = 1;
+			contrasenaCambiada = clienteNeg.cambiar_contrasena(user, pass);
+			request.setAttribute("cambioExitoso", contrasenaCambiada);
+					
+					request.setAttribute("UserExiste", usuarioExiste);
+					}
+					
+					else
+						request.setAttribute("IgualPass", iguales);
+				}
+			
+				
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/CambioContraseñaAdmin.jsp");
+			dispatcher.forward(request, response);
 			
 		}
 

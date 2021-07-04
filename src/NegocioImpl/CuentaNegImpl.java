@@ -1,5 +1,7 @@
 package NegocioImpl;
 
+import java.sql.SQLException;
+
 import Dao.CuentasDao;
 import DaoImpl.CuentasDaoImpl;
 import Entidad.Cuentas;
@@ -14,6 +16,16 @@ public class CuentaNegImpl implements CuentaNeg {
 	public boolean insert(Cuentas cuenta) {
 	
 		return cuentaDao.insertar(cuenta);
+	}
+
+	@Override
+	public boolean borrarCuenta(int nro_cuenta) {
+		return cuentaDao.borrarCuenta(nro_cuenta);
+	}
+
+	@Override
+	public int buscar_una_cuenta(int nro_cuenta) throws SQLException {
+		return cuentaDao.buscar_una_cuenta(nro_cuenta);
 	}
 
 }

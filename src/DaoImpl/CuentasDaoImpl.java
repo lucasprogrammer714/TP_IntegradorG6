@@ -3,7 +3,9 @@ package DaoImpl;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import Dao.CuentasDao;
 import Entidad.Cuentas;
@@ -44,7 +46,7 @@ public class CuentasDaoImpl implements CuentasDao {
 			statement.setString(1, cuenta.getDni_cuenta());
 			statement.setInt(2, cuenta.getNumero_cuenta());
 			statement.setString(3, cuenta.getCbu());
-			statement.setDate(4, (Date) cuenta.getCreacion());
+			statement.setString(4, cuenta.getCreacion().toString());
 			statement.setString(5, cuenta.getTipo_cuenta());
 			statement.setFloat(6, cuenta.getSaldo());
 			statement.setBoolean(7, cuenta.getEstado_cuenta());
@@ -71,5 +73,75 @@ public class CuentasDaoImpl implements CuentasDao {
 		return queryExitosa;
 		
 		
+	}
+	
+	
+	
+	
+	
+
+	@Override
+	public boolean borrarCuenta(int nro_cuenta) {
+		
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+	
+		//String query = "UPDATE cuentas SET estado = 0 WHERE num_cuenta='"+ nro_cuenta+"'";
+		
+		PreparedStatement st;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean deleteExitoso = false;
+		
+		try {
+			  
+			st = conexion.prepareCall("Call bajaCuenta (?)");
+			st.setString(1, Integer.toString(nro_cuenta));
+			
+			if (st.executeUpdate()>0)
+			{
+				conexion.commit();
+				deleteExitoso = true;
+			}
+			
+		} catch (SQLException e3)
+		{
+			e3.printStackTrace();
+		}
+		
+		
+		return deleteExitoso;
+	}
+
+
+
+
+
+
+	@Override
+	public int buscar_una_cuenta(int nro_cuenta) throws SQLException {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		  Connection cn = Conexion.getConexion().getSQLConexion();
+		  	
+		  	int cuentaEncontrada=0;
+	    		String query = "SELECT num_cuenta FROM cuentas WHERE num_cuenta ='" + nro_cuenta+"'";
+	    		Statement st = cn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				if(rs.next()) {
+					cuentaEncontrada=1;
+				}
+				System.out.println(cuentaEncontrada);
+				return cuentaEncontrada;
 	}
 }

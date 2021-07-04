@@ -8,22 +8,23 @@
 </head>
 <body>
  <!-- ingresar aqui el usuario conectado -->
+ <form method = "post" action = "servletCliente">
 <table>
 
 <tr>
      <td><b>Ingrese nombre de Usuario:</b></td>
-     <td><input type="text" name="txtNombreUsuario"/></td>
+     <td><input type="text" name="txtNombreUsuario" required/></td>
 </tr>
 <tr>
 <td><b>Nueva Contraseña:</b></td>
 <td>
-<input type="password" name="txtContraseña"/><td>
+<input type="password" name="txtContraseña" required/><td>
 </tr>
 <tr>
 <td>
 <b>Confirmar Contraseña:</b>
 </td>
-<td><input type="password" name="txtConfirmarContraseña"/><td></td>
+<td><input type="password" name="txtConfirmarContraseña" required/><td></td>
 </tr>
 <tr>
 <td></td>
@@ -31,5 +32,55 @@
 
 </tr>
 </table>
+
+<%
+
+boolean cambiada = false;
+int existeUser = -1;
+int igual = -1;
+
+if (request.getAttribute("UserExiste")!=null)
+{
+	existeUser = Integer.parseInt(request.getAttribute("UserExiste").toString());
+}
+
+
+if (request.getAttribute("cambioExitoso")!=null)
+{
+	cambiada = Boolean.parseBoolean(request.getAttribute("cambioExitoso").toString());
+}
+
+
+if (request.getAttribute("IgualPass")!=null)
+{
+	igual = Integer.parseInt(request.getAttribute("IgualPass").toString());
+}
+%>
+
+
+<%
+if (existeUser==0)
+{
+%>
+<h2>El usuario no se encuentra registrado</h2>
+<%} %>
+
+<%
+if (cambiada == true)
+{
+%>
+<h2>La contraseña fue cambiada exitosamente</h2>
+<% } %>
+
+
+<%
+if (igual == 0)
+{
+%>
+
+<h2>Las contraseñas deben ser iguales</h2>
+
+<%} %>
+</form>
 </body>
 </html>

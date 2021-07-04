@@ -31,22 +31,22 @@ padding-right: 10px;
 
 </head>
 <body>
-<form method="post" action=servletCliente>
+<form method="post" action="servletCliente">
 <div>
 <label for="DNI" class="title"><b>DNI:</b> </label>
-<input type="text" name="txtDni" />
+<input type="text" name="txtDni" required/>
 </div>
 <div>
 <label for="Cuil" class="title"><b>CUIL:</b></label>
-<input type="text" name="txtCuil" />
+<input type="text" name="txtCuil" required/>
 </div>
 <div>
 <label for="Nombre" class="title"><b>Nombre:</b></label>
-<input type="text" name="txtNombre"/>
+<input type="text" name="txtNombre" required/>
 </div>
 <div>
 <label for="Apellido" class="title"><b>Apellido:</b></label>
-<input type="text" name="txtApellido"/>
+<input type="text" name="txtApellido" required/>
 </div>
 <div>
 <label for="Sexo" class="title"><b>Sexo:</b></label>
@@ -57,48 +57,48 @@ padding-right: 10px;
 </div>
 <div>
 <label for="Nacionalidad" class="title"><b>Nacionalidad:</b></label>
-<input type="text" name="txtNacionalidad"/>
+<input type="text" name="txtNacionalidad" required/>
 </div>
 <div>
 <label for="FechadeNacimiento" class="title"><b>Fecha de Nacimiento:</b></label>
-<input type="text" name="txtFechaNacimiento"/>
+<input type="text" name="txtFechaNacimiento" required/>
 </div>
 <div>
 <label for="Direccion" class="title"><b>Direccion:</b></label>
-<input type="text" name="txtDireccion"/>
+<input type="text" name="txtDireccion" required/>
 </div>
 <div>
 <label for="Localidad" class="title"><b>Localidad:</b></label>
-<input type="text" name="txtLocalidad"/>
+<input type="text" name="txtLocalidad" required/>
 </div>
 <div>
 <label for="Provincia" class="title"><b>Provincia:</b></label>
-<input type="text" name="txtProvincia"/>
+<input type="text" name="txtProvincia" required/>
 </div>
 <div>
 <label for="CorreoElectronico" class="title"><b>Correo Electronico:</b></label>
-<input type="text" name="txtCorreo"/>
+<input type="text" name="txtCorreo" required/>
 </div>
 <div>
 <label for="TelefonoFijo" class="title"><b>Telefono Fijo:</b></label>
-<input type="text" name="txtTelFijo"/>
+<input type="text" name="txtTelFijo" required/>
 </div>
 <div>
 <label for="TelefonoCelular" class="title"><b>Telefono Celular:</b></label>
-<input type="text" name="txtTelCel"/>
+<input type="text" name="txtTelCel" required/>
 </div><br>
 
 <div>
 <label for="Nombre de Usuario" class="title"><b>Nombre de Usuario:</b></label>
-<input type="text" name="txtUsuarioCliente"/>
+<input type="text" name="txtUsuarioCliente" required/>
 </div>
 <div>
 <label for="ContraseñaUsuario" class="title"><b>Contraseña Usuario:</b></label>
-<input type="password" name="txtContraseña"/>
+<input type="password" name="txtContraseña" required/>
 </div>
 <div>
 <label for="ConfirmarContraseña" class="title"><b>Confirmar Contraseña:</b></label>
-<input type="password" name="txtContraseñaConfirmar"/>
+<input type="password" name="txtContraseñaConfirmar" required/>
 </div>
 <div>
 <input type="submit" name="btnRegistrarUsuario" value="Registrar Usuario"/>

@@ -1,5 +1,6 @@
 package Entidad;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Cuentas {
@@ -8,7 +9,7 @@ public class Cuentas {
 	private String dni_cuenta;
 	private int numero_cuenta;
 	private String cbu;
-	private Date creacion;
+	private LocalDate creacion;
 	private String tipo_cuenta;
 	private float saldo;
 	private boolean estado_cuenta;
@@ -44,11 +45,11 @@ public class Cuentas {
 
 	
 	
-	public Date getCreacion() {
+	public LocalDate getCreacion() {
 		return creacion;
 	}
 
-	public void setCreacion(Date creacion) {
+	public void setCreacion(LocalDate creacion) {
 		this.creacion = creacion;
 	}
 
