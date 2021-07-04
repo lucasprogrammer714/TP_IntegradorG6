@@ -51,9 +51,9 @@ if (request.getAttribute("cambioExitoso")!=null)
 }
 
 
-if (request.getAttribute("IgualPass")!=null)
+if (request.getAttribute("igualPass")!=null)
 {
-	igual = Integer.parseInt(request.getAttribute("IgualPass").toString());
+	igual = Integer.parseInt(request.getAttribute("igualPass").toString());
 }
 %>
 
