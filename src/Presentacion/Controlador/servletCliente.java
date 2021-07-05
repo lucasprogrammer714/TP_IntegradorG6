@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 ///import javax.servlet.RequestDispatcher;
 import javax.servlet.RequestDispatcher;
@@ -36,7 +37,20 @@ public class servletCliente extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		 if(request.getParameter("Param")!=null)
+	        {
+	            //Entra por haber echo click en el hyperlink mostrar usuarios
+	            ClienteNeg udao = new ClienteNegImpl();
+	            ArrayList<Cliente> lista= udao.obtenerClientes();
+	           
+	            request.setAttribute("listaU", lista);
+	           
+	            RequestDispatcher rd = request.getRequestDispatcher("/listadoClientesAdmin.jsp");  
+	            rd.forward(request, response);
+	           
+	           
+	        }
 	}
 
 	

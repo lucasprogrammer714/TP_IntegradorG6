@@ -1,6 +1,7 @@
 package NegocioImpl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import Dao.ClienteDao;
 import DaoImpl.ClienteDaoImpl;
@@ -52,6 +53,8 @@ public class ClienteNegImpl implements ClienteNeg {
 	}
 	
 	
-	
+	public ArrayList<Cliente> obtenerClientes(){
+        return clienteDao.obtenerClientes();  
+    }
 
 }
