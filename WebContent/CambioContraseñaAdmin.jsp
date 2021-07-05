@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Cambiar contraseña Admin</title>
 </head>
 <body>
  <!-- ingresar aqui el usuario conectado -->
@@ -32,6 +32,7 @@
 
 </tr>
 </table>
+<a href="MenuClientesAdmin.jsp">Volver al menú anterior</a>
 
 <%
 
@@ -51,9 +52,9 @@ if (request.getAttribute("cambioExitoso")!=null)
 }
 
 
-if (request.getAttribute("IgualPass")!=null)
+if (request.getAttribute("igualPass")!=null)
 {
-	igual = Integer.parseInt(request.getAttribute("IgualPass").toString());
+	igual = Integer.parseInt(request.getAttribute("igualPass").toString());
 }
 %>
 

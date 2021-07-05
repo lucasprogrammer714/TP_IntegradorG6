@@ -131,7 +131,7 @@ public class servletCliente extends HttpServlet {
 			
 			boolean contrasenaCambiada = false;
 
-			String user = request.getParameter("txtUsuario");
+			String user = request.getParameter("txtNombreUsuario");
 			String pass = request.getParameter("txtContraseña");
 			String pass2 = request.getParameter("txtConfirmarContraseña");
 	
@@ -142,23 +142,25 @@ public class servletCliente extends HttpServlet {
 			try {
 			
 				usuarioExiste = clienteNeg.buscarNombreUsuarioCliente(user);
-				if (usuarioExiste == 1) {
-					if (pass2 == pass) {
-		
-					iguales = 1;
-			contrasenaCambiada = clienteNeg.cambiar_contrasena(user, pass);
-			request.setAttribute("cambioExitoso", contrasenaCambiada);
+
+				if (usuarioExiste==1) {
 					
-					request.setAttribute("UserExiste", usuarioExiste);
+					if (pass.equals(pass2)) {
+						iguales = 1;
+				contrasenaCambiada =	clienteNeg.cambiar_contrasena(user,pass);	
+			    request.setAttribute("cambioExitoso", contrasenaCambiada);
 					}
 					
 					else
-						request.setAttribute("IgualPass", iguales);
-				}
+						request.setAttribute("igualPass", iguales);
+				}else
+					request.setAttribute("UserExiste", usuarioExiste);
+					
+			}
 			
 				
 			
-			} catch (SQLException e) {
+			 catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -168,9 +170,8 @@ public class servletCliente extends HttpServlet {
 			dispatcher.forward(request, response);
 			
 		}
-
-
-}
+		
+	}
 	
 	
 }

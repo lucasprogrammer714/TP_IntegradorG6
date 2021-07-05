@@ -15,6 +15,9 @@ input {
     width: 133px;
     }
 </style>
+
+
+
 </head>
 <body>
 
@@ -27,8 +30,8 @@ user="EL USUARIO NO EXISTE";
 <form method="post" action = "servletLogin">
 <h1>Bienvenido a Banco Golden Age</h1>
 
-Usuario:     <input type="text" name="txtUsuario" /> <br><br>
-Contraseña: <input type="text" name="txtContraseña"  /><br><br>
+Usuario:     <input type="text" name="txtUsuario" required/> <br><br>
+Contraseña: <input type="password" name="txtContraseña" required /><br><br>
 <input type="submit" name="btnLogin" value="Iniciar Sesion" ><br>
 </form>
 <h1><%=user %></h1>
