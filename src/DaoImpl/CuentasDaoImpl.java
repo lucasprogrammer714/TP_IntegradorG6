@@ -34,13 +34,13 @@ public class CuentasDaoImpl implements CuentasDao {
 		try
 		{
 			
-			System.out.println("USUARIO: " + cuenta.getDni_cuenta());
-			System.out.println("N CUENTA: " + cuenta.getNumero_cuenta());
-			System.out.println("CBU: " + cuenta.getCbu());
-			System.out.println("FECHA: " + cuenta.getCreacion());
-			System.out.println("TIPO CUENTA: " + cuenta.getTipo_cuenta());
-			System.out.println("SALDO: " + cuenta.getSaldo());
-			System.out.println("ESTADO: " + cuenta.getEstado_cuenta());
+			//System.out.println("USUARIO: " + cuenta.getDni_cuenta());
+			//System.out.println("N CUENTA: " + cuenta.getNumero_cuenta());
+			//System.out.println("CBU: " + cuenta.getCbu());
+			//System.out.println("FECHA: " + cuenta.getCreacion());
+			//System.out.println("TIPO CUENTA: " + cuenta.getTipo_cuenta());
+			//System.out.println("SALDO: " + cuenta.getSaldo());
+			//System.out.println("ESTADO: " + cuenta.getEstado_cuenta());
 			
 			statement = conexion.prepareStatement(query);
 			statement.setString(1, cuenta.getDni_cuenta());
@@ -144,4 +144,33 @@ public class CuentasDaoImpl implements CuentasDao {
 				System.out.println(cuentaEncontrada);
 				return cuentaEncontrada;
 	}
+	
+	public int contarCuentasAdmin(String dni) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		int cuentas=0, i=0;
+		
+		String sql="SELECT * FROM Cuentas WHERE DNI_c ='" + dni + "' AND estado=1 ";
+		Conexion conexion = Conexion.getConexion();
+		PreparedStatement statement;
+		try {
+			statement=conexion.getSQLConexion().prepareStatement(sql);
+			ResultSet rs;
+			rs=statement.executeQuery();
+			while(rs.next()) {
+				i++;
+			}
+			cuentas=i;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		///System.out.println("DNI: " + dni + ", CANTIDAD DE CUENTAS: " + cuentas);
+		return cuentas;
+	}
+	
 }

@@ -52,6 +52,23 @@
 
 <%
 
+boolean maxCuentas = false;
+
+if (request.getAttribute("NCuentasExcedida")!=null)
+{
+	maxCuentas = true;
+}
+
+%>
+
+<% if (maxCuentas == true) { %>
+
+<h3>El usuario ya posee el maximo de cuentas disponibles</h3>
+
+<% } %>
+
+<%
+
 boolean cuentaAgregada = false;
 
 if (request.getAttribute("cuentaAgregada")!=null)

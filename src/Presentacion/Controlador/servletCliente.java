@@ -97,13 +97,13 @@ public class servletCliente extends HttpServlet {
 			int cliente_existe;
 			try {
 				cliente_existe = clienteNeg.buscar_un_cliente(Integer.parseInt(request.getParameter("txtDniBajaCliente")));
-				System.out.println("CLIENTE_EXISTE: " +cliente_existe);
+				///System.out.println("CLIENTE_EXISTE: " +cliente_existe);
 				if(cliente_existe == 1){
 				
 					baja = clienteNeg.borrar(Integer.parseInt(request.getParameter("txtDniBajaCliente")));
 					if(baja=true) {
 					int baja1=1;
-					System.out.println("ESTADO: " + baja);
+					//System.out.println("ESTADO: " + baja);
 					request.setAttribute("baja_cliente", baja1);
 					}
 				

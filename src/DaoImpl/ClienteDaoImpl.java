@@ -146,7 +146,7 @@ public class ClienteDaoImpl implements ClienteDao {
 				if(rs.next()) {
 					clienteEncontrado=1;
 				}
-				System.out.println(clienteEncontrado);
+				///System.out.println(clienteEncontrado);
 				return clienteEncontrado;
 	}
 	

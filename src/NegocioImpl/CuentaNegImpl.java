@@ -27,5 +27,9 @@ public class CuentaNegImpl implements CuentaNeg {
 	public int buscar_una_cuenta(int nro_cuenta) throws SQLException {
 		return cuentaDao.buscar_una_cuenta(nro_cuenta);
 	}
+	
+	public int contarCuentasAdmin(String dni) {
+		return cuentaDao.contarCuentasAdmin(dni);
+	}
 
 }
