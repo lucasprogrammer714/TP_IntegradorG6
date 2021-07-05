@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.ArrayList;
 
 import Dao.CuentasDao;
 import Entidad.Cuentas;
@@ -144,4 +147,42 @@ public class CuentasDaoImpl implements CuentasDao {
 				System.out.println(cuentaEncontrada);
 				return cuentaEncontrada;
 	}
+
+
+
+
+
+
+	@Override
+	public List<Cuentas> ListarCuentas() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		List<Cuentas> lc = new ArrayList<Cuentas>();
+		Connection cn = Conexion.getConexion().getSQLConexion();
+		try{
+			String query2 ="SELECT * FROM cuentas"; //String sql = "SELECT * FROM cuentas";
+			Statement st = cn.createStatement(); //PreparedStatement pstm = Conexion.prepareStatement(query);
+			ResultSet rs = st.executeQuery(query2);//ResultSet rs = pstm.executeQuery();
+			while (rs.next())
+			{
+				rs.getString(1);  //String dni = rs.getString(1);
+				rs.getInt(2);  //int num_cuenta  = rs.getInt(2);
+				rs.getString(3);  //String cbu = rs.getString(3);
+				LocalDate.parse(rs.getString(4).toString()); //LocalDate creacion =(LocalDate.parse(rs.getString(4).toString()));rs.getString(4); //revisar si es correcto
+				rs.getString(5);  //String tipo_cuenta = rs.getString(5);
+				rs.getFloat(6);  //Float saldo = rs.getFloat(6);
+				rs.getBoolean(7);  //Boolean estado = rs.getBoolean(7);
+				
+				Cuentas cuenta = new Cuentas(); // sino crear un constructor con los datos
+				lc.add(cuenta);
+			}
+
+		} catch (Exception e) {
+		}
+		return lc;	}
 }

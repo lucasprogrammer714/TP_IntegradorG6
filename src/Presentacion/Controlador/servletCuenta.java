@@ -16,6 +16,7 @@ import Negocio.ClienteNeg;
 import Negocio.CuentaNeg;
 import NegocioImpl.ClienteNegImpl;
 import NegocioImpl.CuentaNegImpl;
+//import presentacion.controller.String;
 
 @WebServlet("/servletCuenta")
 public class servletCuenta extends HttpServlet {
@@ -34,8 +35,15 @@ public class servletCuenta extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		if(request.getParameter("Param")!=null)
+		{
+			request.setAttribute("listaCue", cuenta_N.ListarCuentas());	
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoCuentasAdmin.jsp");
+			dispatcher.forward(request, response);
+		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
