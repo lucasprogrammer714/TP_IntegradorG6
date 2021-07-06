@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -254,50 +255,50 @@ public class ClienteDaoImpl implements ClienteDao {
 		return userEncontrado;
 	}
 
-	public ArrayList<Cliente> obtenerClientes() {
+	public List<Cliente> listarClientes() {
 
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-       
-        ArrayList<Cliente> lista = new ArrayList<Cliente>();
-        Connection conn = null;
-        try{
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdbanco" + "bdbanco", "root", "root");
-            Statement st = conn.createStatement();
-           
-            ResultSet rs = st.executeQuery("Select DNI,cuil,nombre,apellido,sexo,nacionalidad,Nacimiento,direccion,localidad,provincia,email,usuario,contraseña,Estado FROM usuario");
-           
-            while(rs.next()){
-               
-                Cliente usuarioRs = new Cliente();
-                usuarioRs.setDni(rs.getString("DNI"));
-                usuarioRs.setCuil(rs.getString("cuil"));
-                usuarioRs.setNombre(rs.getString("nombre"));
-                usuarioRs.setApellido(rs.getString("apellido"));
-                usuarioRs.setSexo(rs.getString("sexo"));
-                usuarioRs.setNacionalidad(rs.getString("nacionalidad"));
-                usuarioRs.setNacimiento(rs.getDate("Nacimiento").toLocalDate());
-                usuarioRs.setDireccion(rs.getString("direccion"));
-                usuarioRs.setLocalidad(rs.getString("localidad"));               
-                usuarioRs.setProvincia(rs.getString("provincia"));
-                usuarioRs.setEmail(rs.getString("email"));
-                usuarioRs.setUsuario(rs.getString("usuario"));
-                usuarioRs.setContraseña(rs.getString("contraseña"));
-                usuarioRs.setEstado(rs.getBoolean("Estado"));
-                lista.add(usuarioRs);
-            }
-            conn.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-       
-        }
-       
-        return lista;
-    }
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String sql="SELECT clientes.DNI, clientes.cuil, clientes.nombre, clientes.apellido, clientes.sexo, clientes.nacionalidad, clientes.nacimiento, clientes.direccion, clientes.localidad, clientes.provincia, clientes.email, clientes.telefono, clientes.usuario, clientes.contrasena, clientes.admin, clientes.telefono_fijo, clientes.estado From clientes ";
+		List<Cliente> lista = new ArrayList<Cliente>();
+		try{
+			
+			Connection conexion = Conexion.getConexion().getSQLConexion();
+			Statement st = conexion.createStatement();
+			ResultSet rs = st.executeQuery(sql); 
+			
+			
+			while(rs.next()){
+				
+				Cliente usuarioRs = new Cliente();
+				usuarioRs.setDni(rs.getString("clientes.DNI"));
+				usuarioRs.setCuil(rs.getString("clientes.cuil"));
+				usuarioRs.setNombre(rs.getString("clientes.nombre"));
+				usuarioRs.setApellido(rs.getString("clientes.apellido"));
+				usuarioRs.setSexo(rs.getString("clientes.sexo"));
+				usuarioRs.setNacionalidad(rs.getString("clientes.nacionalidad"));
+				usuarioRs.setNacimiento(rs.getDate("clientes.nacimiento").toLocalDate());
+				usuarioRs.setDireccion(rs.getString("clientes.direccion"));
+				usuarioRs.setLocalidad(rs.getString("clientes.localidad"));
+				usuarioRs.setProvincia(rs.getString("clientes.provincia"));
+				usuarioRs.setEmail(rs.getString("clientes.email"));
+				usuarioRs.setTelefono(rs.getString("clientes.telefono"));
+				usuarioRs.setUsuario(rs.getString("clientes.usuario"));
+				usuarioRs.setContraseña(rs.getString("clientes.contrasena"));
+				usuarioRs.setAdministrador(rs.getBoolean("clientes.admin"));
+				usuarioRs.setTelefono_fijo(rs.getString("clientes.telefono_fijo"));
+				usuarioRs.setEstado(rs.getBoolean("clientes.estado"));
+				lista.add(usuarioRs);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return lista;
+	}
 
 }	

@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
         <%@page import="Entidad.Cliente"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -16,10 +17,11 @@
 <h1>LISTADO DE CLIENTES</h1>
 
 <% 
-	ArrayList<Cliente> listaclientes = null;
+	List<Cliente> listaclientes = new ArrayList<Cliente>();
 	if(request.getAttribute("listaU")!=null)
 	{
-		listaclientes = (ArrayList<Cliente>) request.getAttribute("listaU");
+		listaclientes = (List<Cliente>) request.getAttribute("listaU");
+		System.out.println("SE CARGO LA LISTA");
 	}
 
  %>
@@ -28,32 +30,33 @@
 <table border="1">
     
         <tr>
-		<th> <b>Dni</b></th>
-		<th> <b>CUIL</b></th>
-		<th> <b>Nombre</b></th>
-		<th> <b>Apellido</b></th>
-		<th> <b>Sexo</b></th>
-		<th> <b>Nacionalidad</b></th>
-		<th> <b>Fecha Nac.</b></th>
-		<th> <b>Direccion</b></th>
-		<th> <b>Localidad</b></th>
-		<th> <b>Provincia</b></th>
-		<th> <b>Correo Electronico</b></th>
-		<th> <b>Telefonos</b></th>
-		<th> <b>Usuario</b></th>
-		<th> <b>Contraseña</b></th>
-		<th> <b>Estado</b></th>
-            <th></th>
+		<td> <b>Dni</b></td>
+		<td> <b>CUIL</b></td>
+		<td> <b>Nombre</b></td>
+		<td> <b>Apellido</b></td>
+		<td> <b>Sexo</b></td>
+		<td> <b>Nacionalidad</b></td>
+		<td> <b>Fecha Nac.</b></td>
+		<td> <b>Direccion</b></td>
+		<td> <b>Localidad</b></td>
+		<td> <b>Provincia</b></td>
+		<td> <b>Correo Electronico</b></td>
+		<td> <b>Telefono</b></td>
+		<td> <b>Telefono Fijo</b></td>
+		<td> <b>Usuario</b></td>
+		<td> <b>Contraseña</b></td>
+		<td> <b>Administrador</b></td>
+		<td> <b>Estado</b></td>
         </tr>
 
  
-       <%  if(listaclientes!=null)
+       <%  
 		for(Cliente user : listaclientes) 
 		{
 	%>
 		<tr>  
-		<form name="formulario" action="servletCliente?DNI=<%=user.getDni()%>" method="get">
-				<td><%=user.getDni() %>   </td> <input type="hidden" name="DNI" value="<%=user.getDni()%>"> </td> 
+		 
+				<td><%=user.getDni() %> </td>
 				<td><%=user.getCuil() %></td>
 				<td><%=user.getNombre() %></td>   
 				<td><%=user.getApellido() %></td>
@@ -63,19 +66,15 @@
 				<td><%=user.getDireccion() %></td>
 				<td><%=user.getLocalidad()%></td>
 				<td><%=user.getProvincia() %></td>
-				<td><%=user.getLocalidad() %></td>
-			
+				<td><%=user.getEmail() %></td>
 				<td><%=user.getTelefono() %></td>
 				<td><%=user.getTelefono_fijo() %></td>
 				<td><%=user.getUsuario() %></td>
 				<td><%=user.getContraseña() %></td>
+				<td><%=user.getAdministrador() %></td>
 				<td><%=user.getEstado() %></td>
-				
-				
-			    </form>
 		</tr>
-		
 	<%  } %>
     </table>
-
+    <a href= "MenuClientesAdmin.jsp">Volver</a>
 </body>
