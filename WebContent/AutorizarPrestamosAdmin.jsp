@@ -9,45 +9,56 @@
 <body>
    <table>
            <tr>
-                 <td><b>Nombre de Usuario:</b></td>
-                 <td><input type="text" name="txtUsuarioPrestamo"/></td>
+                 <td><b>DNI del Cliente:</b></td>
+                 <td><input type="text" name="txtDniCliente"   required/></td>
+           
+           </tr>
+           <tr><td><b>Numero de cuenta a depositar:</b></td>
+                <td><input type="text"  name = "txtNroCuentaPrestamo" required /></td>           
            
            </tr>
            <tr>
            <td><b>Fecha:</b></td>
-                 <td><input type="text" name="txtFechaPrestamo"/></td>
+                 <td><input type="text" name="txtFechaPrestamo" required/></td>
            
            </tr>
-           <tr>
+          <tr>
+            <td> <b>Intereses (según tipo de prestamo):</b></td>
+             <td> Tradicional<input type ="radio" name = "rdbTipoPrestamo" value="Tradicional" /> 
+             UVA<input type ="radio" name="rdbTipoPrestamo" value = "UVA"/>
+              </td>
+          
+          </tr>
+          <tr>
            <td><b>Importe de pago:</b></td>
-                 <td><input type="text" name="txtImportePagoPrestamo"/></td>
+                 <td><input type="text" name="txtImportePagoPrestamo" required/></td>
            
            </tr>
            <tr>
            <td><b>Importe del prestamo:</b></td>
-                 <td><input type="text" name="txtImportePrestamo"/></td>
+                 <td><input type="text" name="txtImportePrestamo" required/></td>
            
            </tr>
            <tr>
-           <td><b>Plazo de pago</b></td>
-                 <td><input type="text" name="txtUsuarioPrestamo"/></td>
+           <td><b>Plazo de pago:</b></td>
+                 <td><input type="text" name="txtUsuarioPrestamo" required/></td>
            
            </tr>
            <tr>
            <td><b>Monto a pagar por mes:</b></td>
-                 <td><input type="text" name="txtUsuarioPrestamo"/></td>
+                 <td><input type="text" name="txtUsuarioPrestamo" required/></td>
            
            </tr>
            <tr>
            <td><b>Cuotas:</b></td>
-                 <td><input type="text" name="txtUsuarioPrestamo"/></td>
+                 <td><input type="text" name="txtCuotasPrestamo" required/></td>
            
            </tr>
            <tr>
            <td></td>
            <td>
           
-                 <input type="submit" name="btnPrestamo" value="Aceptar"/>
+                 <input type="submit" name="btnAutorizarPrestamo" value="Aceptar"/>
            
            </td>
            
