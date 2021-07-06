@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 ///import javax.servlet.RequestDispatcher;
 import javax.servlet.RequestDispatcher;
@@ -36,7 +37,20 @@ public class servletCliente extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		 if(request.getParameter("Param")!=null)
+	        {
+	            //Entra por haber echo click en el hyperlink mostrar usuarios
+	            ClienteNeg udao = new ClienteNegImpl();
+	            ArrayList<Cliente> lista= udao.obtenerClientes();
+	           
+	            request.setAttribute("listaU", lista);
+	           
+	            RequestDispatcher rd = request.getRequestDispatcher("/listadoClientesAdmin.jsp");  
+	            rd.forward(request, response);
+	           
+	           
+	        }
 	}
 
 	
@@ -97,13 +111,13 @@ public class servletCliente extends HttpServlet {
 			int cliente_existe;
 			try {
 				cliente_existe = clienteNeg.buscar_un_cliente(Integer.parseInt(request.getParameter("txtDniBajaCliente")));
-				System.out.println("CLIENTE_EXISTE: " +cliente_existe);
+				///System.out.println("CLIENTE_EXISTE: " +cliente_existe);
 				if(cliente_existe == 1){
 				
 					baja = clienteNeg.borrar(Integer.parseInt(request.getParameter("txtDniBajaCliente")));
 					if(baja=true) {
 					int baja1=1;
-					System.out.println("ESTADO: " + baja);
+					//System.out.println("ESTADO: " + baja);
 					request.setAttribute("baja_cliente", baja1);
 					}
 				
@@ -170,9 +184,8 @@ public class servletCliente extends HttpServlet {
 			dispatcher.forward(request, response);
 			
 		}
-
-
-}
+		
+	}
 	
 	
 }

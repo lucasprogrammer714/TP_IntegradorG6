@@ -1,6 +1,7 @@
 package NegocioImpl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import Dao.CuentasDao;
 import DaoImpl.CuentasDaoImpl;
@@ -26,6 +27,15 @@ public class CuentaNegImpl implements CuentaNeg {
 	@Override
 	public int buscar_una_cuenta(int nro_cuenta) throws SQLException {
 		return cuentaDao.buscar_una_cuenta(nro_cuenta);
+	}
+	
+	public int contarCuentasAdmin(String dni) {
+		return cuentaDao.contarCuentasAdmin(dni);
+	}
+
+	@Override
+	public ArrayList<Cuentas> ListarCuentas() {
+		return (ArrayList<Cuentas>) cuentaDao.ListarCuentas();
 	}
 
 }

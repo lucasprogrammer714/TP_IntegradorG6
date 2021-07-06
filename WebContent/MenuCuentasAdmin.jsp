@@ -11,7 +11,7 @@
 <h2> Elija una opcion:</h2>
 <a href="AltaCuentaAdmin.jsp">Agregar una cuenta</a><br>
 <a href="BajaCuentaAdmin.jsp">Dar de baja una cuenta</a><br>
-<a>Listar todas las cuenta</a><br><br>
+<a href="servletCuenta?Param=list">Listar todas las cuentas</a><br><br>
 <a href="UsuarioAdmin.jsp">Volver al menu anterior</a>
 
 

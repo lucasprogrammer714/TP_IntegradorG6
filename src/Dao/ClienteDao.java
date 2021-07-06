@@ -2,6 +2,7 @@ package Dao;
 
 import java.awt.List;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import Entidad.Cliente;
 
@@ -17,6 +18,6 @@ public boolean borrar(int dni);
 public int buscar_un_cliente(int dni) throws SQLException;
 public int buscarUsuario(String usuario, String contraseña) throws SQLException;
 public int buscarNombreUsuarioCliente (String usuario);
-	
+public ArrayList<Cliente> obtenerClientes();
 
 }
