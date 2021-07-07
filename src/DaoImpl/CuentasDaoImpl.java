@@ -12,6 +12,7 @@ import java.util.List;
 
 import Dao.CuentasDao;
 import Entidad.Cuentas;
+import Entidad.Cliente;
 import DaoImpl.Conexion;
 
 
@@ -226,4 +227,53 @@ public class CuentasDaoImpl implements CuentasDao {
 		}
 	return lc;
 		}
+
+
+
+
+
+
+	@Override
+	public List<Cuentas> Listar_cuenta_por_cliente(String dni) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+
+		}
+		
+	
+		
+		String sql = "SELECT  DNI, num_cuenta FROM cuentas INNER JOIN clientes ON clientes.DNI = cuentas.DNI_c WHERE DNI = '"+dni+"'";
+		
+		List<Cuentas> lista_cuentaxcliente = new ArrayList<Cuentas>();
+		
+		try{
+			
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		Statement st = conexion.createStatement();
+		ResultSet rs = st.executeQuery(sql); 
+		
+		while (rs.next())
+		{
+			//Cliente cliente = new Cliente();
+			Cuentas cuenta = new Cuentas() ;
+			cuenta.setDni_cuenta(rs.getString("DNI"));
+			cuenta.setNumero_cuenta(rs.getInt("num_cuenta"));
+		
+			
+			lista_cuentaxcliente.add(cuenta);
+		}
+
+		}catch (Exception e) {
+
+		        e.printStackTrace();
+		        
+		}
+	return lista_cuentaxcliente;
 	}
+	
+	
+	
+	          }

@@ -14,5 +14,6 @@ public interface CuentasDao {
 	public int buscar_una_cuenta(int nro_cuenta) throws SQLException;
 	public int contarCuentasAdmin(String dni);
 	public List<Cuentas> ListarCuentas();
+	public List<Cuentas> Listar_cuenta_por_cliente(String dni);
 
 }

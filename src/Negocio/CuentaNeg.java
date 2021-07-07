@@ -13,5 +13,6 @@ public interface CuentaNeg {
 	public int buscar_una_cuenta(int nro_cuenta) throws SQLException;;
 	public int contarCuentasAdmin(String dni);
     public ArrayList<Cuentas> ListarCuentas();
+    public ArrayList<Cuentas> ListarCuentaxCliente(String dni);
 
 }

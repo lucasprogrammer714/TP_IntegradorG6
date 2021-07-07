@@ -10,6 +10,9 @@
 <title>Listado cuentas</title>
 </head>
 <body>
+
+<h2>LISTADO DE CUENTAS</h2>
+
 <% 
 	
 	List<Cuentas> lc = new ArrayList<Cuentas>();
@@ -53,7 +56,7 @@ if(request.getAttribute("listaCue")!=null){
 
 
 	</table>
-
+<br><br>
 <a href= "MenuCuentasAdmin.jsp">Volver</a>
 
 

@@ -3,6 +3,7 @@ package Presentacion.Controlador;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -128,6 +129,38 @@ public class servletCuenta extends HttpServlet {
 		
 		
 	   }
+	
+	            if (request.getParameter("btnListarCuentaxDni")!=null)
+	            {
+	            	
+	            	 int 	cliente_existe;
+	            	
+	            	String dni_cliente = request.getParameter("txtListarCuentaxDNI").toString();
+	           try {
+				cliente_existe = cliente_N.buscar_un_cliente(Integer.parseInt(request.getParameter("txtListarCuentaxDNI")));
+				
+		        
+						if(cliente_existe == 1) {
+		            	
+		            	ArrayList<Cuentas> list = cuenta_N.ListarCuentaxCliente(dni_cliente);
+		            	
+		            	request.setAttribute("listaCuentaxCliente", list);	
+						}
+						else
+							request.setAttribute("clienteExiste", cliente_existe);
+
+				
+			} catch (NumberFormatException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	            	
+	            	
+	            	
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/ListarCuentasxCliente.jsp");
+					dispatcher.forward(request, response);
+	            	
+	            }
 	
 	}
 }

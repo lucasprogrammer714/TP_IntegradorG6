@@ -38,4 +38,10 @@ public class CuentaNegImpl implements CuentaNeg {
 		return (ArrayList<Cuentas>) cuentaDao.ListarCuentas();
 	}
 
+	@Override
+	public ArrayList<Cuentas> ListarCuentaxCliente(String dni) {
+		// TODO Auto-generated method stub
+		return (ArrayList<Cuentas>) cuentaDao.Listar_cuenta_por_cliente(dni);
+	}
+
 }
