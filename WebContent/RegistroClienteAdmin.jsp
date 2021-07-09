@@ -105,6 +105,26 @@ padding-right: 10px;
 </div>
   </form>
   
+  
+  
+  <%
+  
+  boolean registro = false;
+  
+  if (request.getAttribute("RegistroExitoso")!=null)
+  {
+	  registro = Boolean.parseBoolean(request.getAttribute("RegistroExitoso").toString());
+  }
+  
+  %>
+  
+  
+  <% if (registro == true){ %>
+  
+  <h2>El cliente fue registrado exitosamente</h2>
+  
+  <%} %>   
+  
   <a href="MenuClientesAdmin.jsp">Volver al menú anterior</a>
 
             </body>

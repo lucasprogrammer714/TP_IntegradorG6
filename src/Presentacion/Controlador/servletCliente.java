@@ -17,8 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Entidad.Cliente;
+import Entidad.Cuentas;
 import Negocio.ClienteNeg;
+import Negocio.CuentaNeg;
 import NegocioImpl.ClienteNegImpl;
+import NegocioImpl.CuentaNegImpl;
 
 
 @WebServlet("/servletCliente")
@@ -27,7 +30,7 @@ public class servletCliente extends HttpServlet {
 	
 	
 	ClienteNeg clienteNeg = new ClienteNegImpl();
-	
+	CuentaNeg cuentaNeg = new CuentaNegImpl();
 
     public servletCliente() {
         super();
@@ -38,19 +41,44 @@ public class servletCliente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		 if(request.getParameter("Param")!=null)
-	        {
-	            //Entra por haber echo click en el hyperlink mostrar usuarios
-	            ClienteNeg udao = new ClienteNegImpl();
-	            ArrayList<Cliente> lista= udao.obtenerClientes();
-	           
-	            request.setAttribute("listaU", lista);
-	           
-	            RequestDispatcher rd = request.getRequestDispatcher("/listadoClientesAdmin.jsp");  
-	            rd.forward(request, response);
-	           
-	           
-	        }
+		if(request.getParameter("Param")!=null)
+		{
+		
+           String user_dni;
+			
+			String option = request.getParameter("Param").toString();
+			
+			
+			switch (option){
+			
+			case "listCuentasUser":
+			{
+				
+					String user = request.getSession().getAttribute("User").toString();
+					System.out.println(user);
+					
+					user_dni = clienteNeg.Dni_de_Usuario(user).toString();
+					System.out.println(user_dni);
+					ArrayList <Cuentas> list = cuentaNeg.ListarCuentaxCliente(user_dni);
+					
+					request.setAttribute("listaCuentasUser", list);	
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/TransferenciaClientes.jsp");
+					dispatcher.forward(request, response);
+			
+			break;	
+			}
+			case "list":
+			{
+				
+			request.setAttribute("listaU", clienteNeg.listarClientes());	
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoClientesAdmin.jsp");
+			dispatcher.forward(request, response);
+			break;
+			}
+			default:
+				break;
+			}
+		}
 	}
 
 	
@@ -60,6 +88,8 @@ public class servletCliente extends HttpServlet {
 		{
 			
 			Cliente cliente = new Cliente();
+			
+			Boolean registro = false;
 			
 			///LocalDate date = LocalDate.parse(request.getParameter("txtFechaNacimiento"));
 			
@@ -97,8 +127,10 @@ public class servletCliente extends HttpServlet {
 			cliente.setContraseña(request.getParameter("txtContraseña"));
 			cliente.setAdministrador(false);
 			cliente.setEstado(true);
-			clienteNeg.insertar(cliente);
+			registro = clienteNeg.insertar(cliente);
 			
+			
+			request.setAttribute("RegistroExitoso", registro);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/RegistroClienteAdmin.jsp");
 			dispatcher.forward(request, response);
 		

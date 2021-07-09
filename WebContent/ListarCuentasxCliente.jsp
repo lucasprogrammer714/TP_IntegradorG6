@@ -69,6 +69,8 @@ if (request.getAttribute("clienteExiste")!=null)
 
 	</table>
 
+<br><br>
+<a href = "MenuCuentasAdmin.jsp">Volver</a>
 
 </body>
 </html>

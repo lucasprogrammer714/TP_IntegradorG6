@@ -216,7 +216,6 @@ public class CuentasDaoImpl implements CuentasDao {
 			cuenta.setTipo_cuenta(rs.getString("cuentas.tipo_cuenta"));
 			cuenta.setSaldo(rs.getFloat("cuentas.saldo"));
 			cuenta.setEstado_cuenta(rs.getBoolean("cuentas.estado"));
-			
 			lc.add(cuenta);
 		}
 

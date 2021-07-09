@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="Entidad.Cuentas" %>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,31 +14,50 @@
 <h1>bienvenido/a</h1>
 <!--  ingresar aqui despues el nombre del administrador -->
 
+<% 
+	
+	List<Cuentas> listaCuentas = new ArrayList<Cuentas>();
+
+if(request.getAttribute("listaCuentasUser")!=null){
+   listaCuentas = (List<Cuentas>) request.getAttribute("listaCuentasUser");
+    
+}
+    
+%>
+
+
 <form method="post" action="ServletCliente">  <!-- aun no cree este servlet pero es un ejemplo de carga -->
 	<table>
 			<tr>
-			<td>CBU a transferir</td>
+			<td><b>CBU a transferir:</b></td>
 			<td><input type="text" name="txtCBU"></td>
 		</tr>
 		<tr>
-			<td>tipo de cuenta</td>
-			<td><select name="TipoCuenta"> 
-					<option>cuenta corriente</option>
-					<option>Cuenta ahorro</option>
-				</select>  </td>
+		
+		
+			<td><b>Nro. de  Cuenta:</b></td>
+			
+			<td><select name="NroCuenta"> 
+			<%
+		   for (Cuentas c : listaCuentas){
+		%>
+					<option> <%=c.getNumero_cuenta() %></option>
+					
+					<%} %>
+				</select> </td>
 		</tr>	
 		<tr>
-			<td>detalle </td>
+			<td><b>Detalle:</b> </td>
 			<td><input type="text" name="txtDetalle">
 		</tr>	
 		<tr>
-			<td>Importe a transferir</td>
+			<td><b>Importe a transferir:</b></td>
 			<td> <input type="text" name="txtImporte"></td>
 		</tr>		
 		
-</table>
+</table><br><br>
 		
- <input type="submit" name="btnTransferir" value="Transferir ahora">
+ <input type="submit" name="btnTransferir" value="Transferir">
 
 </form>
 

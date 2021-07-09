@@ -35,5 +35,6 @@ Contraseña: <input type="password" name="txtContraseña" required /><br><br>
 <input type="submit" name="btnLogin" value="Iniciar Sesion" ><br>
 </form>
 <h1><%=user %></h1>
+
 </body>
 </html>

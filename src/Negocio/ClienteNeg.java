@@ -2,6 +2,7 @@ package Negocio;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import Entidad.Cliente;
 
@@ -14,5 +15,6 @@ public interface ClienteNeg {
 	public int buscar_un_cliente(int dni)throws SQLException;
 	public int buscarUsuario(String usuario, String contraseña) throws SQLException;
 	public int buscarNombreUsuarioCliente(String usuario);
-	public ArrayList<Cliente> obtenerClientes();
+	public String Dni_de_Usuario(String user);
+	public List<Cliente> listarClientes();
 }

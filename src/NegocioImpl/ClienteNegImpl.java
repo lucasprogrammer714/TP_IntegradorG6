@@ -2,6 +2,7 @@ package NegocioImpl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import Dao.ClienteDao;
 import DaoImpl.ClienteDaoImpl;
@@ -53,8 +54,15 @@ public class ClienteNegImpl implements ClienteNeg {
 	}
 	
 	
-	public ArrayList<Cliente> obtenerClientes(){
-        return clienteDao.obtenerClientes();  
+	public List<Cliente> listarClientes(){
+        return clienteDao.listarClientes();  
     }
+
+
+	@Override
+	public String Dni_de_Usuario(String user) {
+		// TODO Auto-generated method stub
+		return clienteDao.Dni_de_Usuario(user);
+	}
 
 }
