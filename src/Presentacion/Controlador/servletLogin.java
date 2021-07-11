@@ -1,6 +1,7 @@
 package Presentacion.Controlador;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Entidad.Cuentas;
 import Negocio.ClienteNeg;
+import Negocio.CuentaNeg;
 import NegocioImpl.ClienteNegImpl;
+import NegocioImpl.CuentaNegImpl;
 
 
 @WebServlet("/servletLogin")
@@ -18,6 +22,7 @@ public class servletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	ClienteNeg clienteNeg = new ClienteNegImpl();
+	CuentaNeg cuentaNeg = new CuentaNegImpl();
 
     public servletLogin() {
         super();
@@ -56,6 +61,8 @@ public class servletLogin extends HttpServlet {
 				}
 				
 				else if(usuario==2){
+					//String user_dni = clienteNeg.Dni_de_Usuario(user).toString();
+					//ArrayList <Cuentas> list = cuentaNeg.ListarCuentaxCliente(user_dni);
 					request.setAttribute("Usuario", usu);
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/UsuarioCliente.jsp");
 					dispatcher.forward(request, response);

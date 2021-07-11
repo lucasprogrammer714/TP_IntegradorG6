@@ -1,5 +1,6 @@
-/DaoImpl/
-/NegocioImpl/
-/Negocio/
 /Presentacion/
+/DaoImpl/
 /Dao/
+/Negocio/
+/NegocioImpl/
+/Entidad/

@@ -1,5 +1,6 @@
 package Entidad;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Movimientos {
@@ -7,7 +8,7 @@ public class Movimientos {
 	private String dni_movimiento;
 	private int nro_cuenta_movimiento;
 	private int id_movimiento;
-	private Date fecha_movimiento;
+	private LocalDate fecha_movimiento;
 	private String detalle;
 	private float importe;
 	private String tipo_movimiento;
@@ -49,12 +50,12 @@ public class Movimientos {
 	}
 
 
-	public Date getFecha_movimiento() {
+	public LocalDate getFecha_movimiento() {
 		return fecha_movimiento;
 	}
 
 
-	public void setFecha_movimiento(Date fecha_movimiento) {
+	public void setFecha_movimiento(LocalDate fecha_movimiento) {
 		this.fecha_movimiento = fecha_movimiento;
 	}
 

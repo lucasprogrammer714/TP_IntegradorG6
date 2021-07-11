@@ -15,13 +15,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Entidad.Cliente;
 import Entidad.Cuentas;
+import Entidad.Movimientos;
 import Negocio.ClienteNeg;
 import Negocio.CuentaNeg;
+import Negocio.MovimientosNeg;
 import NegocioImpl.ClienteNegImpl;
 import NegocioImpl.CuentaNegImpl;
+import NegocioImpl.MovimientosNegImpl;
 
 
 @WebServlet("/servletCliente")
@@ -31,6 +35,7 @@ public class servletCliente extends HttpServlet {
 	
 	ClienteNeg clienteNeg = new ClienteNegImpl();
 	CuentaNeg cuentaNeg = new CuentaNegImpl();
+	MovimientosNeg movimientoNeg= new MovimientosNegImpl();
 
     public servletCliente() {
         super();
@@ -75,10 +80,40 @@ public class servletCliente extends HttpServlet {
 			dispatcher.forward(request, response);
 			break;
 			}
+			
+			case "movCuentas":
+			{
+				HttpSession misession= request.getSession(true);
+				String user = request.getSession().getAttribute("User").toString();
+				user_dni = clienteNeg.Dni_de_Usuario(user).toString();
+				ArrayList <Cuentas> list = cuentaNeg.ListarCuentaxCliente(user_dni);
+				misession.setAttribute("listacuentas", list);
+				request.setAttribute("listaCuentasUser", list);	
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/MovimientosCuentas.jsp");
+				dispatcher.forward(request, response);
+			}
+			
 			default:
 				break;
 			}
 		}
+		
+		if(request.getParameter("Parametro")!=null) {
+			
+			String user = request.getSession().getAttribute("User").toString();
+			String user_dni = clienteNeg.Dni_de_Usuario(user).toString();
+			String ncuent= request.getParameter("Parametro");
+			System.out.println("NUMERO DE CUENTA: "+ ncuent);
+			int ncuenta=Integer.parseInt(request.getParameter("Parametro"));
+			
+			System.out.println("DNI USUARIO: " + user + ", NCUENTA: " + ncuenta);
+			ArrayList <Movimientos> list = movimientoNeg.Listar_movimientos_por_cuenta(user_dni, ncuenta);
+			request.setAttribute("listaMovimientos", list);	
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/MovimientosCuentas.jsp");
+			dispatcher.forward(request, response);
+			
+		}
+		
 	}
 
 	
@@ -215,8 +250,19 @@ public class servletCliente extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/CambioContraseñaAdmin.jsp");
 			dispatcher.forward(request, response);
 			
-		}
+		}	
 		
+		
+		if(request.getParameter("btnListarMovimientos")!=null) {
+			String user = request.getSession().getAttribute("User").toString();
+			String user_dni = clienteNeg.Dni_de_Usuario(user).toString();
+			int ncuenta=Integer.parseInt(request.getParameter("ncuenta"));
+			System.out.println("DNI USUARIO: " + user + ", NCUENTA: " + ncuenta);
+			ArrayList <Movimientos> list = movimientoNeg.Listar_movimientos_por_cuenta(user_dni, ncuenta);
+			request.setAttribute("listaMovimientos", list);	
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/MovimientosCuentas.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 	
 	

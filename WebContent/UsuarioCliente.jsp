@@ -23,7 +23,7 @@ session.setAttribute("User", user);
 <h1>bienvenido/a <%=user %> </h1>
 <!--  ingresar aqui despues el nombre del administrador -->
 
-seleccione y observe el historial de movimientos de sus <a href="MovimientosCuentas.jsp">cuentas</a> <br>
+seleccione y observe el historial de movimientos de sus <a href="servletCliente?Param=movCuentas">cuentas</a> <br>
 realizar <a href="servletCliente?Param=listCuentasUser">tranferencias</a> <br>
 pida un <a href="PrestamosCliente.jsp">prestamo</a> ahora!<br>
 <a href="PagosPrestamosClientes.jsp">pague sus prestamos</a>pendientes<br>
