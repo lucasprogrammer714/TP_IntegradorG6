@@ -14,22 +14,19 @@
 
 <%
 List<Cuentas> listaCuentas = new ArrayList<Cuentas>();
-List<Cuentas> lc = new ArrayList<Cuentas>();  
+List<Cuentas> lc = new ArrayList<Cuentas>();
 if(request.getAttribute("listaCuentasUser")!=null){
    		listaCuentas = (List<Cuentas>) request.getAttribute("listaCuentasUser");
 } 
 	HttpSession misession= (HttpSession) request.getSession();
 	session.setAttribute("listcuentas", listaCuentas);
 	lc=(List<Cuentas>)misession.getAttribute("listcuentas");
-	
-	
 %>
-
 <form method="post" action = "servletCliente">
 Seleccione su cuenta:
 <select name="ncuenta" id="ncuenta">
 		<%
-		   for (Cuentas c : lc){
+		   for (Cuentas c : listaCuentas){
 		%>
 		   		<option> <%=c.getNumero_cuenta() %></option>
 					
@@ -38,7 +35,7 @@ Seleccione su cuenta:
 <%--
 String ncuenta=(String)request.getAttribute("ncuenta");
 System.out.println("JSP CUENTA: " + ncuenta);
- --%>
+--%>
 <%--<a href="servletCliente?Parametro=<%=ncuenta%>">Mostrar Movimientos</a> <br> --%>
 <input type="submit" name="btnListarMovimientos" value="Listar Movimientos"/>
 </form>
@@ -87,6 +84,7 @@ System.out.println("JSP CUENTA: " + ncuenta);
 
 
 	</table>
+<a href= "UsuarioCliente.jsp">Volver</a>
 </form>
 </body>
 </html>

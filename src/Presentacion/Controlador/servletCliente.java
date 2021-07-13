@@ -87,8 +87,9 @@ public class servletCliente extends HttpServlet {
 				String user = request.getSession().getAttribute("User").toString();
 				user_dni = clienteNeg.Dni_de_Usuario(user).toString();
 				ArrayList <Cuentas> list = cuentaNeg.ListarCuentaxCliente(user_dni);
-				misession.setAttribute("listacuentas", list);
-				request.setAttribute("listaCuentasUser", list);	
+				///misession.setAttribute("listacuentas", list);
+				///request.setAttribute("listaCuentasUser", list);	
+				request.setAttribute("listaCuentasUser", cuentaNeg.ListarCuentaxCliente(user_dni));
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/MovimientosCuentas.jsp");
 				dispatcher.forward(request, response);
 			}
@@ -257,9 +258,11 @@ public class servletCliente extends HttpServlet {
 			String user = request.getSession().getAttribute("User").toString();
 			String user_dni = clienteNeg.Dni_de_Usuario(user).toString();
 			int ncuenta=Integer.parseInt(request.getParameter("ncuenta"));
-			System.out.println("DNI USUARIO: " + user + ", NCUENTA: " + ncuenta);
+			System.out.println("DNI USUARIO: " + user_dni + ", NCUENTA: " + ncuenta);
 			ArrayList <Movimientos> list = movimientoNeg.Listar_movimientos_por_cuenta(user_dni, ncuenta);
+			
 			request.setAttribute("listaMovimientos", list);	
+			request.setAttribute("listaCuentasUser", cuentaNeg.ListarCuentaxCliente(user_dni));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/MovimientosCuentas.jsp");
 			dispatcher.forward(request, response);
 		}
