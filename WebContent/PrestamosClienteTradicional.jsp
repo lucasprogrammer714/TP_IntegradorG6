@@ -7,10 +7,23 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+String user="";
+if(request.getAttribute("Usuario")!=null)
+user=request.getAttribute("Usuario").toString();
+%>
+
+<%
+session.setAttribute("User", user);
+ %>
+ 
+ VALOR Session: <%= session.getAttribute("User") %>
+
+
 <h1>bienvenido/a</h1>
 <!--  ingresar aqui despues el nombre del administrador -->
 <p>solicite aqui su prestamo y aguarde su aprobacion o declinacion</p>
-<form method="post" action="ServletCliente">  <!-- aun no cree este servlet pero es un ejemplo de carga -->
+<form method="post" action="ServletPrestamos">  <!-- aun no cree este servlet pero es un ejemplo de carga -->
 	<table>
 		<tr>
 			<td>monto solicitado</td>

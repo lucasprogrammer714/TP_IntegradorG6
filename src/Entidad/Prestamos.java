@@ -14,11 +14,33 @@ public class Prestamos {
 	private String plazo;
 	private float monto_mensual;
 	private int cuotas;
+	private boolean pendiente;
+	private boolean autorizado;
 	
 	
 	public Prestamos()
 	{
 		
+	}
+
+
+	public boolean getPendiente() {
+		return pendiente;
+	}
+
+
+	public void setPendiente(boolean pendiente) {
+		this.pendiente = pendiente;
+	}
+
+
+	public boolean getAutorizado() {
+		return autorizado;
+	}
+
+
+	public void setAutorizado(boolean autorizado) {
+		this.autorizado = autorizado;
 	}
 
 
