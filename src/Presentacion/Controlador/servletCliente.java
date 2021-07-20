@@ -20,6 +20,8 @@ import javax.servlet.http.HttpSession;
 import Entidad.Cliente;
 import Entidad.Cuentas;
 import Entidad.Movimientos;
+import Excepciones.FaltaArrobaException;
+import Excepciones.FaltaPuntoException;
 import Negocio.ClienteNeg;
 import Negocio.CuentaNeg;
 import Negocio.MovimientosNeg;
@@ -91,8 +93,20 @@ public class servletCliente extends HttpServlet {
 				request.setAttribute("listaCuentasUser", cuentaNeg.ListarCuentaxCliente(user_dni));
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/MovimientosCuentas.jsp");
 				dispatcher.forward(request, response);
-			}
+			
 			break;
+			}
+			
+			case "solicitarPrestamo":
+			{
+				String user = request.getSession().getAttribute("User").toString();
+				user_dni = clienteNeg.Dni_de_Usuario(user).toString();
+				
+				request.setAttribute("listaCuentasUser", cuentaNeg.ListarCuentaxCliente(user_dni));
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/SolicitarPrestamosCliente.jsp");
+				dispatcher.forward(request, response);
+			break;
+			}
 			default:
 				break;
 			}
@@ -109,52 +123,37 @@ public class servletCliente extends HttpServlet {
 			
 			Boolean registro = false;
 			
-			///LocalDate date = LocalDate.parse(request.getParameter("txtFechaNacimiento"));
 			
-			/*
+			String mailValidar = request.getParameter("txtCorreo");
 			
-			try {
-				SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-				Date fecha;
-				fecha = (Date) formato.parse(request.getParameter("txtFechaNacimiento"));
-				cliente.setNacimiento(fecha);
-				
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			*/
-			
-			///System.out.println("FECHA: " + date);
-			//cliente.setNacimiento(null);
-			cliente.setDni(request.getParameter("txtDni"));
-			cliente.setCuil(request.getParameter("txtCuil"));
-			cliente.setNombre(request.getParameter("txtNombre"));
-			cliente.setApellido(request.getParameter("txtApellido"));
-			cliente.setSexo(request.getParameter("ddlSexo").toString());
-			cliente.setNacionalidad(request.getParameter("txtNacionalidad"));
-			cliente.setNacimiento(LocalDate.parse(request.getParameter("txtFechaNacimiento").toString()));
-			///cliente.setNacimiento(null);
-			cliente.setDireccion(request.getParameter("txtDireccion"));
-			cliente.setLocalidad(request.getParameter("txtLocalidad"));
-			cliente.setProvincia(request.getParameter("txtProvincia"));
-			cliente.setEmail(request.getParameter("txtCorreo"));
-			cliente.setTelefono_fijo(request.getParameter("txtTelFijo"));
-			cliente.setTelefono(request.getParameter("txtTelCel"));
-			cliente.setUsuario(request.getParameter("txtUsuarioCliente"));
-			cliente.setContraseña(request.getParameter("txtContraseña"));
-			cliente.setAdministrador(false);
-			cliente.setEstado(true);
-			registro = clienteNeg.insertar(cliente);
-			
-			
-			request.setAttribute("RegistroExitoso", registro);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/RegistroClienteAdmin.jsp");
-			dispatcher.forward(request, response);
-		
+	cliente.setDni(request.getParameter("txtDni"));
+	cliente.setCuil(request.getParameter("txtCuil"));
+	cliente.setNombre(request.getParameter("txtNombre"));
+	cliente.setApellido(request.getParameter("txtApellido"));
+	cliente.setSexo(request.getParameter("ddlSexo").toString());
+	cliente.setNacionalidad(request.getParameter("txtNacionalidad"));
+	cliente.setNacimiento(LocalDate.parse(request.getParameter("txtFechaNacimiento").toString()));
+	///cliente.setNacimiento(null);
+	cliente.setDireccion(request.getParameter("txtDireccion"));
+	cliente.setLocalidad(request.getParameter("txtLocalidad"));
+	cliente.setProvincia(request.getParameter("txtProvincia"));
+	cliente.setEmail(request.getParameter("txtCorreo"));
+	cliente.setTelefono_fijo(request.getParameter("txtTelFijo"));
+	cliente.setTelefono(request.getParameter("txtTelCel"));
+	cliente.setUsuario(request.getParameter("txtUsuarioCliente"));
+	cliente.setContraseña(request.getParameter("txtContraseña"));
+	cliente.setAdministrador(false);
+	cliente.setEstado(true);
+	registro = clienteNeg.insertar(cliente);
+	
+	
+	request.setAttribute("RegistroExitoso", registro);
+	RequestDispatcher dispatcher = request.getRequestDispatcher("/RegistroClienteAdmin.jsp");
+	dispatcher.forward(request, response);
 		}
 		
-		if (request.getParameter("btnBajaCliente")!= null)
+		
+	if (request.getParameter("btnBajaCliente")!= null)
 		{
 			
 			boolean baja = false;
@@ -187,7 +186,11 @@ public class servletCliente extends HttpServlet {
 			}
 			
 			
+			
+			
 		}
+	
+	
 		
 		
 		if (request.getParameter("btnCambiarContraseña")!= null)
@@ -227,6 +230,7 @@ public class servletCliente extends HttpServlet {
 			 catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				
 			}
 			
 			
@@ -250,5 +254,46 @@ public class servletCliente extends HttpServlet {
 		}
 	}
 	
+	public boolean validarMail(String mail) throws FaltaArrobaException, FaltaPuntoException
+	{
+		boolean arroba = false;
+		boolean punto = false;
+		
+		
+		
+		for (int i = 0; i< mail.length(); i ++)
+		{
+			if (mail.charAt(i) == '@')
+				arroba = true;
+			if (mail.charAt(i) == '.')
+				punto = true;
+		}
+		
+		
+		if (arroba == false)
+		{
+			
+			
+			FaltaArrobaException excArroba = new FaltaArrobaException();
+			 throw excArroba;
+			
+		}
+		
+		
+		if (punto == false)
+		{
+			FaltaPuntoException excPunto = new FaltaPuntoException();
+            throw excPunto;
+		}
+		
+		
+		if (arroba == true && punto == true)
+		{
+			return  true ;
+		}
+		
+		return false;
+	}
+		
 	
 }

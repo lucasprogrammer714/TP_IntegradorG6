@@ -14,6 +14,9 @@ public class Prestamos {
 	private String plazo;
 	private float monto_mensual;
 	private int cuotas;
+	private boolean pendiente;
+	private boolean autorizado;
+	
 	
 	
 	public Prestamos()
@@ -110,7 +113,30 @@ public class Prestamos {
 	public void setCuotas(int cuotas) {
 		this.cuotas = cuotas;
 	}
+
+
+	public boolean isAutorizado() {
+		return autorizado;
+	}
+
+
+	public void setAutorizado(boolean autorizado) {
+		this.autorizado = autorizado;
+	}
+
+
+	public boolean isPendiente() {
+		return pendiente;
+	}
+
+
+	public void setPendiente(boolean pendiente) {
+		this.pendiente = pendiente;
+	}
+
+
 	
+
 	
 
 }

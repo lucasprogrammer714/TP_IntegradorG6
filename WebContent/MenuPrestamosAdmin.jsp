@@ -29,9 +29,8 @@ text-align: center;}
 </div>
 
 <h1><b>Bienvenido/a</b></h1> <!-- ingresar aqui el usuario conectado -->
-<a>Solicitud de prestamos</a><br>
 <a href="AutorizarPrestamosAdmin.jsp">Autorizar prestamos</a><br>
-<a>Listado de prestamos</a><br><br>
+<a>Lista de solicitudes  de prestamos</a><br><br>
 <a href="UsuarioAdmin.jsp">Volver al menu anterior</a>
  <!-- deberia ser un negar prestamos porque el administrador puede ver las solicitudes de prestamos que le llegaron
  	  de los clientes aceptarlas o rechazarlas -->		<!--   <input type="submit" name="btnAsignarMonto" value="Asignar Monto"/> -->
