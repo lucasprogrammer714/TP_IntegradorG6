@@ -100,9 +100,45 @@ public class MovimientosDaoImpl implements MovimientosDao {
 		        e.printStackTrace();
 		        
 		}
-	return lista_movixcuenta;	}
-	
-	
-	
+	return lista_movixcuenta;	
+	}
+
+	public boolean registrarMovimientoSP(Movimientos move, String dniDepo, String nCuentaDepo) {
+		
+		 try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				
+			}catch(ClassNotFoundException e){
+				e.printStackTrace();
+			}
+			
+		 
+		 PreparedStatement statement;
+			Connection conexion = Conexion.getConexion().getSQLConexion();
+			boolean movimientoRegistrado = false;
+			try 
+			{
+				statement = conexion.prepareCall("Call TransferenciaMovimiento (?,?,?,?,?,?,?,?)");
+				statement.setString(1, move.getDni_movimiento());
+				statement.setInt(2, move.getNro_cuenta_movimiento());
+				statement.setString(3, dniDepo);
+				statement.setString(4, nCuentaDepo);
+				statement.setString(5, move.getFecha_movimiento().toString());
+				statement.setString(6, move.getDetalle());
+				statement.setFloat(7, move.getImporte());
+				statement.setString(8, move.getTipo_movimiento());
+				if(statement.executeUpdate() > 0)
+				{
+					conexion.commit();
+					movimientoRegistrado = true;
+				}
+			} 
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+		 
+		return movimientoRegistrado;
+	}
 
 }

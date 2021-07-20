@@ -31,7 +31,8 @@ text-align: center;}
 <a href= "CambioContraseñaAdmin.jsp">Cambiar Contraseña Cliente</a><br>
 <a href="RegistroClienteAdmin.jsp">Registrar Cliente</a><br>
 <a href="BajaClienteAdmin.jsp">Borrar Cliente</a><br>
-<a href="servletCliente?Param=list">Listar de clientes</a><br><br>
+<a href="servletCliente?Param=list">Listar de clientes</a><br>
+<a href="BuscarFiltrarClientesAdmin.jsp">Listar de clientes por busqueda</a><br><br>
 
 <a href="UsuarioAdmin.jsp">Volver al menu anterior</a>
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">

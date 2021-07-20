@@ -54,6 +54,9 @@ public class servletTransferencia extends HttpServlet {
 		{
 			String usuario = request.getSession().getAttribute("User").toString();
 			String tipo_movimiento ="Extraccion";
+			String CBU=request.getParameter("txtCBU");
+			String dniDepo="";
+			String ncuentaDepo="";
 			
 			user_dni = clienteNeg.Dni_de_Usuario(usuario);
 			Movimientos movimiento = new Movimientos();
@@ -66,8 +69,12 @@ public class servletTransferencia extends HttpServlet {
 			movimiento.setDetalle(request.getParameter("txtDetalle"));
 			movimiento.setImporte(Float.parseFloat(request.getParameter("txtImporte")));
 			movimiento.setTipo_movimiento(tipo_movimiento);
+			dniDepo=cuentaNeg.Dni_de_Cuenta(CBU);
+			ncuentaDepo=cuentaNeg.Numero_de_Cuenta(CBU);
 			
-			registro = move.registarMovimiento(movimiento);
+			System.out.println("DNI DEPO: " + dniDepo + ", CUENTA DEPO: " + ncuentaDepo);
+			
+			registro = move.registrarMovimientoSP(movimiento,dniDepo, ncuentaDepo);
 			
 			
 			ArrayList <Cuentas> list = cuentaNeg.ListarCuentaxCliente(user_dni);

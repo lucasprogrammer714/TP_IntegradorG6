@@ -252,6 +252,26 @@ public class servletCliente extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/MovimientosCuentas.jsp");
 			dispatcher.forward(request, response);
 		}
+		
+		
+		if(request.getParameter("btnBuscar")!=null) {
+			String busqueda = request.getParameter("txtBusqueda");
+			request.setAttribute("listaU", clienteNeg.listarClientesBusqueda(busqueda));	
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/BuscarFiltrarClientesAdmin.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		if(request.getParameter("btnBuscarPorFecha")!=null) {
+			String fechainicio = request.getParameter("fechainicio");
+			String fechafin = request.getParameter("fechafin");
+			System.out.println("INICIO: " + fechainicio + ", FIN: " + fechafin);
+			request.setAttribute("listaU", clienteNeg.listarClientesFiltro(fechainicio, fechafin));	
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/BuscarFiltrarClientesAdmin.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		
+		
 	}
 	
 	public boolean validarMail(String mail) throws FaltaArrobaException, FaltaPuntoException

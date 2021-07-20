@@ -272,7 +272,65 @@ public class CuentasDaoImpl implements CuentasDao {
 		}
 	return lista_cuentaxcliente;
 	}
-	
-	
-	
-	          }
+
+
+
+
+
+
+	@Override
+	public String Dni_de_Cuenta(String CBU) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+        }catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+       // System.out.println("CBU: " + CBU);
+        String dni="";
+        Connection conexion = Conexion.getConexion().getSQLConexion();
+        Statement statement;
+        try {
+            statement = conexion.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM cuentas WHERE CBU='" + CBU+"'");
+            if(rs.next()) {
+                //System.out.println("RESULTADO: " + rs.getString("DNI_c"));
+                dni=rs.getString("DNI_c");
+            }
+            //System.out.println("DNICLIENTE: " + dni);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dni;
+    }
+
+
+
+
+
+
+	public String Numero_de_Cuenta(String CBU) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+        }catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+       // System.out.println("CBU: " + CBU);
+        String ncuenta="";
+        Connection conexion = Conexion.getConexion().getSQLConexion();
+        Statement statement;
+        try {
+            statement = conexion.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM cuentas WHERE CBU='" + CBU+"'");
+            if(rs.next()) {
+               // System.out.println("RESULTADO: " + rs.getString("num_cuenta"));
+                ncuenta=rs.getString("num_cuenta");
+            }
+            //System.out.println("Ncuenta: " + ncuenta);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ncuenta;
+    }
+}

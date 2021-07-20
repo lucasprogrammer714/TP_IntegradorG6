@@ -23,5 +23,9 @@ public class MovimientosNegImpl implements MovimientosNeg {
 	public ArrayList<Movimientos> Listar_movimientos_por_cuenta(String dni, int ncuenta) {
 		return (ArrayList<Movimientos>) movDao.Listar_movimientos_por_cuenta(dni, ncuenta);
 	}
+	
+	public boolean registrarMovimientoSP(Movimientos move, String dniDepo, String nCuentaDepo) {
+		return movDao.registrarMovimientoSP(move, dniDepo, nCuentaDepo);
+	}
 
 }

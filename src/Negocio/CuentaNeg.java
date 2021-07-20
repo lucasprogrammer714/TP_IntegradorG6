@@ -14,5 +14,6 @@ public interface CuentaNeg {
 	public int contarCuentasAdmin(String dni);
     public ArrayList<Cuentas> ListarCuentas();
     public ArrayList<Cuentas> ListarCuentaxCliente(String dni);
-
+    public String Dni_de_Cuenta(String CBU);
+    public String Numero_de_Cuenta(String CBU);
 }

@@ -65,4 +65,14 @@ public class ClienteNegImpl implements ClienteNeg {
 		return clienteDao.Dni_de_Usuario(user);
 	}
 
+	public List<Cliente> listarClientesBusqueda(String Busqueda){
+		return clienteDao.listarClientesBusqueda(Busqueda);
+	}
+	
+	public List<Cliente> listarClientesFiltro(String fechainicio, String fechafin){
+		return clienteDao.listarClientesFiltro(fechainicio, fechafin);
+	}
+	
+	
+	
 }

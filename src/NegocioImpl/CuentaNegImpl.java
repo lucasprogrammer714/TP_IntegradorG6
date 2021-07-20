@@ -43,5 +43,13 @@ public class CuentaNegImpl implements CuentaNeg {
 		// TODO Auto-generated method stub
 		return (ArrayList<Cuentas>) cuentaDao.Listar_cuenta_por_cliente(dni);
 	}
+	
+	public String Dni_de_Cuenta(String CBU) {
+		return cuentaDao.Dni_de_Cuenta(CBU);
+	}
+
+	public String Numero_de_Cuenta(String CBU) {
+		return cuentaDao.Numero_de_Cuenta(CBU);
+	}
 
 }
