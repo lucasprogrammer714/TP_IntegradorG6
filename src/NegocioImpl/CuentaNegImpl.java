@@ -52,4 +52,10 @@ public class CuentaNegImpl implements CuentaNeg {
 		return cuentaDao.Numero_de_Cuenta(CBU);
 	}
 
+	@Override
+	public boolean actualizarSaldoCuenta(String dni, int nroCuenta, float saldo) {
+		// TODO Auto-generated method stub
+		return cuentaDao.actualizarSaldoCuenta(dni, nroCuenta, saldo);
+	}
+
 }

@@ -29,7 +29,7 @@ text-align: center;}
 </div>
 
 <h1><b>Bienvenido/a</b></h1> <!-- ingresar aqui el usuario conectado -->
-<a href="AutorizarPrestamosAdmin.jsp">Autorizar prestamos</a><br>
+<a href="servletPrestamos?Param=1">Autorizar prestamos</a><br>
 <a>Lista de solicitudes  de prestamos</a><br><br>
 <a href="UsuarioAdmin.jsp">Volver al menu anterior</a>
  <!-- deberia ser un negar prestamos porque el administrador puede ver las solicitudes de prestamos que le llegaron

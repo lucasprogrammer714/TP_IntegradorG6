@@ -76,6 +76,6 @@ if (request.getAttribute("baja_cuenta")!=null)
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <footer>Golden Age</footer>
 </div>
-
+<a href = "MenuCuentasAdmin.jsp">Volve
 </body>
 </html>

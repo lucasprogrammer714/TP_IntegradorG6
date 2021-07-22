@@ -98,7 +98,7 @@ if(request.getAttribute("listaCuentasUser")!=null){
 	</table>
 <input type="submit" name="btnSolicitarPrestamo" value="Solicitar Prestamo">
 </form>
-<a href="UsuarioCliente">volver atras</a>
+<a href="UsuarioCliente.jsp">volver atras</a>
 </body>
 </html>
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">

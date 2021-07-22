@@ -333,4 +333,48 @@ public class CuentasDaoImpl implements CuentasDao {
         }
         return ncuenta;
     }
+
+
+
+
+
+
+	@Override
+	public boolean actualizarSaldoCuenta(String dni, int nroCuenta, float saldo) {
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+
+		}
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean updateExitoso = false;
+		
+		try {
+			
+			
+			ps = conexion.prepareCall("Call actualizarSaldoCuenta (?,?,?)");
+			ps.setString(1, dni);
+			ps.setInt(2, nroCuenta);
+			ps.setFloat(3, saldo);
+			
+			if (ps.executeUpdate()>0)
+			{
+				conexion.commit();
+				updateExitoso = true;
+			}
+			
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		return updateExitoso;
+	}	
 }

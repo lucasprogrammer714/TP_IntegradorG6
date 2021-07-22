@@ -105,7 +105,7 @@ if (registrado == true)
 <%
 }
 %>
-<a href="UsuarioCliente">cancelar transferencia</a>
+<a href="UsuarioCliente.jsp">cancelar transferencia</a>
 
 
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">

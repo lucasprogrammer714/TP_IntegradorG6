@@ -16,4 +16,5 @@ public interface CuentaNeg {
     public ArrayList<Cuentas> ListarCuentaxCliente(String dni);
     public String Dni_de_Cuenta(String CBU);
     public String Numero_de_Cuenta(String CBU);
+    public boolean actualizarSaldoCuenta(String dni, int nroCuenta, float saldo);
 }

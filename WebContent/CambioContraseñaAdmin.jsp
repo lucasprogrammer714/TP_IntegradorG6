@@ -106,5 +106,7 @@ if (igual == 0)
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <footer>Golden Age</footer>
 </div>
+
+<a href = "MenuCLientesAdmin.jsp">Volver</a>
 </body>
 </html>

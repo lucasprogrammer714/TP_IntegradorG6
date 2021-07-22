@@ -123,8 +123,10 @@ public class servletCliente extends HttpServlet {
 			
 			Boolean registro = false;
 			
-			
+		
+	
 			String mailValidar = request.getParameter("txtCorreo");
+		
 			
 	cliente.setDni(request.getParameter("txtDni"));
 	cliente.setCuil(request.getParameter("txtCuil"));

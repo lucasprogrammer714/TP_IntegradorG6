@@ -3,6 +3,7 @@ package Presentacion.Controlador;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,9 +33,6 @@ public class servletPrestamos extends HttpServlet {
 	//Cuentas cuenta = new Cuentas();
 	
 	PrestamosNeg prestamoN = new PrestamosNegImpl();
-	
-
-	
 	ClienteNeg clienteNeg = new ClienteNegImpl();
 	MovimientosNeg movimientoNeg = new MovimientosNegImpl();
 	
@@ -49,6 +47,22 @@ public class servletPrestamos extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if(request.getParameter("Param")!=null)
+		{
+			//String usuario = request.getSession().getAttribute("User").toString();
+
+			//String dni = clienteNeg.Dni_de_Usuario(usuario);
+			request.setAttribute("listaPrestamos", prestamoN.ListarPrestamos());
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/AutorizarPrestamosAdmin.jsp");
+			dispatcher.forward(request, response);
+			
+			
+			
+		}
+		
+		
+		
 	}
 
 
@@ -61,12 +75,12 @@ public class servletPrestamos extends HttpServlet {
 			String user_dni;
 			float interes=(float) 1.54;
 			float importe_a_pagar = Float.parseFloat(request.getParameter("txtMonto").toString()) * interes;
-			System.out.println("A PAGAR: "  + importe_a_pagar);
+			
 			int cuotas = Integer.parseInt(request.getParameter("Cuotas").toString());
-			System.out.println("cuotas: " + cuotas);
+		
 			
 			float monto_mensual = importe_a_pagar/cuotas;
-			System.out.println("monto mes: " + monto_mensual);
+			
 			
 			
 			
@@ -94,6 +108,20 @@ public class servletPrestamos extends HttpServlet {
 			//request.setAttribute("listaMovimientos", list);	
 			request.setAttribute("listaCuentasUser", cuentaNeg.ListarCuentaxCliente(user_dni));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/SolicitarPrestamosCliente.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		if (request.getParameter("btnAutorizar")!=null)
+		{
+			String dni = request.getParameter("dniPrestamo");
+			int nro_cuenta = Integer.parseInt(request.getParameter("NroCuentaPrestamo"));
+			float saldo = Float.parseFloat(request.getParameter("Importe"));
+			
+			prestamoN.autorizarPrestamos(dni, nro_cuenta);
+			cuentaNeg.actualizarSaldoCuenta(dni, nro_cuenta, saldo);
+			
+			request.setAttribute("listaPrestamos", prestamoN.ListarPrestamos());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/AutorizarPrestamosAdmin.jsp");
 			dispatcher.forward(request, response);
 		}
 
