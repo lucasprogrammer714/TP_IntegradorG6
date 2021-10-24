@@ -137,7 +137,7 @@ public class servletCuenta extends HttpServlet {
 	            	
 	            	String dni_cliente = request.getParameter("txtListarCuentaxDNI").toString();
 	           try {
-				cliente_existe = cliente_N.buscar_un_cliente(Integer.parseInt(request.getParameter("txtListarCuentaxDNI")));
+				cliente_existe = cliente_N.buscar_un_cliente(request.getParameter("txtListarCuentaxDNI"));
 				
 		        
 						if(cliente_existe == 1) {

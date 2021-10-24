@@ -56,16 +56,7 @@ text-align: center;}
 <img alt="golden age" src="C:\Users\usuario\Desktop\TP5_AaronMeza\TP_IntegradorG6\Imagenes\Golden age.JPEG">
 </a>
 </div>
-<% 
- 
-boolean registrado = false;
 
-if (request.getAttribute("RegistroExitoso")!=null)
-{
-	registrado = Boolean.parseBoolean(request.getParameter("RegistroExitoso").toString());
-}
-
-%>
 
 
 
@@ -147,13 +138,126 @@ if (request.getAttribute("RegistroExitoso")!=null)
   </form>
   
   
- <%  if (registrado == false) {%>
+  
+  <% 
+ 
+  
+  boolean cuil = true;
+
+  if (request.getAttribute("CuilSoloNumeros")!=null)
+  {
+  	cuil = Boolean.parseBoolean(request.getAttribute("CuilSoloNumeros").toString());
+  }
+  
+  boolean dni = true;
+
+  if (request.getAttribute("DniSoloNumeros")!=null)
+  {
+  	dni = Boolean.parseBoolean(request.getAttribute("DniSoloNumeros").toString());
+  }
+  
+  boolean cel = true;
+
+  if (request.getAttribute("CelularSoloNumeros")!=null)
+  {
+  	cel = Boolean.parseBoolean(request.getAttribute("CelularSoloNumeros").toString());
+  }
+  
+  boolean fijo = true;
+
+  if (request.getAttribute("TelFijoSoloNumeros")!=null)
+  {
+  	fijo = Boolean.parseBoolean(request.getAttribute("TelFijoSoloNumeros").toString());
+  }
+  
+boolean registrado = false;
+
+if (request.getAttribute("RegistroExitoso")!=null)
+{
+	registrado = Boolean.parseBoolean(request.getAttribute("RegistroExitoso").toString());
+}
+
+
+boolean contraseñasIguales = true;
+
+if (request.getAttribute("ContraseñasIguales")!=null)
+{
+	contraseñasIguales = Boolean.parseBoolean(request.getAttribute("ContraseñasIguales").toString());
+}
+
+int nombreUsuario = 0;
+
+if (request.getAttribute("NombreUsuarioExiste")!=null)
+{
+	nombreUsuario = Integer.parseInt(request.getAttribute("NombreUsuarioExiste").toString());
+}
+
+int dniUser = 0;
+
+if (request.getAttribute("DniCliente")!=null)
+{
+	dniUser = Integer.parseInt(request.getAttribute("DniCliente").toString());
+}
+%>
+  
+ <%  if (registrado == true) {%>
   <h2>El cliente fue registrado exitosamente</h2>
   <% 
   }
+ %>
  
-  %> 
+ 
+  <%  if (dni == false) {%>
+  <h3>Ingrese en campo dni solo numeros</h3>
+  <% 
+  }
+ %>
+ 
+  <%  if (cuil == false) {%>
+  <h3>Ingrese en campo cuil solo numeros</h3>
+  <% 
+  }
+ %>
+ 
+  <%  if (cel == false) {%>
+  <h3>Ingreseen campo celular solo numeros</h3>
+  <% 
+  }
+ %>
+ 
+  <%  if (fijo == false) {%>
+  <h3>Ingrese en telefono fijo solo numeros</h3>
+  <% 
+  }
+ %>
+ 
+
+ 
+  
+  <%if(contraseñasIguales==false){ %>
+  <h4>Hubo un problema al confirmar su contraseña. Recuerde deben ser iguales al confirmar</h4>
+  <%
+  }
+  %>
+  
+  
+  <%if(nombreUsuario==1){ %>
+  <h4>Ya existe un registro con el mismo nombre de usuario</h4>
+  <%
+  }
+  %>
+
+
+
+  <%if(dniUser==1){ %>
+  <h4>Ya existe un registro con el mismo DNI para un usuario</h4>
+  <%
+  }
+  %>   
   <a href="MenuClientesAdmin.jsp">Volver al menú anterior</a>
+  
+  
+  
   
   <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <footer>Golden Age</footer>

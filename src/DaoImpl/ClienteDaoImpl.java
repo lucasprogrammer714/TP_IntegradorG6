@@ -21,7 +21,7 @@ public class ClienteDaoImpl implements ClienteDao {
 
 	
 	
-	private static final String insert = "INSERT INTO clientes(DNI, cuil, nombre, apellido, sexo, nacionalidad, nacimiento, direccion, localidad, provincia, email, telefono, usuario, contrasena, admin, estado, telefono_fijo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String insert = "INSERT INTO clientes (DNI, cuil, nombre, apellido, sexo, nacionalidad, nacimiento, direccion, localidad, provincia, email, telefono, usuario, contrasena, admin, estado, telefono_fijo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 	public boolean insertar(Cliente cliente) {
 		
@@ -32,32 +32,34 @@ public class ClienteDaoImpl implements ClienteDao {
 			e.printStackTrace();
 		}
 		
-		PreparedStatement statement;
+		
+		PreparedStatement st;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
+     
 		boolean isInsertExitoso = false;
 		try{
 			
 			
-			statement = conexion.prepareStatement(insert);
-			statement.setString(1, cliente.getDni());
-			statement.setString(2, cliente.getCuil());
-			statement.setString(3, cliente.getNombre());
-			statement.setString(4, cliente.getApellido());
-			statement.setString(5, cliente.getSexo());
-			statement.setString(6, cliente.getNacionalidad());
-			statement.setString(7, cliente.getNacimiento().toString());
-			statement.setString(8, cliente.getDireccion());
-			statement.setString(9, cliente.getLocalidad());
-			statement.setString(10, cliente.getProvincia());
-			statement.setString(11, cliente.getEmail());
-			statement.setString(12, cliente.getTelefono());
-			statement.setString(13, cliente.getUsuario());
-			statement.setString(14, cliente.getContraseña());
-			statement.setBoolean(15, cliente.getAdministrador());
-			statement.setBoolean(16, cliente.getEstado());
-			statement.setString(17, cliente.getTelefono_fijo());
+			st = conexion.prepareStatement(insert);
+			st.setString(1, cliente.getDni());
+			st.setString(2, cliente.getCuil());
+			st.setString(3, cliente.getNombre());
+			st.setString(4, cliente.getApellido());
+			st.setString(5, cliente.getSexo());
+			st.setString(6, cliente.getNacionalidad());
+			st.setString(7, cliente.getNacimiento().toString());
+			st.setString(8, cliente.getDireccion());
+			st.setString(9, cliente.getLocalidad());
+			st.setString(10, cliente.getProvincia());
+			st.setString(11, cliente.getEmail());
+			st.setString(12, cliente.getTelefono());
+			st.setString(13, cliente.getUsuario());
+			st.setString(14, cliente.getContraseña());
+			st.setBoolean(15, cliente.getAdministrador());
+			st.setBoolean(16, cliente.getEstado());
+			st.setString(17, cliente.getTelefono_fijo());
 			
-			if(statement.executeUpdate() > 0){
+			if(st.executeUpdate() > 0){
 				conexion.commit();
 				isInsertExitoso = true;
 			}
@@ -113,7 +115,7 @@ public class ClienteDaoImpl implements ClienteDao {
 		return isdeleteExitoso;
 	}
 	
-	public int buscar_un_cliente(int dni) throws SQLException{
+	public int buscar_un_cliente(String dni) throws SQLException {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

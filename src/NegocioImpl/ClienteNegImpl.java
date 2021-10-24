@@ -29,7 +29,7 @@ public class ClienteNegImpl implements ClienteNeg {
 
 
 	@Override
-	public int buscar_un_cliente(int dni) throws SQLException {
+	public int buscar_un_cliente(String dni) throws SQLException  {
 	return clienteDao.buscar_un_cliente(dni);
 	}
 	
