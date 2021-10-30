@@ -22,4 +22,5 @@ public String Dni_de_Usuario (String user);
 public List<Cliente> listarClientes();
 public List<Cliente> listarClientesBusqueda(String Busqueda);
 public List<Cliente> listarClientesFiltro(String fechainicio, String fechafin);
+public Cliente obtenerdatoscliente(String dni);
 }

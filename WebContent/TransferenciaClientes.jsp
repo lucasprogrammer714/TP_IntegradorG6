@@ -34,7 +34,14 @@ text-align: center;}
 </a>
 </div>
 
-<h1>bienvenido/a</h1>
+<%
+String user="";
+if(session.getAttribute("usuariolog")!=null)
+{
+user=session.getAttribute("usuariolog").toString();
+}
+%>
+<h1>bienvenido/a <%=user %> </h1>
 <!--  ingresar aqui despues el nombre del administrador -->
 
 <% 

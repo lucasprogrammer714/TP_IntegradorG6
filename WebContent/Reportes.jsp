@@ -29,8 +29,17 @@ text-align: center;}
 </a>
 </div>
 
+<%
+String user="";
+if(session.getAttribute("adminlog")!=null)
+user=session.getAttribute("adminlog").toString();
+%>
 
-<h1>REPORTES</h1>
+<h1> bienvenido/a <%=user %></h1> <br>
+
+<h2>REPORTES</h2>
+
+<a href="UsuarioAdmin.jsp">Volver al menu anterior</a>
 
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <footer>Golden Age</footer>

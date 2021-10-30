@@ -28,8 +28,16 @@ text-align: center;}
 </a>
 </div>
 
-<h1>Menú de cuentas</h1> <br>
-<h2> Elija una opcion:</h2>
+<%
+String user="";
+if(session.getAttribute("adminlog")!=null)
+user=session.getAttribute("adminlog").toString();
+%>
+
+<h1> bienvenido/a <%=user %></h1>
+
+<h2>Menú de cuentas</h2>
+<h3> Elija una opcion:</h3>
 <a href="AltaCuentaAdmin.jsp">Agregar una cuenta</a><br>
 <a href="BajaCuentaAdmin.jsp">Dar de baja una cuenta</a><br>
 <a href="servletCuenta?Param=list">Listar todas las cuentas</a><br><br>

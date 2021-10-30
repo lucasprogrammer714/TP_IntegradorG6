@@ -459,6 +459,54 @@ public class ClienteDaoImpl implements ClienteDao {
 		
 		return lista;
 	}
+
+
+
+
+
+
+	@Override
+	public Cliente obtenerdatoscliente(String dni) {
+	
+		try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+        }catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        //System.out.println("USUARIO: " + usuario);
+        Cliente usuariodatos=new Cliente();
+        Connection conexion = Conexion.getConexion().getSQLConexion();
+        Statement statement;
+        try {
+            statement = conexion.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Clientes WHERE DNI='" + dni+"'");
+            if(rs.next()) {
+                System.out.println("RESULTADO: " + rs.getString("DNI"));
+                usuariodatos.setDni(rs.getString("clientes.DNI"));
+                usuariodatos.setCuil(rs.getString("clientes.cuil"));
+                usuariodatos.setNombre(rs.getString("clientes.nombre"));
+                usuariodatos.setApellido(rs.getString("clientes.apellido"));
+                usuariodatos.setSexo(rs.getString("clientes.sexo"));
+                usuariodatos.setNacionalidad(rs.getString("clientes.nacionalidad"));
+                usuariodatos.setNacimiento(rs.getDate("clientes.nacimiento").toLocalDate());
+                usuariodatos.setDireccion(rs.getString("clientes.direccion"));
+                usuariodatos.setLocalidad(rs.getString("clientes.localidad"));
+                usuariodatos.setProvincia(rs.getString("clientes.provincia"));
+                usuariodatos.setEmail(rs.getString("clientes.email"));
+                usuariodatos.setTelefono(rs.getString("clientes.telefono"));
+                usuariodatos.setUsuario(rs.getString("clientes.usuario"));
+				//usuarioRs.setContraseña(rs.getString("clientes.contrasena"));
+				//usuarioRs.setAdministrador(rs.getBoolean("clientes.admin"));
+                usuariodatos.setTelefono_fijo(rs.getString("clientes.telefono_fijo"));
+				//usuarioRs.setEstado(rs.getBoolean("clientes.estado"));
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuariodatos;
+	}
 	
 	
 

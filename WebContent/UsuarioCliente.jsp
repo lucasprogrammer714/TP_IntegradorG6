@@ -30,19 +30,11 @@ text-align: center;}
 </div>
 <%
 String user="";
-if(request.getAttribute("Usuario")!=null)
+if(session.getAttribute("usuariolog")!=null)
 {
-user=request.getAttribute("Usuario").toString();
+user=session.getAttribute("usuariolog").toString();
 }
 %>
-
-
-
-<%session.setAttribute("User", user);%>
-
-
-
-
 <h1>bienvenido/a <%=user %> </h1>
 <!--  ingresar aqui despues el nombre del administrador   session.setAttribute("User", user) %> -->
 
@@ -50,7 +42,7 @@ seleccione y observe el historial de movimientos de sus <a href="servletCliente?
 realizar <a href="servletCliente?Param=listCuentasUser">tranferencias</a> <br>
 pida un <a href="servletCliente?Param=solicitarPrestamo">prestamo</a> ahora!<br>
 <a href="PagosPrestamosClientes.jsp">pague sus prestamos</a>pendientes<br>
-visualizar <a href="DatosCliente.jsp">mis datos</a><br> <br>
+visualizar <a href="servletCliente?Param=mostrarDatos">mis datos</a><br> <br>
 <a href="Login.jsp">cerrar sesion</a>
 <!--
 <input type="submit" name="btnCuentas" value="Cuentas"/>

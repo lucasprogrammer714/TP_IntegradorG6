@@ -61,7 +61,7 @@ public class servletCliente extends HttpServlet {
 			case "listCuentasUser":
 			{
 				
-					String user = request.getSession().getAttribute("User").toString();
+					String user = request.getSession().getAttribute("usuariolog").toString();
 					
 					user_dni = clienteNeg.Dni_de_Usuario(user).toString();
 					
@@ -85,7 +85,7 @@ public class servletCliente extends HttpServlet {
 			case "movCuentas":
 			{
 				HttpSession misession= request.getSession(true);
-				String user = request.getSession().getAttribute("User").toString();
+				String user = request.getSession().getAttribute("usuariolog").toString();
 				user_dni = clienteNeg.Dni_de_Usuario(user).toString();
 				///ArrayList <Cuentas> list = cuentaNeg.ListarCuentaxCliente(user_dni);
 				///misession.setAttribute("listacuentas", list);
@@ -99,14 +99,22 @@ public class servletCliente extends HttpServlet {
 			
 			case "solicitarPrestamo":
 			{
-				String user = request.getSession().getAttribute("User").toString();
+				String user = request.getSession().getAttribute("usuariolog").toString();
 				user_dni = clienteNeg.Dni_de_Usuario(user).toString();
-				
 				request.setAttribute("listaCuentasUser", cuentaNeg.ListarCuentaxCliente(user_dni));
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/SolicitarPrestamosCliente.jsp");
 				dispatcher.forward(request, response);
 			break;
 			}
+			
+			case "mostrarDatos":
+				String user = request.getSession().getAttribute("usuariolog").toString();
+				user_dni = clienteNeg.Dni_de_Usuario(user).toString();
+				request.setAttribute("datosuser", clienteNeg.obtenerdatoscliente(user_dni));
+				request.getSession().setAttribute("datosusuario", clienteNeg.obtenerdatoscliente(user_dni));
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/DatosCliente.jsp");
+				dispatcher.forward(request, response);
+			
 			default:
 				break;
 			}
@@ -281,7 +289,7 @@ public class servletCliente extends HttpServlet {
 		
 		
 		if(request.getParameter("btnListarMovimientos")!=null) {
-			String user = request.getSession().getAttribute("User").toString();
+			String user = request.getSession().getAttribute("usuariolog").toString();
 			String user_dni = clienteNeg.Dni_de_Usuario(user).toString();
 			int ncuenta=Integer.parseInt(request.getParameter("ncuenta"));
 			System.out.println("DNI USUARIO: " + user_dni + ", NCUENTA: " + ncuenta);

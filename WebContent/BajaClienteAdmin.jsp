@@ -78,7 +78,6 @@ text-align: center;}
 
 <% if (existe == 0) { %>
   
-  <h2>El cliente no existe </h2>
   
   <%}%>
  <a href="MenuClientesAdmin.jsp">Volver al menú</a>

@@ -50,13 +50,15 @@ public class servletLogin extends HttpServlet {
 				int usuario = 3;
 				usuario=clienteNeg.buscarUsuario(user, pass);
 				if(usuario==1) {
-					request.setAttribute("Usuario", usu);
+					
+					//request.setAttribute("Usuario", usu);
+					request.getSession().setAttribute("adminlog", user);
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/UsuarioAdmin.jsp");
 					dispatcher.forward(request, response);
 				}
 				
 				else if(usuario==2){
-					request.setAttribute("Usuario", usu);
+					request.getSession().setAttribute("usuariolog", user);
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/UsuarioCliente.jsp");
 					dispatcher.forward(request, response);
 				}

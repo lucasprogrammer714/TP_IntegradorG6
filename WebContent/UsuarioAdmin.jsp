@@ -30,8 +30,8 @@ text-align: center;}
 
 <%
 String user="";
-if(request.getAttribute("Usuario")!=null)
-user=request.getAttribute("Usuario").toString();
+if(session.getAttribute("adminlog")!=null)
+user=session.getAttribute("adminlog").toString();
 %>
 
 <h1> bienvenido/a <%=user %></h1>

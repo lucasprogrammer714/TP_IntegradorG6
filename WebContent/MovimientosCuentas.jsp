@@ -34,6 +34,15 @@ text-align: center;}
 </div>
 
 <%
+String user="";
+if(session.getAttribute("usuariolog")!=null)
+{
+user=session.getAttribute("usuariolog").toString();
+}
+%>
+<h1>bienvenido/a <%=user %> </h1>
+
+<%
 List<Cuentas> listaCuentas = new ArrayList<Cuentas>();
 List<Cuentas> lc = new ArrayList<Cuentas>();
 if(request.getAttribute("listaCuentasUser")!=null){

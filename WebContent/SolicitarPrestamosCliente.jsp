@@ -32,7 +32,14 @@ text-align: center;}
 <img alt="golden age" src="C:\Users\usuario\Desktop\TP5_AaronMeza\TP_IntegradorG6\Imagenes\Golden age.JPEG">
 </a>
 </div>
-<h1>bienvenido/a</h1>
+<%
+String user="";
+if(session.getAttribute("usuariolog")!=null)
+{
+user=session.getAttribute("usuariolog").toString();
+}
+%>
+<h1>bienvenido/a <%=user %> </h1> 
 
 <!--  ingresar aqui despues el nombre del administrador -->
 <p>solicite aqui su prestamo y aguarde su aprobacion o declinacion</p>

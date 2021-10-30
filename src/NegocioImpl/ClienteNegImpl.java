@@ -72,6 +72,10 @@ public class ClienteNegImpl implements ClienteNeg {
 	public List<Cliente> listarClientesFiltro(String fechainicio, String fechafin){
 		return clienteDao.listarClientesFiltro(fechainicio, fechafin);
 	}
+
+	public Cliente obtenerdatoscliente(String dni) {
+		return clienteDao.obtenerdatoscliente(dni);
+	}
 	
 	
 	
