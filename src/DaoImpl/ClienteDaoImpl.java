@@ -95,14 +95,17 @@ public class ClienteDaoImpl implements ClienteDao {
 		}
 		
  
-		PreparedStatement statement;
+		PreparedStatement st;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isdeleteExitoso = false;
+       String update = "UPDATE clientes SET estado = false WHERE DNI = '"+dni+"'";
+		// "SELECT DNI FROM clientes WHERE DNI ='" + dni+"'";
+
 		try 
 		{
-			statement = conexion.prepareCall("Call bajaCliente (?)");
-			statement.setString(1, Integer.toString(dni));
-			if(statement.executeUpdate() > 0)
+			st = conexion.prepareStatement(update);
+			//st.setString(1, Integer.toString(dni));
+			if(st.executeUpdate() > 0)
 			{
 				conexion.commit();
 				isdeleteExitoso = true;
@@ -250,7 +253,7 @@ public class ClienteDaoImpl implements ClienteDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String sql="SELECT clientes.DNI, clientes.cuil, clientes.nombre, clientes.apellido, clientes.sexo, clientes.nacionalidad, clientes.nacimiento, clientes.direccion, clientes.localidad, clientes.provincia, clientes.email, clientes.telefono, clientes.usuario, clientes.contrasena, clientes.admin, clientes.telefono_fijo, clientes.estado From clientes ";
+		String sql="SELECT clientes.DNI, clientes.cuil, clientes.nombre, clientes.apellido, clientes.sexo, clientes.nacionalidad, clientes.nacimiento, clientes.direccion, clientes.localidad, clientes.provincia, clientes.email, clientes.telefono, clientes.usuario, clientes.telefono_fijo  From clientes  WHERE clientes.estado = 1 ";
 		List<Cliente> lista = new ArrayList<Cliente>();
 		try{
 			
@@ -275,10 +278,10 @@ public class ClienteDaoImpl implements ClienteDao {
 				usuarioRs.setEmail(rs.getString("clientes.email"));
 				usuarioRs.setTelefono(rs.getString("clientes.telefono"));
 				usuarioRs.setUsuario(rs.getString("clientes.usuario"));
-				usuarioRs.setContraseña(rs.getString("clientes.contrasena"));
-				usuarioRs.setAdministrador(rs.getBoolean("clientes.admin"));
+				//usuarioRs.setContraseña(rs.getString("clientes.contrasena"));
+			//	usuarioRs.setAdministrador(rs.getBoolean("clientes.admin"));
 				usuarioRs.setTelefono_fijo(rs.getString("clientes.telefono_fijo"));
-				usuarioRs.setEstado(rs.getBoolean("clientes.estado"));
+				//usuarioRs.setEstado(rs.getBoolean("clientes.estado"));
 				lista.add(usuarioRs);
 			}
 		}catch(Exception e){
@@ -397,10 +400,10 @@ public class ClienteDaoImpl implements ClienteDao {
 				usuarioRs.setEmail(rs.getString("clientes.email"));
 				usuarioRs.setTelefono(rs.getString("clientes.telefono"));
 				usuarioRs.setUsuario(rs.getString("clientes.usuario"));
-				usuarioRs.setContraseña(rs.getString("clientes.contrasena"));
-				usuarioRs.setAdministrador(rs.getBoolean("clientes.admin"));
+				//usuarioRs.setContraseña(rs.getString("clientes.contrasena"));
+				//usuarioRs.setAdministrador(rs.getBoolean("clientes.admin"));
 				usuarioRs.setTelefono_fijo(rs.getString("clientes.telefono_fijo"));
-				usuarioRs.setEstado(rs.getBoolean("clientes.estado"));
+				//usuarioRs.setEstado(rs.getBoolean("clientes.estado"));
 				lista.add(usuarioRs);
 			}
 		}catch(Exception e){
@@ -444,10 +447,10 @@ public class ClienteDaoImpl implements ClienteDao {
 				usuarioRs.setEmail(rs.getString("clientes.email"));
 				usuarioRs.setTelefono(rs.getString("clientes.telefono"));
 				usuarioRs.setUsuario(rs.getString("clientes.usuario"));
-				usuarioRs.setContraseña(rs.getString("clientes.contrasena"));
-				usuarioRs.setAdministrador(rs.getBoolean("clientes.admin"));
+				//usuarioRs.setContraseña(rs.getString("clientes.contrasena"));
+				//usuarioRs.setAdministrador(rs.getBoolean("clientes.admin"));
 				usuarioRs.setTelefono_fijo(rs.getString("clientes.telefono_fijo"));
-				usuarioRs.setEstado(rs.getBoolean("clientes.estado"));
+				//usuarioRs.setEstado(rs.getBoolean("clientes.estado"));
 				lista.add(usuarioRs);
 			}
 		}catch(Exception e){

@@ -49,9 +49,8 @@ Filtrar clientes por fecha de nacimiento: DESDE <input type="date" name="fechain
 		<td> <b>Telefono</b></td>
 		<td> <b>Telefono Fijo</b></td>
 		<td> <b>Usuario</b></td>
-		<td> <b>Contraseña</b></td>
-		<td> <b>Administrador</b></td>
-		<td> <b>Estado</b></td>
+		
+	
         </tr>
 
  
@@ -75,9 +74,7 @@ Filtrar clientes por fecha de nacimiento: DESDE <input type="date" name="fechain
 				<td><%=user.getTelefono() %></td>
 				<td><%=user.getTelefono_fijo() %></td>
 				<td><%=user.getUsuario() %></td>
-				<td><%=user.getContraseña() %></td>
-				<td><%=user.getAdministrador() %></td>
-				<td><%=user.getEstado() %></td>
+			
 		</tr>
 	<%  } %>
     </table>
