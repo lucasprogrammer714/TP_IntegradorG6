@@ -2,6 +2,8 @@ package Presentacion.Controlador;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,13 +51,53 @@ public class servletPrestamos extends HttpServlet {
 		
 		if(request.getParameter("Param")!=null)
 		{
-			//String usuario = request.getSession().getAttribute("User").toString();
-
-			//String dni = clienteNeg.Dni_de_Usuario(usuario);
-			request.setAttribute("listaPrestamos", prestamoN.ListarPrestamos());
+	        String user_dni;
+			String option = request.getParameter("Param").toString();
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/AutorizarPrestamosAdmin.jsp");
-			dispatcher.forward(request, response);
+			switch(option)
+			{
+			case "PagarCuotasPrestamos":
+			{
+				Prestamos prestamo = new Prestamos();
+				String user = request.getSession().getAttribute("usuariolog").toString();
+				int nro_cuenta_prestamo = 0;
+				user_dni = clienteNeg.Dni_de_Usuario(user).toString();
+				nro_cuenta_prestamo = prestamoN.cuentaPrestamo(user_dni);
+				ArrayList <Cuentas> list = cuentaNeg.ListarCuentaxCliente(user_dni);
+				
+				prestamo = prestamoN.datosPagoPrestamos(user_dni, nro_cuenta_prestamo);
+				
+				    request.setAttribute("listaCuentasUser", list);	
+					request.setAttribute("DniUser", user_dni);
+					request.setAttribute("DatosPrestamo", prestamoN.datosPagoPrestamos(user_dni, nro_cuenta_prestamo));
+				
+			   
+					 
+				if(prestamo.isAutorizado()==false || prestamo.isPendiente() == true)
+				{
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/MensajesPrestamos.jsp");
+					dispatcher.forward(request, response);
+				}
+				
+				else {
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/PagosPrestamosClientes.jsp");
+				dispatcher.forward(request, response);
+				}
+				break;
+			}
+			case "ListadoPrestamos":
+				
+				request.setAttribute("listaPrestamos", prestamoN.ListarPrestamos());
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/AutorizarPrestamosAdmin.jsp");
+				dispatcher.forward(request, response);
+				
+				default:
+				break;
+			}
+			
+			
 			
 			
 			
@@ -123,8 +165,66 @@ public class servletPrestamos extends HttpServlet {
 			request.setAttribute("listaPrestamos", prestamoN.ListarPrestamos());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AutorizarPrestamosAdmin.jsp");
 			dispatcher.forward(request, response);
-		}
+		}  
+		
+		if(request.getParameter("btnPagarCuotaPrestamo")!=null)
+		{
+	
+		
+			String user = request.getSession().getAttribute("usuariolog").toString();
+			String user_dni;
+			int nro_cuenta_prestamo = 0;
+			int nro_cuenta_prestamo_DP = 0;
+			float montoCuota;
+			boolean pagoExitoso = false;
+		
+			
+			user_dni = clienteNeg.Dni_de_Usuario(user).toString();
+			nro_cuenta_prestamo = Integer.parseInt(request.getParameter("ddlNroCuenta"));
+			montoCuota = Float.parseFloat(request.getParameter("rdbMontoCuota"));
+			pagoExitoso =  prestamoN.pagoCuotaPrestamo(user_dni, nro_cuenta_prestamo, montoCuota);
+			registrarMovimiento(user_dni,nro_cuenta_prestamo,montoCuota);
+			
+			
 
+			
+
+		    nro_cuenta_prestamo_DP = prestamoN.cuentaPrestamo(user_dni);
+			ArrayList <Cuentas> list = cuentaNeg.ListarCuentaxCliente(user_dni);
+			
+			request.setAttribute("listaCuentasUser", list);	
+			request.setAttribute("DniUser", user_dni);
+			request.setAttribute("DatosPrestamo", prestamoN.datosPagoPrestamos(user_dni, nro_cuenta_prestamo_DP));
+		    
+			
+			
+			request.setAttribute("PagoExitoso", pagoExitoso);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/PagosPrestamosClientes.jsp");
+			dispatcher.forward(request, response);
+			
+	   }
+		
+	
+}
+
+
+	private void registrarMovimiento(String user_dni, int nro_cuenta, float montoCuota) {
+		
+		String tipo_movimiento = "Extraccion";
+		String detalle = "Pago de cuota de prestamo pedido";
+		//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+	
+		
+		Movimientos movimiento = new Movimientos();
+		
+		movimiento.setDni_movimiento(user_dni);
+		movimiento.setNro_cuenta_movimiento(nro_cuenta);
+		movimiento.setFecha_movimiento(LocalDate.now());
+		movimiento.setDetalle(detalle);
+		movimiento.setImporte(montoCuota);
+		movimiento.setTipo_movimiento(tipo_movimiento);
+		
+		 movimientoNeg.registarMovimiento(movimiento);
 	}
 
 }

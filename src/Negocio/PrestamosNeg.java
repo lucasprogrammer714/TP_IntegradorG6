@@ -8,7 +8,9 @@ public interface PrestamosNeg {
 	public boolean insertar (Prestamos prestamos);
 	public List<Prestamos> ListarPrestamos();
 	public boolean autorizarPrestamos(String dni, int nrocuenta);
-	
+	public Prestamos datosPagoPrestamos(String dni, int nro_cuenta);
+	public int cuentaPrestamo (String dni_p);
+	public boolean pagoCuotaPrestamo(String dni_c, int num_cuenta, float montoCuota);
 
 
 }

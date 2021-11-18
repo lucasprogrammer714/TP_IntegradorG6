@@ -144,6 +144,118 @@ public class PrestamosDaoImpl implements PrestamosDao {
 		
 		return updateExitoso;
 	}
+
+	@Override
+	public Prestamos  datosPagoPrestamo(String dni, int nrocuent) {
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+
+		}
+		
+		
+		String sql = "SELECT id_p, cuotas, monto_mensual, autorizado, pendiente  FROM prestamos WHERE DNI_p ='" +dni+"' AND num_cuenta_p = '"+nrocuent+"'";
+	    Prestamos datosPrestamos = new Prestamos();
+		
+		try{
+				
+			Connection conexion = Conexion.getConexion().getSQLConexion();	
+			Statement st = conexion.createStatement();
+	        ResultSet rs = st.executeQuery(sql);
+	        
+	        if (rs.next())
+	        {
+	           datosPrestamos.setCuotas(rs.getInt("cuotas"));
+	           datosPrestamos.setMonto_mensual(rs.getFloat("monto_mensual"));
+	           datosPrestamos.setAutorizado(rs.getBoolean("autorizado"));
+	           datosPrestamos.setPendiente(rs.getBoolean("pendiente"));
+	           datosPrestamos.setId_prestamo(rs.getInt("id_p"));
+	        }
+				
+			
+	}
+		
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	return datosPrestamos;
+	}
+
+	@Override
+	public int cuentaPrestamo(String dni_p) {
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+
+		}
+		
+		String query = "SELECT num_cuenta_p FROM prestamos WHERE DNI_p ='" +dni_p+"'";
+		int num_cuenta = 0;
+		
+		try{
+			
+			Connection conexion = Conexion.getConexion().getSQLConexion();	
+			Statement st = conexion.createStatement();
+	        ResultSet rs = st.executeQuery(query);
+	        
+	        if (rs.next())
+	        {
+	           num_cuenta = rs.getInt("num_cuenta_p");
+	        }
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+			
+		return num_cuenta;
+	}
+
+	@Override
+	public boolean pagoCuotaPrestamo(String dni_c, int nroCuenta, float montoCuota) {
+	
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+
+		}
+		
+		PreparedStatement st;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean updateExitoso = false;
+		String query = "UPDATE cuentas SET saldo = saldo - '"+montoCuota+"' where Dni_c = '"+dni_c+"' and num_cuenta = '"+nroCuenta+"'";
+		
+		try 
+		{
+			st = conexion.prepareStatement(query);
+			//st.setString(1, Integer.toString(dni));
+			if(st.executeUpdate() > 0)
+			{
+				conexion.commit();
+				updateExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+	   
+		
+		return updateExitoso;
+	} 
+	
+	
+	
 	
 
 	

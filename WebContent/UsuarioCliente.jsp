@@ -41,7 +41,7 @@ user=session.getAttribute("usuariolog").toString();
 seleccione y observe el historial de movimientos de sus <a href="servletCliente?Param=movCuentas">cuentas</a> <br>
 realizar <a href="servletCliente?Param=listCuentasUser">tranferencias</a> <br>
 pida un <a href="servletCliente?Param=solicitarPrestamo">prestamo</a> ahora!<br>
-<a href="PagosPrestamosClientes.jsp">pague sus prestamos</a>pendientes<br>
+<a href="servletPrestamos?Param=PagarCuotasPrestamos">pague sus prestamos</a> pendientes<br>
 visualizar <a href="servletCliente?Param=mostrarDatos">mis datos</a><br> <br>
 <a href="Login.jsp">cerrar sesion</a>
 <!--
