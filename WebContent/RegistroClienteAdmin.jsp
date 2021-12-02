@@ -141,6 +141,15 @@ text-align: center;}
   
   <% 
  
+  boolean mail = true;
+
+  if (request.getAttribute("ValidacionMail")!=null)
+  {
+  	mail = Boolean.parseBoolean(request.getAttribute("ValidacionMail").toString());
+  }
+  
+  
+  
   
   boolean cuil = true;
 
@@ -231,7 +240,11 @@ if (request.getAttribute("DniCliente")!=null)
   }
  %>
  
-
+  <%  if (mail == false) {%>
+  <h3>Ingrese una direccion de correo valida </h3>
+  <% 
+  }
+ %>
  
   
   <%if(contraseñasIguales==false){ %>

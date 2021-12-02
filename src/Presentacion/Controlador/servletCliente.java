@@ -132,15 +132,26 @@ public class servletCliente extends HttpServlet {
 			boolean cuilSoloNumeros = isNumeric(request.getParameter("txtCuil"));
 			boolean telFijoSoloNumeros = isNumeric(request.getParameter("txtTelFijo"));
 			boolean telCelularSoloNumeros = isNumeric(request.getParameter("txtTelCel"));
-
+			boolean validarMail  = false;
+			try {
+				validarMail = validarMail(request.getParameter("txtCorreo"));
 				
+			} catch (FaltaArrobaException e1) {
+				
+				e1.printStackTrace();
+			} catch (FaltaPuntoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+
 			int nombreUsuarioExiste = clienteNeg.buscarNombreUsuarioCliente(request.getParameter("txtUsuarioCliente"));
 			int dniCliente;
 			try {
 				dniCliente = clienteNeg.buscar_un_cliente(request.getParameter("txtDni"));
 				
 				if(contraseñasIguales==true && nombreUsuarioExiste != 1 && dniCliente != 1 &&
-						dniSoloNumeros == true && cuilSoloNumeros == true  && telFijoSoloNumeros == true && telCelularSoloNumeros == true )
+						dniSoloNumeros == true && cuilSoloNumeros == true  && telFijoSoloNumeros == true && telCelularSoloNumeros == true && validarMail == true)
 				{
 					
 		Cliente cliente = new Cliente();
@@ -185,6 +196,7 @@ public class servletCliente extends HttpServlet {
 					request.setAttribute("CuilSoloNumeros", cuilSoloNumeros);
 					request.setAttribute("TelFijoSoloNumeros", telFijoSoloNumeros);
 					request.setAttribute("CelularSoloNumeros", telCelularSoloNumeros);
+					request.setAttribute("ValidacionMail", validarMail);
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/RegistroClienteAdmin.jsp");
 					dispatcher.forward(request, response);
 

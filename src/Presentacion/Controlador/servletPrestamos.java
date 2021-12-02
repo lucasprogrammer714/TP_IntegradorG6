@@ -64,15 +64,26 @@ public class servletPrestamos extends HttpServlet {
 				user_dni = clienteNeg.Dni_de_Usuario(user).toString();
 				nro_cuenta_prestamo = prestamoN.cuentaPrestamo(user_dni);
 				ArrayList <Cuentas> list = cuentaNeg.ListarCuentaxCliente(user_dni);
+				ArrayList <Integer> listaCuotas=new ArrayList <Integer>(); ///***************************** LISTA PARA LAS CUOTAS PAGAS
 				
 				prestamo = prestamoN.datosPagoPrestamos(user_dni, nro_cuenta_prestamo);
 				
 				    request.setAttribute("listaCuentasUser", list);	
 					request.setAttribute("DniUser", user_dni);
 					request.setAttribute("DatosPrestamo", prestamoN.datosPagoPrestamos(user_dni, nro_cuenta_prestamo));
-				
+					
+				///********************CARGA DE LA LISTA DE LAS CUOTAS PAGAS*****************
+			   for(int i=1;i<=prestamo.getCuotas(); i++) {
+				   int valor=movimientoNeg.contarPagoCuota(user_dni, i, prestamo.getId_prestamo());
+				   listaCuotas.add(valor);
+			   }
+			   ///*********************** MUESTRA LA LISTA ***********************
+			   for(int i=0;i<prestamo.getCuotas(); i++) {
+				   System.out.println("VALOR CUOTA "+i+": "+listaCuotas.get(i));
+			   }
 			   
-					 
+				request.setAttribute("arrayCuotas", listaCuotas); /// REQUEST DE LA LISTA CUOTAS
+				
 				if(prestamo.isAutorizado()==false || prestamo.isPendiente() == true)
 				{
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/MensajesPrestamos.jsp");
@@ -97,13 +108,7 @@ public class servletPrestamos extends HttpServlet {
 				break;
 			}
 			
-			
-			
-			
-			
 		}
-		
-		
 		
 	}
 
@@ -174,30 +179,30 @@ public class servletPrestamos extends HttpServlet {
 			String user = request.getSession().getAttribute("usuariolog").toString();
 			String user_dni;
 			int nro_cuenta_prestamo = 0;
-			int nro_cuenta_prestamo_DP = 0;
+			int nro_cuenta_prestamo_Datos = 0;
 			float montoCuota;
 			boolean pagoExitoso = false;
+			 Prestamos prestamo = new Prestamos();
 		
-			
+		
+	
 			user_dni = clienteNeg.Dni_de_Usuario(user).toString();
 			nro_cuenta_prestamo = Integer.parseInt(request.getParameter("ddlNroCuenta"));
-			montoCuota = Float.parseFloat(request.getParameter("rdbMontoCuota"));
-			pagoExitoso =  prestamoN.pagoCuotaPrestamo(user_dni, nro_cuenta_prestamo, montoCuota);
-			registrarMovimiento(user_dni,nro_cuenta_prestamo,montoCuota);
 			
-			
-
-			
-
-		    nro_cuenta_prestamo_DP = prestamoN.cuentaPrestamo(user_dni);
+		    nro_cuenta_prestamo_Datos = prestamoN.cuentaPrestamo(user_dni);
 			ArrayList <Cuentas> list = cuentaNeg.ListarCuentaxCliente(user_dni);
 			
-			request.setAttribute("listaCuentasUser", list);	
-			request.setAttribute("DniUser", user_dni);
-			request.setAttribute("DatosPrestamo", prestamoN.datosPagoPrestamos(user_dni, nro_cuenta_prestamo_DP));
-		    
+               prestamo =  prestamoN.datosPagoPrestamos(user_dni, nro_cuenta_prestamo_Datos);
 			
-			
+			   montoCuota = prestamo.getMonto_mensual();
+				
+				pagoExitoso =  prestamoN.pagoCuotaPrestamo(user_dni, nro_cuenta_prestamo, montoCuota);
+				registrarMovimiento(user_dni,nro_cuenta_prestamo,montoCuota);
+				
+				request.setAttribute("listaCuentasUser", list);	
+				request.setAttribute("DniUser", user_dni);
+				request.setAttribute("DatosPrestamo", prestamoN.datosPagoPrestamos(user_dni, nro_cuenta_prestamo_Datos));
+				
 			request.setAttribute("PagoExitoso", pagoExitoso);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/PagosPrestamosClientes.jsp");
 			dispatcher.forward(request, response);

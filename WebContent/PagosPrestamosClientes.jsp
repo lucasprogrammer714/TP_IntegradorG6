@@ -42,14 +42,21 @@ prestamo = (Prestamos)request.getAttribute("DatosPrestamo");
 } 
 %>
 
+<% 	List<Cuentas> listaCuentas = new ArrayList<Cuentas>();
 
-
-	<% 	List<Cuentas> listaCuentas = new ArrayList<Cuentas>();
+	ArrayList<Integer> listaCuotas = new ArrayList<Integer>();
+	
 boolean registrado = false;
 
 if(request.getAttribute("listaCuentasUser")!=null){
    listaCuentas = (List<Cuentas>) request.getAttribute("listaCuentasUser");
     
+}
+
+/// LLena la lista con el getAttribute si no es null***********************************************************************
+if(request.getAttribute("arrayCuotas")!=null){
+	   listaCuotas = (ArrayList<Integer>) request.getAttribute("arrayCuotas");
+	   //System.out.println("EL ARRAYLIST NO ESTA VACIO");
 }
 
 boolean pagoExitoso = false;
@@ -59,29 +66,21 @@ if(request.getAttribute("PagoExitoso")!=null){
 }
  %>
  
-
- 
-
-   
-
  <form method="post" action = "servletPrestamos">
  <b>Seleccione la cuota que desea pagar: </b><br>
 
-
- <%for(int i=1;i<=prestamo.getCuotas();i++){ 
-if(i==8){ %>
- Cuota  <%=i %>  : <input  type ="radio" name= "rdbMontoCuota" value="<%=prestamo.getMonto_mensual() %>" required  disabled> Monto a pagar:  <b><%=prestamo.getMonto_mensual()%></b> <br><br>
+ <%for(int x=0;x<prestamo.getCuotas();x++){ 
+if(listaCuotas.get(x)==1){ %>
+ Cuota  <%=x+1 %>  : <input  type ="radio" name= "rdbMontoCuota" value="<%=prestamo.getMonto_mensual() %>" required  disabled> Monto a pagar:  <b><%=prestamo.getMonto_mensual()%></b> <br><br>
  <%}else{ %>
 
 
- Cuota  <%=i %>  : <input  type ="radio" name= "rdbMontoCuota" value="<%=prestamo.getMonto_mensual() %>" required  > Monto a pagar:  <b><%=prestamo.getMonto_mensual()%></b> <br><br>
+ Cuota  <%=x+1 %>  : <input  type ="radio" name= "rdbMontoCuota" value="<%=prestamo.getMonto_mensual() %>" required  > Monto a pagar:  <b><%=prestamo.getMonto_mensual()%></b> <br><br>
 <%} 
 }%>
 
 
- 
 
- 
 Seleccione la cuenta con la que desea pagar su cuota: 
 <select name="ddlNroCuenta"><%for(Cuentas c : listaCuentas){ %>
  

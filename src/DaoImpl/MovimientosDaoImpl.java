@@ -141,4 +141,35 @@ public class MovimientosDaoImpl implements MovimientosDao {
 		return movimientoRegistrado;
 	}
 
-}
+	@Override
+	public int contarPagoCuota(String dni, int cuota, int idPrestamo) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		String sql= "SELECT COUNT(detalle) FROM movimientos WHERE detalle LIKE 'Pago de cuota "+ cuota+" de prestamo "+idPrestamo+"%' AND DNI_m = "+dni+"";
+		System.out.println(sql);
+		int n= 0;
+	     Connection conexion = Conexion.getConexion().getSQLConexion();
+	     try {
+	    	 Statement stm = conexion.createStatement();
+		     // almaceno resultado de consulta en ResultSet
+		     ResultSet rs  = stm.executeQuery(sql);
+		     while(rs.next()) {
+		       //Si hay resultados obtengo el valor. 
+		        n= rs.getInt(1);
+		        //System.out.println("CONTAR PAGO CUOTA ENTCONTRADO");
+		     }
+	     }
+	     catch(SQLException e) {
+	    	 e.printStackTrace();
+	     }
+	     return n;
+	
+	   }
+	}
+
+

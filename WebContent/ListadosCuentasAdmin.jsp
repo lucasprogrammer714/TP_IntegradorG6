@@ -8,6 +8,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Listado cuentas</title>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+$(document).ready( function () {
+    $('#tablacuentas').DataTable();
+} );
+</script>
 <style type="text/css">
 body {
 font-family: arial;
@@ -41,17 +49,19 @@ if(request.getAttribute("listaCue")!=null){
     
 %>
 
-	<table border="1">
+	<table id="tablacuentas" class="display" border="1">
+		<thead>
 		<tr>
-			<td><b>DNI</b></td>
-			<td><b>N. CUENTA</b></td>
-			<td><b>CBU</b></td>
-			<td><b>CREACION</b></td>
-			<td><b>TIPO DE CUENTA</b></td>
-			<td><b>SALDO</b></td>
-			<td><b>ESTADO</b></td>
+			<th>DNI</th>
+			<th>N. CUENTA</th>
+			<th>CBU</th>
+			<th>CREACION</th>
+			<th>TIPO DE CUENTA</th>
+			<th>SALDO</th>
+			<th>ESTADO</th>
 		</tr>
-
+		</thead>
+		<tbody>
 		<%
 			for (Cuentas c : lc) {
 		%>
@@ -65,12 +75,10 @@ if(request.getAttribute("listaCue")!=null){
 			<td><%=c.getSaldo()%></td>
 			<td><%=c.getEstado_cuenta()%></td>
 		</tr>
-
-		
 		<%
 			}
 		%>
-
+		</tbody>
 
 	</table>
 

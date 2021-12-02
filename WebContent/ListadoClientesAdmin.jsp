@@ -9,9 +9,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Listado de Clientes</title>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+$(document).ready( function () {
+    $('#tablaclientes').DataTable();
+} );
+</script>
 <style type="text/css">
 body {
 font-family: arial;
+ background-color: lightblue;
 }
 
   
@@ -31,7 +40,7 @@ text-align: center;}
 
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <a href="Login.jsp">
-<img alt="golden age" src="C:\Users\usuario\Desktop\TP5_AaronMeza\TP_IntegradorG6\Imagenes\Golden age.JPEG">
+<img alt="golden age" src="C:\Users\IsaAli\eclipse-workspace\TP_IntegradorG6\Imagenes\Golden age.JPEG">
 </a>
 </div>
 
@@ -47,32 +56,32 @@ text-align: center;}
 
  %>
 
-
-<table border="1">
-    
-        <tr>
-		<td> <b>Dni</b></td>
-		<td> <b>CUIL</b></td>
-		<td> <b>Nombre</b></td>
-		<td> <b>Apellido</b></td>
-		<td> <b>Sexo</b></td>
-		<td> <b>Nacionalidad</b></td>
-		<td> <b>Fecha Nac.</b></td>
-		<td> <b>Direccion</b></td>
-		<td> <b>Localidad</b></td>
-		<td> <b>Provincia</b></td>
-		<td> <b>Correo Electronico</b></td>
-		<td> <b>Telefono</b></td>
-		<td> <b>Telefono Fijo</b></td>
-		<td> <b>Usuario</b></td>
-		
-        </tr>
-        
-    <%  
+<%///aca empieza la tabla antes de la paginacion %>
+<table id="tablaclientes" class="display" border="1">
+	<thead>
+		<tr>
+		<th>Dni</th>
+		<th>CUIL</th>
+		<th>Nombre</th>
+		<th>Apellido</th>
+		<th>Sexo</th>
+		<th>Nacionalidad</th>
+		<th>Fecha Nac.</th>
+		<th>Direccion</th>
+		<th>Localidad</th>
+		<th>Provincia</th>
+		<th>Correo Electronico</th>
+		<th>Telefono</th>
+		<th>Telefono Fijo</th>
+		<th>Usuario</th>
+		</tr>
+	</thead>
+	<tbody>
+	<%  
 		for(Cliente user : listaclientes) 
 		{
 	%>
-		<tr>  
+			<tr>  
 		 
 				<td><%=user.getDni() %> </td>
 				<td><%=user.getCuil() %></td>
@@ -89,13 +98,14 @@ text-align: center;}
 				<td><%=user.getTelefono_fijo() %></td>
 				<td><%=user.getUsuario() %></td>
 			
-		</tr>
+			</tr>
 	<%  } %>
-    </table>
+		
+	</tbody>
+</table>
+<%///aca termina la tabla antes de la paginacion %>
     <a href= "MenuClientesAdmin.jsp">Volver</a>
     <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <footer>Golden Age</footer>
 </div>
-    
-    
 </body>

@@ -10,6 +10,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Movimientos</title>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+$(document).ready( function () {
+    $('#tablamovimientos').DataTable();
+} );
+</script>
 <style type="text/css">
 body {
 font-family: arial;
@@ -86,17 +94,19 @@ System.out.println("JSP CUENTA: " + ncuenta);
 
 
 
-<table border="1">
+<table id="tablamovimientos" class="display" border="1">
+		<thead>
 		<tr>
-			<td><b>DNI</b></td>
-			<td><b>Numero de cuenta</b></td>
-			<td><b>Codigo de movimiento</b></td>
-			<td><b>Fecha</b></td>
-			<td><b>Detalle</b></td>
-			<td><b>Importe</b></td>
-			<td><b>Tipo de movimiento</b></td>
+			<th>DNI</th>
+			<th>Numero de cuenta</th>
+			<th>Codigo de movimiento</th>
+			<th>Fecha></th>
+			<th>Detalle</th>
+			<th>Importe</th>
+			<th>Tipo de movimiento</th>
 		</tr>
-
+		</thead>
+		<tbody>
 		<%
 			for (Movimientos lm : listaMovimientos) {
 		%>
@@ -114,7 +124,7 @@ System.out.println("JSP CUENTA: " + ncuenta);
 			}
 		%>
 
-
+	</tbody>
 	</table>
 	
 <a href= "UsuarioCliente.jsp">Volver</a>

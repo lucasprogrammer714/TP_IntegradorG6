@@ -40,25 +40,44 @@ if(session.getAttribute("usuariolog")!=null)
 user=session.getAttribute("usuariolog").toString();
 }
 %>
+<%usuario=(Cliente)session.getAttribute("datosusuario");%>
 <h1>bienvenido/a <%=user %> </h1>
 
-<%usuario=(Cliente)session.getAttribute("datosusuario");%>
-Nombre: <%=usuario.getNombre().toString() %><br/>
-Apellido: <%=usuario.getApellido().toString() %><br/>
-Fecha de Nacimiento: <%=usuario.getNacimiento().toString() %><br/>
-DNI: <%=usuario.getDni().toString() %><br>
-CUIL: <%=usuario.getCuil().toString() %><br>
-Provincia: <%=usuario.getProvincia().toString() %> <br>
-Localidad: <%=usuario.getLocalidad().toString() %><br>
-Direccion: <%=usuario.getDireccion().toString() %><br>
-Email: <%=usuario.getEmail().toString() %><br>
-Telefono: <%=usuario.getTelefono().toString() %><br>
-Telefono Fijo: <%=usuario.getTelefono_fijo().toString() %><br>
-
+<table class="table" border="1">
+  <thead>
+    <tr>
+      <th >Nombre</th>
+      <th >Apellido</th>
+      <th >Fecha de Nacimiento</th>
+      <th >DNI</th>
+      <th >CUIL</th>
+      <th >Provincia</th>
+      <th >Localidad</th>
+      <th >Direccion</th>
+      <th>Email</th>
+      <th >Telefono</th>
+      <th>Telefono Fijo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%=usuario.getNombre().toString()%></td>
+      <td><%=usuario.getApellido().toString() %></td>
+      <td><%=usuario.getNacimiento().toString() %></td>
+      <td><%=usuario.getDni().toString() %></td>
+      <td><%=usuario.getCuil().toString() %></td>
+      <td><%=usuario.getProvincia().toString() %></td>
+      <td> <%=usuario.getLocalidad().toString() %></td>
+      <td><%=usuario.getDireccion().toString() %></td>
+      <td><%=usuario.getEmail().toString() %></td>
+      <td><%=usuario.getTelefono().toString() %></td>
+      <td><%=usuario.getTelefono_fijo().toString() %></td>
+    </tr>
+  </tbody>
+</table>
 <a href="UsuarioCliente.jsp">Volver</a>
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <footer>Golden Age</footer>
 </div>
-
 </body>
 </html>

@@ -28,4 +28,10 @@ public class MovimientosNegImpl implements MovimientosNeg {
 		return movDao.registrarMovimientoSP(move, dniDepo, nCuentaDepo);
 	}
 
+
+	@Override
+	public int contarPagoCuota(String dni, int cuota, int idPrestamo) {
+		return movDao.contarPagoCuota(dni, cuota, idPrestamo);
+	}
+
 }
