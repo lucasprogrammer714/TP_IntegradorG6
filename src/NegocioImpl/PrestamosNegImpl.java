@@ -46,4 +46,13 @@ public class PrestamosNegImpl implements PrestamosNeg{
 		return prestamoDao.pagoCuotaPrestamo(dni_c, num_cuenta, montoCuota);
 	}
 
+	@Override
+	public int contarPrestamo(String dni, int nrocuent) {
+		return prestamoDao.contarPrestamo(dni, nrocuent);
+	}
+
+	public boolean prestamoSaldado(String dni_p, int nroCuenta_p, int id_p) {
+		return prestamoDao.prestamoSaldado(dni_p, nroCuenta_p, id_p);
+	}
+	
 }

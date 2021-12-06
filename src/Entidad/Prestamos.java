@@ -16,6 +16,7 @@ public class Prestamos {
 	private int cuotas;
 	private boolean pendiente;
 	private boolean autorizado;
+	private boolean saldado;
 	
 	
 	
@@ -134,9 +135,11 @@ public class Prestamos {
 		this.pendiente = pendiente;
 	}
 
-
+	public boolean getSaldado() {
+		return saldado;
+	}
 	
-
-	
-
+	public void setSaldado(boolean saldado) {
+		this.saldado=saldado;
+	}
 }

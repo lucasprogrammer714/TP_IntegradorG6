@@ -20,14 +20,17 @@ import javax.servlet.http.HttpSession;
 import Entidad.Cliente;
 import Entidad.Cuentas;
 import Entidad.Movimientos;
+import Entidad.Prestamos;
 import Excepciones.FaltaArrobaException;
 import Excepciones.FaltaPuntoException;
 import Negocio.ClienteNeg;
 import Negocio.CuentaNeg;
 import Negocio.MovimientosNeg;
+import Negocio.PrestamosNeg;
 import NegocioImpl.ClienteNegImpl;
 import NegocioImpl.CuentaNegImpl;
 import NegocioImpl.MovimientosNegImpl;
+import NegocioImpl.PrestamosNegImpl;
 
 
 @WebServlet("/servletCliente")
@@ -38,6 +41,7 @@ public class servletCliente extends HttpServlet {
 	ClienteNeg clienteNeg = new ClienteNegImpl();
 	CuentaNeg cuentaNeg = new CuentaNegImpl();
 	MovimientosNeg movimientoNeg = new MovimientosNegImpl();
+	PrestamosNeg prestamoNeg = new PrestamosNegImpl();
 
     public servletCliente() {
         super();
@@ -99,11 +103,39 @@ public class servletCliente extends HttpServlet {
 			
 			case "solicitarPrestamo":
 			{
+				
+				Prestamos prestamo = new Prestamos();
 				String user = request.getSession().getAttribute("usuariolog").toString();
+				int nro_cuenta_prestamo = 0;
 				user_dni = clienteNeg.Dni_de_Usuario(user).toString();
-				request.setAttribute("listaCuentasUser", cuentaNeg.ListarCuentaxCliente(user_dni));
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/SolicitarPrestamosCliente.jsp");
-				dispatcher.forward(request, response);
+				nro_cuenta_prestamo = prestamoNeg.cuentaPrestamo(user_dni);
+				int contarPrestamo=prestamoNeg.contarPrestamo(user_dni, nro_cuenta_prestamo);
+				System.out.println("CONTADOR DE PRESTAMOS PENDIENTES: " + contarPrestamo);
+			    //System.out.println(prestamo.getDni_prestamo());
+				//System.out.println(prestamo.getNro_cuenta_p());
+				//System.out.println(prestamo.getFecha_p().toString());
+				//System.out.println(prestamo.getImp_debe_pagar());
+				//System.out.println(prestamo.getImporte_pedido());
+				//System.out.println(prestamo.getPlazo());
+				System.out.println(prestamo.getId_prestamo());
+				System.out.println(prestamo.getMonto_mensual());
+				System.out.println(prestamo.getCuotas());
+				System.out.println(prestamo.isPendiente());
+				System.out.println(prestamo.isAutorizado());
+				System.out.println(prestamo.getSaldado());
+				request.setAttribute("prestamopendiente", contarPrestamo);
+				if(contarPrestamo>0) {
+					System.out.println("HAY MAS DE UN PRESTAMO ACTIVO PENDIENTE");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/MensajePrestamosPendientes.jsp");
+					dispatcher.forward(request, response);
+				}
+				
+				else {
+					request.setAttribute("listaCuentasUser", cuentaNeg.ListarCuentaxCliente(user_dni));
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/SolicitarPrestamosCliente.jsp");
+					dispatcher.forward(request, response);
+				}
+				
 			break;
 			}
 			

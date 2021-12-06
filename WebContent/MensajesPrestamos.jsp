@@ -11,24 +11,30 @@
 <body>
 
 <%Prestamos prestamo = new Prestamos(); %>
-	
+
+<% boolean update=false;%>
 <%if(request.getAttribute("DatosPrestamo")!=null)
 {
 prestamo = (Prestamos)request.getAttribute("DatosPrestamo");
 } 
 
+if(request.getAttribute("updateprestamo")!=null){
+	update=(boolean)request.getAttribute("updateprestamo");
+}
 %>
 
-<%=prestamo.isPendiente() %><br>
-<%=prestamo.getId_prestamo() %><br>
-
-<% if (prestamo.isPendiente()==true){ %> 
+<%boolean autorizado=prestamo.isAutorizado(); %>
+<%boolean pendiente=prestamo.isPendiente(); %>
+<%int idP=prestamo.getId_prestamo(); %>
+<%=autorizado %>
+<%=pendiente %>
+<%=idP %>
+<% if (prestamo.isPendiente()==true && prestamo.isAutorizado()==false){ %> 
 	<b>Su prestamo está pendiente de autorización</b>
-	
 <%}%>
 
 
-<%if (prestamo.isAutorizado()==false  && prestamo.getId_prestamo() != 0){ %> 
+<%if (prestamo.isAutorizado()==false && prestamo.isPendiente()==false && prestamo.getId_prestamo() != 0){ %> 
 <b>Su prestamo no ha sido autorizado. Para más información contacte al banco Golden Age</b><br>
 <%}%>
 	
@@ -37,10 +43,11 @@ prestamo = (Prestamos)request.getAttribute("DatosPrestamo");
 <b>Aún no cuenta con un prestamo solicitado</b><br>
 <%}%>
 	
+<%if (update==true){ %> 
+<b>Su prestamo fue saldado correctamente</b><br>
+<%}%>
 
-
-
-
+<a href="UsuarioCliente.jsp">Volver</a>
 
 </body>
 </html>

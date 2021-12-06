@@ -69,13 +69,13 @@ if(request.getAttribute("PagoExitoso")!=null){
  <form method="post" action = "servletPrestamos">
  <b>Seleccione la cuota que desea pagar: </b><br>
 
- <%for(int x=0;x<prestamo.getCuotas();x++){ 
-if(listaCuotas.get(x)==1){ %>
- Cuota  <%=x+1 %>  : <input  type ="radio" name= "rdbMontoCuota" value="<%=prestamo.getMonto_mensual() %>" required  disabled> Monto a pagar:  <b><%=prestamo.getMonto_mensual()%></b> <br><br>
+ <%for(int x=1;x<=listaCuotas.size();x++){ 
+if(listaCuotas.get(x-1)==1){ %>
+ Cuota  <%=x %>  : <input  type ="radio" name= "rdbMontoCuota" value="<%=x %>" required  disabled> Monto a pagar:  <b><%=prestamo.getMonto_mensual()%></b> <br><br>
  <%}else{ %>
 
 
- Cuota  <%=x+1 %>  : <input  type ="radio" name= "rdbMontoCuota" value="<%=prestamo.getMonto_mensual() %>" required  > Monto a pagar:  <b><%=prestamo.getMonto_mensual()%></b> <br><br>
+ Cuota  <%=x %>  : <input  type ="radio" name= "rdbMontoCuota" value="<%=x %>" required  > Monto a pagar:  <b><%=prestamo.getMonto_mensual()%></b> <br><br>
 <%} 
 }%>
 

@@ -58,15 +58,33 @@ public class servletPrestamos extends HttpServlet {
 			{
 			case "PagarCuotasPrestamos":
 			{
+				System.out.println("SERVLET PRESTAMO SIN BOTON PAGAR");
+				int nro_cuenta_prestamo_Datos;
+				boolean prestamosaldado= false;
+				int contador=0;
 				Prestamos prestamo = new Prestamos();
 				String user = request.getSession().getAttribute("usuariolog").toString();
 				int nro_cuenta_prestamo = 0;
 				user_dni = clienteNeg.Dni_de_Usuario(user).toString();
 				nro_cuenta_prestamo = prestamoN.cuentaPrestamo(user_dni);
+				nro_cuenta_prestamo_Datos = prestamoN.cuentaPrestamo(user_dni);
 				ArrayList <Cuentas> list = cuentaNeg.ListarCuentaxCliente(user_dni);
 				ArrayList <Integer> listaCuotas=new ArrayList <Integer>(); ///***************************** LISTA PARA LAS CUOTAS PAGAS
-				
+				boolean updateprestamo=false;
 				prestamo = prestamoN.datosPagoPrestamos(user_dni, nro_cuenta_prestamo);
+				
+			    //System.out.println(prestamo.getDni_prestamo());
+				//System.out.println(prestamo.getNro_cuenta_p());
+				//System.out.println(prestamo.getFecha_p().toString());
+				//System.out.println(prestamo.getImp_debe_pagar());
+				//System.out.println(prestamo.getImporte_pedido());
+				//System.out.println(prestamo.getPlazo());
+				System.out.println(prestamo.getId_prestamo());
+				System.out.println(prestamo.getMonto_mensual());
+				System.out.println(prestamo.getCuotas());
+				System.out.println(prestamo.isPendiente());
+				System.out.println(prestamo.isAutorizado());
+				System.out.println(prestamo.getSaldado());
 				
 				    request.setAttribute("listaCuentasUser", list);	
 					request.setAttribute("DniUser", user_dni);
@@ -79,13 +97,26 @@ public class servletPrestamos extends HttpServlet {
 			   }
 			   ///*********************** MUESTRA LA LISTA ***********************
 			   for(int i=0;i<prestamo.getCuotas(); i++) {
+				   if(listaCuotas.get(i)==1) {
+					   contador++;
+				   }
 				   System.out.println("VALOR CUOTA "+i+": "+listaCuotas.get(i));
 			   }
 			   
+			   if(prestamo.getCuotas()==contador) {
+				   prestamosaldado=true;
+			   }
+
+			   if(prestamosaldado==true) {
+				   
+				   updateprestamo = prestamoN.prestamoSaldado(user_dni, nro_cuenta_prestamo_Datos, prestamo.getId_prestamo());
+				   System.out.println("ESTADO DE UPDATE PRESTAMO: " + updateprestamo);
+			   }
 				request.setAttribute("arrayCuotas", listaCuotas); /// REQUEST DE LA LISTA CUOTAS
 				
-				if(prestamo.isAutorizado()==false || prestamo.isPendiente() == true)
+				if(prestamo.isAutorizado()==false || prestamo.isPendiente() == true || updateprestamo==true)
 				{
+					request.setAttribute("updateprestamo", updateprestamo);
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/MensajesPrestamos.jsp");
 					dispatcher.forward(request, response);
 				}
@@ -143,15 +174,17 @@ public class servletPrestamos extends HttpServlet {
 			prestamos.setFecha_p(LocalDate.now());
 			prestamos.setImporte_pedido(Float.parseFloat(request.getParameter("txtMonto").toString()));//es el importe que solicita el cliente
 			prestamos.setCuotas(cuotas);
-			prestamos.setPlazo("12");
+			prestamos.setPlazo("2022-01-01");
 			prestamos.setImp_debe_pagar(importe_a_pagar); // segun el importe pedido se le multiplica un interes del 54% tomando de ejemplo un banco
 			prestamos.setMonto_mensual(monto_mensual); // calcula lo que se calculo en el importe que se debe pagar dividido las cuotas solicitadas esto daria el importe a pagar por mes          
 			prestamos.setPendiente(true);
 			prestamos.setAutorizado(false);
+			prestamos.setSaldado(false);
 			
 			registro = prestamoN.insertar(prestamos);
 			
 			request.setAttribute("RegistroExitoso", registro);
+			System.out.println("REGISTRO PEDIDO DE PRESTAMO: " +registro);
 			//request.setAttribute("listaMovimientos", list);	
 			request.setAttribute("listaCuentasUser", cuentaNeg.ListarCuentaxCliente(user_dni));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/SolicitarPrestamosCliente.jsp");
@@ -175,13 +208,14 @@ public class servletPrestamos extends HttpServlet {
 		if(request.getParameter("btnPagarCuotaPrestamo")!=null)
 		{
 	
-		
+			System.out.println("SERVLET PRESTAMO CON BOTON PAGAR");
 			String user = request.getSession().getAttribute("usuariolog").toString();
 			String user_dni;
 			int nro_cuenta_prestamo = 0;
 			int nro_cuenta_prestamo_Datos = 0;
 			float montoCuota;
 			boolean pagoExitoso = false;
+			boolean updateprestamo=false;
 			 Prestamos prestamo = new Prestamos();
 		
 		
@@ -195,28 +229,60 @@ public class servletPrestamos extends HttpServlet {
                prestamo =  prestamoN.datosPagoPrestamos(user_dni, nro_cuenta_prestamo_Datos);
 			
 			   montoCuota = prestamo.getMonto_mensual();
-				
+			   String numcuota=request.getParameter("rdbMontoCuota");
 				pagoExitoso =  prestamoN.pagoCuotaPrestamo(user_dni, nro_cuenta_prestamo, montoCuota);
-				registrarMovimiento(user_dni,nro_cuenta_prestamo,montoCuota);
+				registrarMovimiento(user_dni,nro_cuenta_prestamo,montoCuota, numcuota,prestamo.getId_prestamo());
 				
 				request.setAttribute("listaCuentasUser", list);	
 				request.setAttribute("DniUser", user_dni);
 				request.setAttribute("DatosPrestamo", prestamoN.datosPagoPrestamos(user_dni, nro_cuenta_prestamo_Datos));
-				
-			request.setAttribute("PagoExitoso", pagoExitoso);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/PagosPrestamosClientes.jsp");
-			dispatcher.forward(request, response);
-			
+				ArrayList <Integer> listaCuotas=new ArrayList <Integer>();
+				///********************CARGA DE LA LISTA DE LAS CUOTAS PAGAS*****************
+				   for(int i=1;i<=prestamo.getCuotas(); i++) {
+					   int valor=movimientoNeg.contarPagoCuota(user_dni, i, prestamo.getId_prestamo());
+					   listaCuotas.add(valor);
+				   }
+				   ///*********************** MUESTRA LA LISTA ***********************
+				   boolean prestamosaldado= false;
+				   int contador=0;
+				   for(int i=0;i<prestamo.getCuotas(); i++) {
+					   
+					   if(listaCuotas.get(i)==1) {
+						   contador++;
+					   }
+					   System.out.println("VALOR CUOTA "+i+": "+listaCuotas.get(i));
+				   }
+				   
+				   if(prestamo.getCuotas()==contador) {
+					   prestamosaldado=true;
+				   }
+
+				   if(prestamosaldado==true) {
+					   
+					   updateprestamo = prestamoN.prestamoSaldado(user_dni, nro_cuenta_prestamo_Datos, prestamo.getId_prestamo());
+					   System.out.println("ESTADO DE UPDATE PRESTAMO: " + updateprestamo);
+				   }
+					request.setAttribute("arrayCuotas", listaCuotas); /// REQUEST DE LA LISTA CUOTAS
+					
+					if(prestamo.isAutorizado()==false || prestamo.isPendiente() == true || updateprestamo==true)
+					{
+						request.setAttribute("updateprestamo", updateprestamo);
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/MensajesPrestamos.jsp");
+						dispatcher.forward(request, response);
+					}
+					else {
+						request.setAttribute("PagoExitoso", pagoExitoso);
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/PagosPrestamosClientes.jsp");
+						dispatcher.forward(request, response);
+					}
 	   }
-		
-	
 }
 
 
-	private void registrarMovimiento(String user_dni, int nro_cuenta, float montoCuota) {
+	private void registrarMovimiento(String user_dni, int nro_cuenta, float montoCuota, String numerocuota, int idprestamo ) {
 		
 		String tipo_movimiento = "Extraccion";
-		String detalle = "Pago de cuota de prestamo pedido";
+		String detalle = "Pago de cuota "+numerocuota+" de prestamo "+idprestamo+" pedido";
 		//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 	
 		

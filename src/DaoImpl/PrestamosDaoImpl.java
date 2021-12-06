@@ -26,13 +26,26 @@ public class PrestamosDaoImpl implements PrestamosDao {
 				}catch(ClassNotFoundException e){
 					e.printStackTrace();
 				}
-				
+				System.out.println(insert);
 				PreparedStatement statement;
 				Connection conexion = Conexion.getConexion().getSQLConexion();
 				boolean isInsertExitoso = false;
 				try{
 					
 					statement = conexion.prepareStatement(insert);
+					
+					System.out.println(prestamos.getDni_prestamo());
+					System.out.println(prestamos.getNro_cuenta_p());
+					System.out.println(prestamos.getFecha_p().toString());
+					System.out.println(prestamos.getImp_debe_pagar());
+					System.out.println(prestamos.getImporte_pedido());
+					System.out.println(prestamos.getPlazo().toString());
+					System.out.println(prestamos.getMonto_mensual());
+					System.out.println(prestamos.getCuotas());
+					System.out.println(prestamos.isPendiente());
+					System.out.println(prestamos.isAutorizado());
+					System.out.println(prestamos.getSaldado());
+					
 					
 					statement.setString(1, prestamos.getDni_prestamo());
 					statement.setInt(2, prestamos.getNro_cuenta_p());
@@ -44,10 +57,12 @@ public class PrestamosDaoImpl implements PrestamosDao {
 					statement.setInt(8, prestamos.getCuotas());
 					statement.setBoolean(9, prestamos.isPendiente());
 					statement.setBoolean(10, prestamos.isAutorizado());
+					statement.setBoolean(10, prestamos.getSaldado());
 					
 					if(statement.executeUpdate() > 0){
 						conexion.commit();
 						isInsertExitoso = true;
+						System.out.println("EXITO ALTA PRESTAMO: " + isInsertExitoso);
 					}
 				}
 				catch (SQLException e) {
@@ -146,7 +161,7 @@ public class PrestamosDaoImpl implements PrestamosDao {
 	}
 
 	@Override
-	public Prestamos  datosPagoPrestamo(String dni, int nrocuent) {
+	public Prestamos datosPagoPrestamo(String dni, int nrocuent) {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -157,7 +172,7 @@ public class PrestamosDaoImpl implements PrestamosDao {
 		}
 		
 		
-		String sql = "SELECT id_p, cuotas, monto_mensual, autorizado, pendiente  FROM prestamos WHERE DNI_p ='" +dni+"' AND num_cuenta_p = '"+nrocuent+"'";
+		String sql = "SELECT id_p, cuotas, monto_mensual, autorizado, pendiente, saldado FROM prestamos WHERE DNI_p ='" +dni+"' AND num_cuenta_p = '"+nrocuent+"'";
 	    Prestamos datosPrestamos = new Prestamos();
 		
 		try{
@@ -166,13 +181,16 @@ public class PrestamosDaoImpl implements PrestamosDao {
 			Statement st = conexion.createStatement();
 	        ResultSet rs = st.executeQuery(sql);
 	        
-	        if (rs.next())
+	        while (rs.next())
 	        {
+	           if(rs.getBoolean("saldado")==false) {
 	           datosPrestamos.setCuotas(rs.getInt("cuotas"));
 	           datosPrestamos.setMonto_mensual(rs.getFloat("monto_mensual"));
 	           datosPrestamos.setAutorizado(rs.getBoolean("autorizado"));
 	           datosPrestamos.setPendiente(rs.getBoolean("pendiente"));
 	           datosPrestamos.setId_prestamo(rs.getInt("id_p"));
+	           datosPrestamos.setSaldado(rs.getBoolean("saldado"));
+	           }
 	        }
 				
 			
@@ -254,7 +272,75 @@ public class PrestamosDaoImpl implements PrestamosDao {
 		return updateExitoso;
 	} 
 	
+	public int contarPrestamo(String dni, int nrocuent) {
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+
+		}
+		
+		  int contPrest=0;
+		String sql = "SELECT id_p, cuotas, monto_mensual, autorizado, pendiente, saldado FROM prestamos WHERE DNI_p ='" +dni+"' AND num_cuenta_p = '"+nrocuent+"'";
+		
+		try{
+				
+			Connection conexion = Conexion.getConexion().getSQLConexion();	
+			Statement st = conexion.createStatement();
+	        ResultSet rs = st.executeQuery(sql);
+	      
+	        while (rs.next())
+	        {
+	           if(rs.getBoolean("saldado")==false) {
+	           contPrest++;
+	           }
+	        }
+	   }	
+		
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	return contPrest;
+	}
 	
+	
+	public boolean prestamoSaldado(String dni_p, int nroCuenta_p, int id_p) {
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+
+		}
+		
+		PreparedStatement st;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean updateExitoso = false;
+		String query = "UPDATE prestamos SET saldado = true where DNI_p = '"+dni_p+"' and num_cuenta_p = '"+nroCuenta_p+"' and id_p ='" + id_p+"'";
+		System.out.println(query);
+		try 
+		{
+			st = conexion.prepareStatement(query);
+			//st.setString(1, Integer.toString(dni));
+			if(st.executeUpdate() > 0)
+			{
+				conexion.commit();
+				updateExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+	   
+		
+		return updateExitoso;
+	} 
 	
 	
 
