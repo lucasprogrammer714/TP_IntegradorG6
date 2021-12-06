@@ -39,6 +39,11 @@ user=session.getAttribute("adminlog").toString();
 
 <h2>REPORTES</h2>
 
+<a href=ReporteIngresos.jsp>Reporte de ingresos bancarios</a>
+<a href=ReporteEgresos.jsp>Reporte de egresos bancarios</a>
+
+
+
 <a href="UsuarioAdmin.jsp">Volver al menu anterior</a>
 
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">

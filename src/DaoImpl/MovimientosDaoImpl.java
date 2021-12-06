@@ -66,7 +66,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 			
 		}catch(ClassNotFoundException e){
 			e.printStackTrace();
-
+  
 		}
 		
 	
@@ -170,6 +170,39 @@ public class MovimientosDaoImpl implements MovimientosDao {
 	     return n;
 	
 	   }
+
+	@Override
+	public float ingresosBancoFecha(String fechaInicio, String fechaFin) {
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+ String query = "SELECT convert(sum(importe), decimal(12,2))  as reporte FROM movimientos  where fecha_m >='"+fechaInicio+"' and fecha_m <= '"+fechaFin+"' and detalle like '%Pago de cuota%' ";
+		float reporte = 0;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		
+		try {
+			
+			Statement stm = conexion.createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			
+			while(rs.next())
+			{
+				reporte = rs.getFloat("reporte");
+				System.out.println(reporte);
+			}
+			
+		} catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return reporte;
+	   }
+
 	}
 
 

@@ -34,4 +34,12 @@ public class MovimientosNegImpl implements MovimientosNeg {
 		return movDao.contarPagoCuota(dni, cuota, idPrestamo);
 	}
 
+
+	@Override
+	public float reporteIngresoFecha(String fechaInicio, String fechaFin) {
+
+		return movDao.ingresosBancoFecha(fechaInicio, fechaFin);
+		
+	}
+
 }

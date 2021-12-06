@@ -19,8 +19,12 @@ prestamo = (Prestamos)request.getAttribute("DatosPrestamo");
 
 %>
 
+<%=prestamo.isPendiente() %><br>
+<%=prestamo.getId_prestamo() %><br>
+
 <% if (prestamo.isPendiente()==true){ %> 
 	<b>Su prestamo está pendiente de autorización</b>
+	
 <%}%>
 
 

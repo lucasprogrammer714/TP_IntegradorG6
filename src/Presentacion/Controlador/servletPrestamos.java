@@ -131,7 +131,7 @@ public class servletPrestamos extends HttpServlet {
 			
 			
 			
-			String user = request.getSession().getAttribute("User").toString();
+			String user = request.getSession().getAttribute("usuariolog").toString();
 			user_dni = clienteNeg.Dni_de_Usuario(user).toString();
 			
 			
