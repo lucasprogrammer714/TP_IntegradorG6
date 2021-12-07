@@ -106,11 +106,13 @@ public class servletCliente extends HttpServlet {
 				
 				Prestamos prestamo = new Prestamos();
 				String user = request.getSession().getAttribute("usuariolog").toString();
-				int nro_cuenta_prestamo = 0;
+				//int nro_cuenta_prestamo = 0;
 				user_dni = clienteNeg.Dni_de_Usuario(user).toString();
-				nro_cuenta_prestamo = prestamoNeg.cuentaPrestamo(user_dni);
-				int contarPrestamo=prestamoNeg.contarPrestamo(user_dni, nro_cuenta_prestamo);
-				System.out.println("CONTADOR DE PRESTAMOS PENDIENTES: " + contarPrestamo);
+				
+				//nro_cuenta_prestamo = prestamoNeg.cuentaPrestamo(user_dni);
+				int contarPrestamo=prestamoNeg.contarPrestamo(user_dni);
+				//System.out.println("nro_cuenta_prestamo: " + nro_cuenta_prestamo);
+				//System.out.println("CONTADOR DE PRESTAMOS PENDIENTES: " + contarPrestamo);
 			    //System.out.println(prestamo.getDni_prestamo());
 				//System.out.println(prestamo.getNro_cuenta_p());
 				//System.out.println(prestamo.getFecha_p().toString());
@@ -123,11 +125,19 @@ public class servletCliente extends HttpServlet {
 				System.out.println(prestamo.isPendiente());
 				System.out.println(prestamo.isAutorizado());
 				System.out.println(prestamo.getSaldado());
-				request.setAttribute("prestamopendiente", contarPrestamo);
 				if(contarPrestamo>0) {
-					System.out.println("HAY MAS DE UN PRESTAMO ACTIVO PENDIENTE");
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/MensajePrestamosPendientes.jsp");
-					dispatcher.forward(request, response);
+					if(contarPrestamo==1) {
+						System.out.println("TIENE UN PRESTAMO PENDIENTE PARA AUTORIZACION");
+						request.setAttribute("ESTADOPRESTAMO", contarPrestamo);
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/MensajePrestamosPendientes.jsp");
+						dispatcher.forward(request, response);
+					}
+					else {
+						System.out.println("TIENE UN PRESTAMO SIN SALDAR");
+						request.setAttribute("ESTADOPRESTAMO", contarPrestamo);
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/MensajePrestamosPendientes.jsp");
+						dispatcher.forward(request, response);
+					}	
 				}
 				
 				else {

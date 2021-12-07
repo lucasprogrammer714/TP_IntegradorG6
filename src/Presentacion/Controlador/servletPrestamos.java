@@ -193,13 +193,36 @@ public class servletPrestamos extends HttpServlet {
 		
 		if (request.getParameter("btnAutorizar")!=null)
 		{
+			Movimientos movimiento=new Movimientos();
 			String dni = request.getParameter("dniPrestamo");
 			int nro_cuenta = Integer.parseInt(request.getParameter("NroCuentaPrestamo"));
 			float saldo = Float.parseFloat(request.getParameter("Importe"));
+			int idPrestamo = Integer.parseInt(request.getParameter("idPrestamo"));
 			
-			prestamoN.autorizarPrestamos(dni, nro_cuenta);
+			movimiento.setDni_movimiento(dni);
+			movimiento.setNro_cuenta_movimiento(nro_cuenta);
+			movimiento.setFecha_movimiento(LocalDate.now());
+			movimiento.setDetalle("Autorizacion de prestamo aceptada"); /// VERIFICAR QUE PONEMOS ACA
+			movimiento.setImporte(saldo);
+			movimiento.setTipo_movimiento("Deposito");
+			
+			prestamoN.autorizarPrestamo(idPrestamo);
 			cuentaNeg.actualizarSaldoCuenta(dni, nro_cuenta, saldo);
+			movimientoNeg.registarMovimiento(movimiento);
 			
+			request.setAttribute("listaPrestamos", prestamoN.ListarPrestamos());
+			System.out.println("BOTON AUTORIZAR");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/AutorizarPrestamosAdmin.jsp");
+			dispatcher.forward(request, response);
+		}  
+		
+		
+		if (request.getParameter("btnRechazar")!=null)
+		{
+			
+			System.out.println("BOTON RECHAZAR");
+			int idPrestamo = Integer.parseInt(request.getParameter("idPrestamo"));
+			prestamoN.rechazarPrestamo(idPrestamo);
 			request.setAttribute("listaPrestamos", prestamoN.ListarPrestamos());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AutorizarPrestamosAdmin.jsp");
 			dispatcher.forward(request, response);

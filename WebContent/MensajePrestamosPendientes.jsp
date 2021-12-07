@@ -9,14 +9,17 @@
 <body>
 <%
 int contarPrestamos=0;
-if(request.getAttribute("prestamopendiente")!=null)
+if(request.getAttribute("ESTADOPRESTAMO")!=null)
 {
-	contarPrestamos=Integer.parseInt(request.getAttribute("prestamopendiente").toString());
+	contarPrestamos=Integer.parseInt(request.getAttribute("ESTADOPRESTAMO").toString());
 
 }
 %>
-<%if (contarPrestamos!=0){ %> 
-<b>DEBE SALDAR EL PRESTAMO PEDIDO PARA CONTINUAR CON LA OPERACION</b><br>
+<%if (contarPrestamos==1){ %> 
+<b>TIENE UN PRESTAMO PENDIENTE PARA AUTORIZACION</b><br>
+<%}%>
+<%if (contarPrestamos==2){ %> 
+<b>TIENE UN PRESTAMO PENDIENTE SIN SALDAR</b><br>
 <%}%>
 </body>
 </html>

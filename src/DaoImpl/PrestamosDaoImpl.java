@@ -13,7 +13,7 @@ import Entidad.Prestamos;
 
 public class PrestamosDaoImpl implements PrestamosDao {
 	
-	private static final String insert = "INSERT INTO Prestamos(DNI_p, num_cuenta_p, fecha_p, imp_debe_pagar, imp_pedido, plazo, monto_mensual, cuotas, pendiente, autorizado) VALUES(?,?,?,?,?,?,?,?,?,?)";
+	private static final String insert = "INSERT INTO Prestamos(DNI_p, num_cuenta_p, fecha_p, imp_debe_pagar, imp_pedido, plazo, monto_mensual, cuotas, pendiente, autorizado, saldado) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
 	@Override
 	public boolean insertar(Prestamos prestamos) {
@@ -34,18 +34,19 @@ public class PrestamosDaoImpl implements PrestamosDao {
 					
 					statement = conexion.prepareStatement(insert);
 					
-					System.out.println(prestamos.getDni_prestamo());
-					System.out.println(prestamos.getNro_cuenta_p());
-					System.out.println(prestamos.getFecha_p().toString());
-					System.out.println(prestamos.getImp_debe_pagar());
-					System.out.println(prestamos.getImporte_pedido());
-					System.out.println(prestamos.getPlazo().toString());
-					System.out.println(prestamos.getMonto_mensual());
-					System.out.println(prestamos.getCuotas());
-					System.out.println(prestamos.isPendiente());
-					System.out.println(prestamos.isAutorizado());
-					System.out.println(prestamos.getSaldado());
-					
+					/*
+					System.out.println("DNI: "+prestamos.getDni_prestamo());
+					System.out.println("NRO CUENTA: "+prestamos.getNro_cuenta_p());
+					System.out.println("FECHA: "+prestamos.getFecha_p().toString());
+					System.out.println("DEBE PAGAR: "+prestamos.getImp_debe_pagar());
+					System.out.println("IMPORTE PEDIDO: "+prestamos.getImporte_pedido());
+					System.out.println("PLAZO: "+prestamos.getPlazo().toString());
+					System.out.println("MONTOMENSUAL: "+prestamos.getMonto_mensual());
+					System.out.println("CUOTAS: "+prestamos.getCuotas());
+					System.out.println("PENDIENTE: "+prestamos.isPendiente());
+					System.out.println("AUTORIZADO: "+prestamos.isAutorizado());
+					System.out.println("SALDADO: "+prestamos.getSaldado());
+					*/
 					
 					statement.setString(1, prestamos.getDni_prestamo());
 					statement.setInt(2, prestamos.getNro_cuenta_p());
@@ -57,7 +58,7 @@ public class PrestamosDaoImpl implements PrestamosDao {
 					statement.setInt(8, prestamos.getCuotas());
 					statement.setBoolean(9, prestamos.isPendiente());
 					statement.setBoolean(10, prestamos.isAutorizado());
-					statement.setBoolean(10, prestamos.getSaldado());
+					statement.setBoolean(11, prestamos.getSaldado());
 					
 					if(statement.executeUpdate() > 0){
 						conexion.commit();
@@ -93,7 +94,7 @@ public class PrestamosDaoImpl implements PrestamosDao {
 		}
 		
 		
-		String sql = "SELECT DNI_p, num_cuenta_p, id_p, imp_debe_pagar, imp_pedido FROM prestamos";
+		String sql = "SELECT DNI_p, num_cuenta_p, id_p, imp_debe_pagar, imp_pedido, Pendiente FROM prestamos";
 		List<Prestamos> listap = new ArrayList<Prestamos>();
 		
 		try{
@@ -104,16 +105,16 @@ public class PrestamosDaoImpl implements PrestamosDao {
 	        
 	        while (rs.next())
 	        {
-	        	Prestamos presta = new Prestamos();
-	        	presta.setDni_prestamo(rs.getString("DNI_p"));
-	        	presta.setNro_cuenta_p(rs.getInt("num_cuenta_p"));
-	        	presta.setImp_debe_pagar(rs.getFloat("imp_debe_pagar"));
-	        	presta.setImporte_pedido(rs.getFloat("imp_pedido"));
-	        	
-	        	listap.add(presta);
-	        }
-				
-				
+	        	if(rs.getBoolean("Pendiente")==true) {
+	        		Prestamos presta = new Prestamos();
+		        	presta.setDni_prestamo(rs.getString("DNI_p"));
+		        	presta.setNro_cuenta_p(rs.getInt("num_cuenta_p"));
+		        	presta.setId_prestamo(rs.getInt("id_p"));
+		        	presta.setImp_debe_pagar(rs.getFloat("imp_debe_pagar"));
+		        	presta.setImporte_pedido(rs.getFloat("imp_pedido"));
+		        	listap.add(presta);
+	        	}
+	        }				
 	}
 		catch(Exception e)
 		{
@@ -124,7 +125,7 @@ public class PrestamosDaoImpl implements PrestamosDao {
 	}
 
 	@Override
-	public boolean autorizarPrestamo(String dni, int nrocuenta) {
+	public boolean autorizarPrestamo(int idPrestamo) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
@@ -139,9 +140,43 @@ public class PrestamosDaoImpl implements PrestamosDao {
 		try {
 			
 			
-			ps = conexion.prepareCall("Call autorizarPrestamo (?,?)");
-			ps.setString(1, dni);
-			ps.setInt(2, nrocuenta);
+			ps = conexion.prepareCall("Call autorizarPrestamo (?)");
+			ps.setInt(1, idPrestamo);
+			
+			if (ps.executeUpdate()>0)
+			{
+				conexion.commit();
+				updateExitoso = true;
+			}
+			
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		return updateExitoso;
+	}
+	
+	public boolean rechazarPrestamo(int idPrestamo) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+
+		}
+		PreparedStatement ps;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean updateExitoso = false;
+		
+		try {
+			
+			
+			ps = conexion.prepareCall("Call rechazarPrestamo (?)");
+			ps.setInt(1, idPrestamo);
 			
 			if (ps.executeUpdate()>0)
 			{
@@ -272,7 +307,7 @@ public class PrestamosDaoImpl implements PrestamosDao {
 		return updateExitoso;
 	} 
 	
-	public int contarPrestamo(String dni, int nrocuent) {
+	public int contarPrestamo(String dni) {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -282,8 +317,11 @@ public class PrestamosDaoImpl implements PrestamosDao {
 
 		}
 		
-		  int contPrest=0;
-		String sql = "SELECT id_p, cuotas, monto_mensual, autorizado, pendiente, saldado FROM prestamos WHERE DNI_p ='" +dni+"' AND num_cuenta_p = '"+nrocuent+"'";
+		//PENDIENTE = 1
+		// NO SALDADO = 2
+		int contPrest=0;
+		  
+		String sql = "SELECT id_p, cuotas, monto_mensual, autorizado, pendiente, saldado FROM prestamos WHERE DNI_p ='" +dni+"'";
 		
 		try{
 				
@@ -293,9 +331,13 @@ public class PrestamosDaoImpl implements PrestamosDao {
 	      
 	        while (rs.next())
 	        {
-	           if(rs.getBoolean("saldado")==false) {
-	           contPrest++;
+	           if(rs.getBoolean("Pendiente")==true && rs.getBoolean("Autorizado")==false && rs.getBoolean("saldado")==false) {
+	        	   contPrest=1;
 	           }
+	           
+	           if(rs.getBoolean("Pendiente")==false && rs.getBoolean("Autorizado")==true && rs.getBoolean("saldado")==false) {
+		           contPrest=2;
+		       }
 	        }
 	   }	
 		

@@ -23,11 +23,16 @@ public class PrestamosNegImpl implements PrestamosNeg{
 	}
 
 	@Override
-	public boolean autorizarPrestamos(String dni, int nrocuenta) {
+	public boolean autorizarPrestamo(int idPrestamo) {
 		// TODO Auto-generated method stub
-		return prestamoDao.autorizarPrestamo(dni, nrocuenta);
+		return prestamoDao.autorizarPrestamo(idPrestamo);
 	}
 
+	public boolean rechazarPrestamo(int idPrestamo) {
+		// TODO Auto-generated method stub
+		return prestamoDao.rechazarPrestamo(idPrestamo);
+	}
+	
 	@Override
 	public Prestamos datosPagoPrestamos(String dni, int nro_cuenta) {
 		// TODO Auto-generated method stub
@@ -47,8 +52,8 @@ public class PrestamosNegImpl implements PrestamosNeg{
 	}
 
 	@Override
-	public int contarPrestamo(String dni, int nrocuent) {
-		return prestamoDao.contarPrestamo(dni, nrocuent);
+	public int contarPrestamo(String dni) {
+		return prestamoDao.contarPrestamo(dni);
 	}
 
 	public boolean prestamoSaldado(String dni_p, int nroCuenta_p, int id_p) {

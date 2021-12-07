@@ -56,7 +56,7 @@ if (request.getAttribute("listaPrestamos")!=null)
 		<tr>
 			<td><b>DNI</b></td>
 			<td><b>Numero de cuenta</b></td>
-			<td><b>ID</b></td>
+			<td hidden><b>ID</b></td>
 			<td><b>Importe de pago</b></td>
 			<td><b>Importe pedido</b></td>
 		</tr>
@@ -65,10 +65,11 @@ if (request.getAttribute("listaPrestamos")!=null)
 		<form action="servletPrestamos" method = "post" >
 		<td> <%=pr.getDni_prestamo()%> <input type="hidden" name= "dniPrestamo" value= "<%=pr.getDni_prestamo()%>"/> </td>
 		<td> <%=pr.getNro_cuenta_p() %> <input type="hidden" name= "NroCuentaPrestamo" value= "<%=pr.getNro_cuenta_p()%>"/>  </td>
-		<td> <%=pr.getId_prestamo() %></td>
+		<td hidden> <%=pr.getId_prestamo() %> <input type="hidden" name= "idPrestamo" value= "<%=pr.getId_prestamo()%>"/> </td> 
 		<td> <%=pr.getImp_debe_pagar() %> </td>
 		<td> <%=pr.getImporte_pedido() %> </td> <input type="hidden" name= "Importe" value= "<%=pr.getImporte_pedido()%>"/>
 		<td> <input  type="submit" name = "btnAutorizar" value = "Autorizar"> </td>
+		<td> <input  type="submit" name = "btnRechazar" value = "Rechazar"> </td>
 		</form>
 		</tr>
 		<% } %>
