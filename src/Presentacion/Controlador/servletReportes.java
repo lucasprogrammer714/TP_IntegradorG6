@@ -1,6 +1,9 @@
 package Presentacion.Controlador;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,7 +40,7 @@ public class servletReportes extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		if(request.getParameter("btnReporte")!=null)
+		if(request.getParameter("btnReporteFechas")!=null)
 		{
 			
 			String fechaInicio = request.getParameter("txtFechaInicio");
@@ -49,6 +52,57 @@ public class servletReportes extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ReporteIngresos.jsp");
 			dispatcher.forward(request, response);
 			
+		}
+		 
+		if(request.getParameter("btnReporteAnual")!=null)
+		{
+			
+			LocalDate currentDate = LocalDate.now();
+			int year = currentDate.getYear(); 
+			
+			float reporteAnual = movNeg.reporteIngresoAnual(year);
+			//Float[] reporteMensual = new Float[12];
+			
+			//reporteMensual = movNeg.ingresosMensual();
+	
+		//	String param = Arrays.toString(reporteMensual);
+			
+			request.setAttribute("reporteAnual", reporteAnual);
+			//request.setAttribute("reporteMensual", param);
+			RequestDispatcher disptacher = request.getRequestDispatcher("/ReporteIngresos.jsp");
+			disptacher.forward(request, response);
+		}
+		
+		if(request.getParameter("btnReporteEgresoFechas")!=null)
+		{
+			
+			String fechaInicio = request.getParameter("txtFechaInicio");
+			String fechaFin = request.getParameter("txtFechaFin");
+			
+			float reporte = movNeg.reporte_egresoFecha(fechaInicio, fechaFin);
+			
+			request.setAttribute("reporteFechas", reporte);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ReporteEgresos.jsp");
+			dispatcher.forward(request, response);
+			
+		}
+		 
+		if(request.getParameter("btnReporteEgresoAnual")!=null)
+		{
+			
+			LocalDate currentDate = LocalDate.now();
+			int year = currentDate.getYear(); 
+			
+			float reporteAnual = movNeg.reporte_egresoAnual(year);
+			
+			ArrayList<Float> reporteMensual = new ArrayList();
+			
+			reporteMensual = movNeg.egresosMensual();
+			
+			request.setAttribute("reporteAnual", reporteAnual);
+			request.setAttribute("reporteMensual", reporteMensual);
+			RequestDispatcher disptacher = request.getRequestDispatcher("/ReporteEgresos.jsp");
+			disptacher.forward(request, response);
 		}
 		
 		

@@ -42,4 +42,42 @@ public class MovimientosNegImpl implements MovimientosNeg {
 		
 	}
 
+
+	@Override
+	public float reporteIngresoAnual(int year) {
+		// TODO Auto-generated method stub
+		return  movDao.ingresosBancoAnual(year);
+	}
+
+
+	@Override
+	public float reporte_egresoFecha(String fechaInicio, String fechaFin) {
+		// TODO Auto-generated method stub
+		return movDao.egresosBancoFecha(fechaInicio, fechaFin);
+	}
+
+
+	@Override
+	public float reporte_egresoAnual(int year) {
+		// TODO Auto-generated method stub
+		return movDao.egresosBancoAnual(year);
+	}
+
+
+	@Override
+	public ArrayList<Float> egresosMensual() {
+		// TODO Auto-generated method stub
+		return movDao.egresosMensual();
+	}
+
+
+
+
+
+	/*@Override
+	public Float[] ingresosMensual() {
+		// TODO Auto-generated method stub
+		return movDao.ingresosMensual();
+	}*/
+
 }
