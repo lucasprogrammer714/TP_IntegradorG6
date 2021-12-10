@@ -361,6 +361,36 @@ public class MovimientosDaoImpl implements MovimientosDao {
 	return reporteMeses;
 		
 	}
+	
+	
+public float egresoPrestamos(String fechaInicio, String fechaFin) {
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		float reporte = 0;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try {
+			String query = "SELECT SUM(imp_pedido) as sumegresoprestamo FROM  prestamos WHERE fecha_p >='"+fechaInicio+"' and fecha_p <= '"+fechaFin+"' and Autorizado=1";
+			Statement stm = conexion.createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			
+			while(rs.next())
+			{
+				reporte = rs.getFloat("sumegresoprestamo");
+				System.out.println(reporte);
+			}
+			
+		} catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return reporte;
+	}
 
 
 }

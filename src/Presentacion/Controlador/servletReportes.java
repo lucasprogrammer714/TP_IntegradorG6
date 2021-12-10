@@ -105,6 +105,20 @@ public class servletReportes extends HttpServlet {
 			disptacher.forward(request, response);
 		}
 		
+		if(request.getParameter("btnReportePrestamoEgreso")!=null)
+		{
+			
+			String fechaInicio = request.getParameter("fechainicio");
+			String fechaFin = request.getParameter("fechafin");
+			
+			float reporte = movNeg.egresoPrestamos(fechaInicio, fechaFin);
+			
+			request.setAttribute("egresoPrestamos", reporte);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ReportePrestamos.jsp");
+			dispatcher.forward(request, response);
+			
+		}
+		
 		
 	}
 

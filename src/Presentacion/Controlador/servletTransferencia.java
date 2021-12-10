@@ -52,7 +52,7 @@ public class servletTransferencia extends HttpServlet {
 		
 		if (request.getParameter("btnTransferir")!=null)
 		{
-			String usuario = request.getSession().getAttribute("User").toString();
+			String usuario = request.getSession().getAttribute("usuariolog").toString();
 			String tipo_movimiento ="Extraccion";
 			String CBU=request.getParameter("txtCBU");
 			String dniDepo="";
@@ -61,10 +61,11 @@ public class servletTransferencia extends HttpServlet {
 			user_dni = clienteNeg.Dni_de_Usuario(usuario);
 			Movimientos movimiento = new Movimientos();
 			boolean registro = false;
+			boolean registroF=true;
 			
 			
 			movimiento.setDni_movimiento(user_dni);
-			movimiento.setNro_cuenta_movimiento(Integer.parseInt(request.getParameter("ddlNroCuenta").toString()));
+			movimiento.setNro_cuenta_movimiento(Integer.parseInt(request.getParameter("cuentassaldo").toString()));
 			movimiento.setFecha_movimiento(LocalDate.parse(request.getParameter("txtFechaTransferencia")));
 			movimiento.setDetalle(request.getParameter("txtDetalle"));
 			movimiento.setImporte(Float.parseFloat(request.getParameter("txtImporte")));
@@ -73,21 +74,28 @@ public class servletTransferencia extends HttpServlet {
 			ncuentaDepo=cuentaNeg.Numero_de_Cuenta(CBU);
 			
 			System.out.println("DNI DEPO: " + dniDepo + ", CUENTA DEPO: " + ncuentaDepo);
-			
-			registro = move.registrarMovimientoSP(movimiento,dniDepo, ncuentaDepo);
-			
-			
 			ArrayList <Cuentas> list = cuentaNeg.ListarCuentaxCliente(user_dni);
-			request.setAttribute("listaCuentasUser", list);	
-			request.setAttribute("registroExitoso", registro);
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/TransferenciaClientes.jsp");
-			dispatcher.forward(request, response);
 			
-			 
-		}
-		
-		
+			
+			for(int i=0; i<list.size();i++) {
+				if(list.get(i).getNumero_cuenta() == Integer.parseInt(request.getParameter("cuentassaldo"))) {
+					if(Float.parseFloat(request.getParameter("txtImporte"))>list.get(i).getSaldo()){
+						request.setAttribute("registroFallido", registroF);
+						request.setAttribute("listaCuentasUser", list);	
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/TransferenciaClientes.jsp");
+						dispatcher.forward(request, response);
+					}
+					else {
+						registro = move.registrarMovimientoSP(movimiento,dniDepo, ncuentaDepo);
+						System.out.println("ESTADO: " + registro);
+						request.setAttribute("listaCuentasUser", list);	
+						request.setAttribute("registroExitoso", registro);
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/TransferenciaClientes.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+			} 
+		}	
 	}
-
 }

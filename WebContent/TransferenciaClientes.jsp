@@ -47,7 +47,8 @@ user=session.getAttribute("usuariolog").toString();
 <% 
 	
 	List<Cuentas> listaCuentas = new ArrayList<Cuentas>();
-boolean registrado = false;
+boolean registrado=false;
+boolean registradoF=false;
 
 if(request.getAttribute("listaCuentasUser")!=null){
    listaCuentas = (List<Cuentas>) request.getAttribute("listaCuentasUser");
@@ -58,6 +59,11 @@ if(request.getAttribute("listaCuentasUser")!=null){
 if (request.getAttribute("registroExitoso")!=null)
 {
 	registrado = Boolean.parseBoolean(request.getAttribute("registroExitoso").toString());
+}
+
+if (request.getAttribute("registroFallido")!=null)
+{
+	registradoF = Boolean.parseBoolean(request.getAttribute("registroFallido").toString());
 }
     
 %>
@@ -71,19 +77,16 @@ if (request.getAttribute("registroExitoso")!=null)
 			<td><input type="text" name="txtCBU" required></td>
 		</tr>
 		<tr>
-		
-		
-			<td><b>Nro. de  Cuenta:</b></td>
-			
-			<td><select name="ddlNroCuenta"> 
-			<%
-		   for (Cuentas c : listaCuentas){
-		%>
-					<option> <%=c.getNumero_cuenta() %></option>
-					
-					<%} %>
-				</select> </td>
-		</tr>	
+			<td><b>CUENTA</b></td>
+			<td><b>SALDO</b></td>
+		</tr>
+		<%for(Cuentas c : listaCuentas){%>
+		<tr>
+			<td><b><%=c.getNumero_cuenta() %></b></td>
+			<td><b><%=c.getSaldo() %></b></td>
+			<td><input type="radio" name="cuentassaldo" value="<%=c.getNumero_cuenta()%>" required></td>
+		</tr>
+		<%} %>
 		<tr>
 			<td><b>Detalle:</b> </td>
 			<td><input type="text" name="txtDetalle" required>
@@ -110,6 +113,11 @@ if (registrado == true)
 %>
 <h2>Transferencia exitosa</h2>
 <%
+}
+if(registradoF==true){
+	%>
+	<h2>No se pudo realizar la transferencia</h2>
+	<%
 }
 %>
 <a href="UsuarioCliente.jsp">cancelar transferencia</a>

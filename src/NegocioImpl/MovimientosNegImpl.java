@@ -70,7 +70,9 @@ public class MovimientosNegImpl implements MovimientosNeg {
 		return movDao.egresosMensual();
 	}
 
-
+	public float egresoPrestamos(String fechaInicio, String fechaFin) {
+		return movDao.egresoPrestamos(fechaInicio, fechaFin);
+	}
 
 
 

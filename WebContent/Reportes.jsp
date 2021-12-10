@@ -41,6 +41,7 @@ user=session.getAttribute("adminlog").toString();
 
 <a href=ReporteIngresos.jsp>Reporte de ingresos bancarios</a>
 <a href=ReporteEgresos.jsp>Reporte de egresos bancarios</a>
+<a href=ReportePrestamos.jsp>Reporte de Prestamos</a>
 
 
 

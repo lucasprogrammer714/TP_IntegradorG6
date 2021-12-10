@@ -244,7 +244,7 @@ public class CuentasDaoImpl implements CuentasDao {
 		
 	
 		
-		String sql = "SELECT  DNI, num_cuenta FROM cuentas INNER JOIN clientes ON clientes.DNI = cuentas.DNI_c WHERE DNI = '"+dni+"'";
+		String sql = "SELECT  DNI, num_cuenta, saldo FROM cuentas INNER JOIN clientes ON clientes.DNI = cuentas.DNI_c WHERE DNI = '"+dni+"'";
 		
 		List<Cuentas> lista_cuentaxcliente = new ArrayList<Cuentas>();
 		
@@ -260,7 +260,7 @@ public class CuentasDaoImpl implements CuentasDao {
 			Cuentas cuenta = new Cuentas() ;
 			cuenta.setDni_cuenta(rs.getString("DNI"));
 			cuenta.setNumero_cuenta(rs.getInt("num_cuenta"));
-		
+			cuenta.setSaldo(rs.getFloat("saldo"));;
 			
 			lista_cuentaxcliente.add(cuenta);
 		}

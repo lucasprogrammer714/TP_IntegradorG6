@@ -21,6 +21,10 @@ public class PrestamosNegImpl implements PrestamosNeg{
 	
 		return prestamoDao.ListarPrestamos();
 	}
+	
+	public List<Prestamos> ListarTodosPrestamos(){
+		return prestamoDao.ListarTodosPrestamos();
+	}
 
 	@Override
 	public boolean autorizarPrestamo(int idPrestamo) {

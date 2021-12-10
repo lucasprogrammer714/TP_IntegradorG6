@@ -18,4 +18,6 @@ public interface MovimientosNeg {
 	
     public ArrayList<Float> egresosMensual(); 
 	//public Float[] ingresosMensual();
+    
+    public float egresoPrestamos(String fechaInicio, String fechaFin);
 }

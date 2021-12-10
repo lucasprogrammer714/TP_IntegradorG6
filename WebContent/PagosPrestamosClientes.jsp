@@ -64,6 +64,13 @@ if(request.getAttribute("PagoExitoso")!=null){
   pagoExitoso = (Boolean)request.getAttribute("PagoExitoso");
     
 }
+
+boolean pagoNoExitoso=false;
+if(request.getAttribute("pagoNoExitoso")!=null){
+	pagoNoExitoso=(Boolean)request.getAttribute("pagoNoExitoso");
+}
+
+
  %>
  
  <form method="post" action = "servletPrestamos">
@@ -82,15 +89,19 @@ if(listaCuotas.get(x-1)==1){ %>
 
 
 Seleccione la cuenta con la que desea pagar su cuota: 
-<select name="ddlNroCuenta"><%for(Cuentas c : listaCuentas){ %>
- 
- <option><%=c.getNumero_cuenta() %></option>
-
-<%} %>
-</select> <br><br>
-
-
-
+		<table border="1">
+		<tr>
+			<td><b>CUENTA</b></td>
+			<td><b>SALDO</b></td>
+		</tr>
+		<%for(Cuentas c : listaCuentas){%>
+		<tr>
+			<td><b><%=c.getNumero_cuenta() %></b></td>
+			<td><b><%=c.getSaldo() %></b></td>
+			<td><input type="radio" name="cuentassaldo" value="<%=c.getNumero_cuenta()%>" required></td>
+		</tr>
+		<%} %>
+		</table>
   <input type="submit" name="btnPagarCuotaPrestamo" value="Pagar"/>
   </form>
   <br><br>
@@ -98,7 +109,14 @@ Seleccione la cuenta con la que desea pagar su cuota:
 
   El pago de cuota fue exitoso
   
-<%} %><br><br>
+<%} 
+
+if(pagoNoExitoso==true){%>
+	no se pudo realizar el pago de cuota
+	<% 
+}
+%>
+<br><br>
     <a href= "UsuarioCliente.jsp">Volver</a>
   <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <footer>Golden Age</footer>

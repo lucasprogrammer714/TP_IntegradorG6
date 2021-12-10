@@ -123,6 +123,53 @@ public class PrestamosDaoImpl implements PrestamosDao {
 		
 	return listap;
 	}
+	
+	
+	@Override
+	public List<Prestamos> ListarTodosPrestamos() {
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+
+		}
+		
+		
+		String sql = "SELECT DNI_p, num_cuenta_p, id_p, imp_debe_pagar, imp_pedido, pendiente, autorizado, saldado FROM prestamos";
+		List<Prestamos> listap = new ArrayList<Prestamos>();
+		
+		try{
+				
+			Connection conexion = Conexion.getConexion().getSQLConexion();	
+			Statement st = conexion.createStatement();
+	        ResultSet rs = st.executeQuery(sql);
+	        
+	        while (rs.next())
+	        {
+	        	System.out.println("CARGA TODOS LOS PRESTAMOS");
+	        	Prestamos presta = new Prestamos();
+		        presta.setDni_prestamo(rs.getString("DNI_p"));
+		        presta.setNro_cuenta_p(rs.getInt("num_cuenta_p"));
+		        presta.setId_prestamo(rs.getInt("id_p"));
+		        presta.setImp_debe_pagar(rs.getFloat("imp_debe_pagar"));
+		        presta.setImporte_pedido(rs.getFloat("imp_pedido"));
+		        presta.setPendiente(rs.getBoolean("Pendiente"));
+		        presta.setAutorizado(rs.getBoolean("Autorizado"));
+		        presta.setSaldado(rs.getBoolean("saldado"));
+		        listap.add(presta);
+	        	
+	        }				
+	}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	return listap;
+	}
+	
 
 	@Override
 	public boolean autorizarPrestamo(int idPrestamo) {

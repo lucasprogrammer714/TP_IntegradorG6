@@ -20,5 +20,5 @@ public interface MovimientosDao {
     public ArrayList<Float> egresosMensual(); 
   //  public Float[] ingresosMensual();
 	
-
+    public float egresoPrestamos(String fechaInicio, String fechaFin);
 }

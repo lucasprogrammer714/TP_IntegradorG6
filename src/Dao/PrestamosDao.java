@@ -15,4 +15,5 @@ public interface PrestamosDao {
 	public boolean pagoCuotaPrestamo (String dni_c, int nroCuenta, float montoCuota);
 	public int contarPrestamo(String dni);
 	public boolean prestamoSaldado(String dni_p, int nroCuenta_p, int id_p);
+	public List<Prestamos> ListarTodosPrestamos();
 }
