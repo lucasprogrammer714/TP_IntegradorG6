@@ -19,31 +19,34 @@ form {
 </head>
 <body>
 
-<% float ingresoPrestamo=0;%>
-<%float egresoPrestamo=0;%>
+<% float gananciaAnual=0;%>
+<%float gananciaPrestamo=0;%>
 
-<% if(request.getAttribute("egresoPrestamos") !=null){
-	egresoPrestamo=Float.parseFloat(request.getAttribute("egresoPrestamos").toString());
+<% if(request.getAttribute("gananciaPrestamos") !=null){
+	gananciaPrestamo=Float.parseFloat(request.getAttribute("gananciaPrestamos").toString());
+}
+
+if(request.getAttribute("gananciaAnual")!=null){
+	gananciaAnual=Float.parseFloat(request.getAttribute("gananciaAnual").toString());
 }
 %>
 
-<form name = "ingresoPrestamos" method= "post" action= "servletReportes">
+<form name = "gananciaPrestamosAnual" method= "post" action= "servletReportes">
 
-<h3> INGRESO DE PRESTAMOS POR FECHA</h3>
+<h3> GANANCIA ANUAL DE PRESTAMOS</h3>
 <table>
 <tr>
-	<td>FECHA DE INICIO: <input type="date" id="fechainicio" name ="fechainicio"></td>
-	<td>FECHA DE FIN: <input type="date" id="fechafin" name ="fechafin"></td>
+	<td>GANANCIA ANUAL:</td>
 </tr>
 <tr>
-	<td><input type="submit" name="btnReportePrestamoIngreso" value="Calcular"></td>
+	<td><input type="submit" name="btngananciaPrestamoAnual" value="Calcular"></td>
 </tr>
 <tr>
 
-	<td>Resultado: <%if(ingresoPrestamo==0){%>
+	<td>Resultado: <%if(gananciaAnual==0){%>
 		SIN RESULTADO
 	<%}else{ %>
-	<%=ingresoPrestamo %>
+	<%=gananciaAnual %>
 	<%} %>
 	
 	</td>
@@ -52,22 +55,22 @@ form {
 </form>
 
 
-<form name = "egresoPrestamos" method= "post" action= "servletReportes">
-<h3>EGRESO DE PRESTAMOS POR FECHA</h3>
+<form name = "gananciaPrestamos" method= "post" action= "servletReportes">
+<h3>GANANCIA DE PRESTAMOS POR FECHA</h3>
 <table>
 <tr>
-	<td>FECHA DE INICIO: <input type="date" id="fechainicio" name ="fechainicio"></td>
-	<td>FECHA DE FIN: <input type="date" id="fechafin" name ="fechafin"></td>
+	<td>FECHA DE INICIO: <input type="date" id="fechainicio" name ="fechainicio" required></td>
+	<td>FECHA DE FIN: <input type="date" id="fechafin" name ="fechafin" required></td>
 </tr>
 <tr>
-	<td><input type="submit" name="btnReportePrestamoEgreso" value="Calcular"></td>
+	<td><input type="submit" name="btnGananciaPrestamo" value="Calcular"></td>
 </tr>
 <tr>
 
-	<td>Resultado: <%if(egresoPrestamo==0){%>
+	<td>Resultado: <%if(gananciaPrestamo==0){%>
 		SIN RESULTADO
 	<%}else{ %>
-	<%=egresoPrestamo %>
+	<%=gananciaPrestamo %>
 	<%} %>
 	
 	</td>

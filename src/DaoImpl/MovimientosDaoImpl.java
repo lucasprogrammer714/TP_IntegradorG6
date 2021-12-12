@@ -363,7 +363,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 	}
 	
 	
-public float egresoPrestamos(String fechaInicio, String fechaFin) {
+public float gananciaPrestamos(String fechaInicio, String fechaFin) {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -375,13 +375,13 @@ public float egresoPrestamos(String fechaInicio, String fechaFin) {
 		float reporte = 0;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		try {
-			String query = "SELECT SUM(imp_pedido) as sumegresoprestamo FROM  prestamos WHERE fecha_p >='"+fechaInicio+"' and fecha_p <= '"+fechaFin+"' and Autorizado=1";
+			String query = "SELECT SUM(imp_debe_pagar) - SUM(imp_pedido) as gananciaPrestamo FROM  prestamos WHERE fecha_p >='"+fechaInicio+"' and fecha_p <= '"+fechaFin+"' and Autorizado=1";
 			Statement stm = conexion.createStatement();
 			ResultSet rs = stm.executeQuery(query);
 			
 			while(rs.next())
 			{
-				reporte = rs.getFloat("sumegresoprestamo");
+				reporte = rs.getFloat("gananciaPrestamo");
 				System.out.println(reporte);
 			}
 			
@@ -391,6 +391,38 @@ public float egresoPrestamos(String fechaInicio, String fechaFin) {
 		}
 		return reporte;
 	}
+
+
+public float ingresoPrestamoAnual(int year) {
+	try {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
+	}catch(ClassNotFoundException e){
+		e.printStackTrace();
+	}
+	
+	String query = "SELECT SUM(imp_debe_pagar) - SUM(imp_pedido) as gananciaPrestamoAnual FROM prestamos WHERE YEAR(fecha_p) ='" + year + "'AND Autorizado=1";
+	float reporte = 0;
+	Connection conexion = Conexion.getConexion().getSQLConexion();
+	
+	
+	try {
+		
+		Statement stm = conexion.createStatement();
+		ResultSet rs = stm.executeQuery(query);
+		
+		while(rs.next())
+		{
+			reporte = rs.getFloat("gananciaPrestamoAnual");
+			System.out.println(reporte);
+		}
+		
+	} catch(Exception e)
+	{
+		e.printStackTrace();
+	}
+	return reporte;
+   }
 
 
 }

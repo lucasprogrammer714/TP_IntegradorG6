@@ -70,11 +70,14 @@ public class MovimientosNegImpl implements MovimientosNeg {
 		return movDao.egresosMensual();
 	}
 
-	public float egresoPrestamos(String fechaInicio, String fechaFin) {
-		return movDao.egresoPrestamos(fechaInicio, fechaFin);
+	public float gananciaPrestamos(String fechaInicio, String fechaFin) {
+		return movDao.gananciaPrestamos(fechaInicio, fechaFin);
 	}
 
-
+	public float ingresoPrestamoAnual(int year) {
+		return movDao.ingresoPrestamoAnual(year);
+	}
+	
 
 	/*@Override
 	public Float[] ingresosMensual() {

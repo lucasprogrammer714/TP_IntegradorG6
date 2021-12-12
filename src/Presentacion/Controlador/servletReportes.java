@@ -105,18 +105,28 @@ public class servletReportes extends HttpServlet {
 			disptacher.forward(request, response);
 		}
 		
-		if(request.getParameter("btnReportePrestamoEgreso")!=null)
+		if(request.getParameter("btnGananciaPrestamo")!=null)
 		{
 			
 			String fechaInicio = request.getParameter("fechainicio");
 			String fechaFin = request.getParameter("fechafin");
 			
-			float reporte = movNeg.egresoPrestamos(fechaInicio, fechaFin);
+			float reporte = movNeg.gananciaPrestamos(fechaInicio, fechaFin);
 			
-			request.setAttribute("egresoPrestamos", reporte);
+			request.setAttribute("gananciaPrestamos", reporte);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ReportePrestamos.jsp");
 			dispatcher.forward(request, response);
 			
+		}
+		
+		if(request.getParameter("btngananciaPrestamoAnual")!=null) {
+			LocalDate currentDate = LocalDate.now();
+			int year = currentDate.getYear();
+			float gananciaAnual = movNeg.ingresoPrestamoAnual(year);
+			System.out.println("GANANCIA ANUAL: " + gananciaAnual);
+			request.setAttribute("gananciaAnual", gananciaAnual);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ReportePrestamos.jsp");
+			dispatcher.forward(request, response);
 		}
 		
 		
