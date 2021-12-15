@@ -8,6 +8,35 @@
 <style type="text/css">
 body {
 font-family: arial;
+ background-color: lightblue;
+} 
+
+a {
+  outline: none;
+  text-decoration: none;
+  display: inline-block;
+  width: 20%;
+  margin-right: 0.625%;
+  text-align: left;
+  line-height: 3;
+  color: black;
+}
+ a.back
+ {
+ margin: 20px;
+ }
+
+a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: red;
 }
 
   
@@ -34,14 +63,14 @@ if(session.getAttribute("adminlog")!=null)
 user=session.getAttribute("adminlog").toString();
 %>
 
-<h1> bienvenido/a <%=user %></h1>
+<h1> Bienvenido/a <%=user %></h1>
 
 <h2>Menú de cuentas</h2>
 <h3> Elija una opcion:</h3>
 <a href="AltaCuentaAdmin.jsp">Agregar una cuenta</a><br>
 <a href="BajaCuentaAdmin.jsp">Dar de baja una cuenta</a><br>
 <a href="servletCuenta?Param=list">Listar todas las cuentas</a><br><br>
-<a href="UsuarioAdmin.jsp">Volver al menu anterior</a>
+<a href="UsuarioAdmin.jsp" class = "back">Volver al menu anterior</a>
 
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <footer>Golden Age</footer>

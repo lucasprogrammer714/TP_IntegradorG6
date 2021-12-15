@@ -67,7 +67,7 @@ public class servletTransferencia extends HttpServlet {
 			movimiento.setDni_movimiento(user_dni);
 			movimiento.setNro_cuenta_movimiento(Integer.parseInt(request.getParameter("cuentassaldo").toString()));
 			movimiento.setFecha_movimiento(LocalDate.parse(request.getParameter("txtFechaTransferencia")));
-			movimiento.setDetalle(request.getParameter("txtDetalle"));
+			movimiento.setDetalle(request.getParameter("txtDetalle")+"-Transferencia a CBU: "+CBU);
 			movimiento.setImporte(Float.parseFloat(request.getParameter("txtImporte")));
 			movimiento.setTipo_movimiento(tipo_movimiento);
 			dniDepo=cuentaNeg.Dni_de_Cuenta(CBU);

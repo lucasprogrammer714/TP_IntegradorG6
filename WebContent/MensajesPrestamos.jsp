@@ -26,9 +26,7 @@ if(request.getAttribute("updateprestamo")!=null){
 <%boolean autorizado=prestamo.isAutorizado(); %>
 <%boolean pendiente=prestamo.isPendiente(); %>
 <%int idP=prestamo.getId_prestamo(); %>
-<%=autorizado %>
-<%=pendiente %>
-<%=idP %>
+
 <% if (prestamo.isPendiente()==true && prestamo.isAutorizado()==false){ %> 
 	<b>Su prestamo está pendiente de autorización</b>
 <%}%>

@@ -196,7 +196,7 @@ public class CuentasDaoImpl implements CuentasDao {
 		
 	
 		
-		String sql = "SELECT cuentas.DNI_c, cuentas.num_cuenta, cuentas.CBU, cuentas.creacion, cuentas.tipo_cuenta, cuentas.saldo, cuentas.estado FROM cuentas inner join clientes on cuentas.DNI_c = clientes.DNI ";
+		String sql = "SELECT cuentas.DNI_c, cuentas.num_cuenta, cuentas.CBU, cuentas.creacion, cuentas.tipo_cuenta, cuentas.saldo FROM cuentas inner join clientes on cuentas.DNI_c = clientes.DNI where cuentas.estado = 1";
 		
 		List<Cuentas> lc = new ArrayList<Cuentas>();
 		
@@ -215,7 +215,7 @@ public class CuentasDaoImpl implements CuentasDao {
 			cuenta.setCreacion(rs.getDate("cuentas.creacion").toLocalDate());
 			cuenta.setTipo_cuenta(rs.getString("cuentas.tipo_cuenta"));
 			cuenta.setSaldo(rs.getFloat("cuentas.saldo"));
-			cuenta.setEstado_cuenta(rs.getBoolean("cuentas.estado"));
+		
 			lc.add(cuenta);
 		}
 

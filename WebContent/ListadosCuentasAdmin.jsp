@@ -58,7 +58,7 @@ if(request.getAttribute("listaCue")!=null){
 			<th>CREACION</th>
 			<th>TIPO DE CUENTA</th>
 			<th>SALDO</th>
-			<th>ESTADO</th>
+		
 		</tr>
 		</thead>
 		<tbody>
@@ -73,7 +73,7 @@ if(request.getAttribute("listaCue")!=null){
 			<td><%=c.getCreacion() %></td>
 			<td><%=c.getTipo_cuenta()%></td>
 			<td><%=c.getSaldo()%></td>
-			<td><%=c.getEstado_cuenta()%></td>
+		
 		</tr>
 		<%
 			}

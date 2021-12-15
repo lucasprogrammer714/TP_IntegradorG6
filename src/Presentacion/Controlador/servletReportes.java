@@ -54,6 +54,26 @@ public class servletReportes extends HttpServlet {
 			
 		}
 		 
+		
+		
+		if(request.getParameter("btnReporteIngresoMensual")!=null)
+		{
+			
+			int month = Integer.parseInt(request.getParameter("MesesReporte"));
+			
+			LocalDate currentDate = LocalDate.now();
+			int year = currentDate.getYear(); 
+			
+			
+			
+			float reporteMensual = movNeg.reporteIngresoMensual(year, month);
+			
+			request.setAttribute("ReporteMes", reporteMensual);
+			RequestDispatcher disptacher = request.getRequestDispatcher("/ReporteIngresos.jsp");
+			disptacher.forward(request, response);
+			
+		}
+		
 		if(request.getParameter("btnReporteAnual")!=null)
 		{
 			
@@ -95,14 +115,31 @@ public class servletReportes extends HttpServlet {
 			
 			float reporteAnual = movNeg.reporte_egresoAnual(year);
 			
-			ArrayList<Float> reporteMensual = new ArrayList();
-			
-			reporteMensual = movNeg.egresosMensual();
+		
 			
 			request.setAttribute("reporteAnual", reporteAnual);
-			request.setAttribute("reporteMensual", reporteMensual);
+		
 			RequestDispatcher disptacher = request.getRequestDispatcher("/ReporteEgresos.jsp");
 			disptacher.forward(request, response);
+		}
+		
+		
+		if(request.getParameter("btnReporteEgresoMensual")!=null)
+		{
+			
+			int month = Integer.parseInt(request.getParameter("Meses"));
+			
+			LocalDate currentDate = LocalDate.now();
+			int year = currentDate.getYear(); 
+			
+			
+			
+			float reporteMensual = movNeg.egresosBancoMensual(year, month);
+			
+			request.setAttribute("ReporteMes", reporteMensual);
+			RequestDispatcher disptacher = request.getRequestDispatcher("/ReporteEgresos.jsp");
+			disptacher.forward(request, response);
+			
 		}
 		
 		if(request.getParameter("btnGananciaPrestamo")!=null)

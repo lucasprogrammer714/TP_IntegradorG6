@@ -14,11 +14,12 @@ public interface MovimientosDao {
     public int contarPagoCuota(String dni, int cuota, int idPrestamo);
     public float  ingresosBancoFecha (String fechaInicio, String fechaFin);
     public float ingresosBancoAnual(int year);
+    public float ingresosBancoMensual(int year, int month);
     public float  egresosBancoFecha (String fechaInicio, String fechaFin);
     public float  egresosBancoAnual(int year);
- 
-    public ArrayList<Float> egresosMensual(); 
-  //  public Float[] ingresosMensual();
+    public float egresosBancoMensual(int year, int month);
+    //public ArrayList<Float> egresosMensual(); 
+
 	
     public float gananciaPrestamos(String fechaInicio, String fechaFin);
     public float ingresoPrestamoAnual(int year);

@@ -8,6 +8,35 @@
 <style type="text/css">
 body {
 font-family: arial;
+ background-color: lightblue;
+} 
+
+a {
+  outline: none;
+  text-decoration: none;
+  display: inline-block;
+  width: 20%;
+  margin-right: 0.625%;
+  text-align: left;
+  line-height: 3;
+  color: black;
+}
+ a.back
+ {
+ margin: 20px;
+ }
+
+a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: red;
 }
 
   
@@ -34,17 +63,17 @@ if(session.getAttribute("adminlog")!=null)
 user=session.getAttribute("adminlog").toString();
 %>
 
-<h1> bienvenido/a <%=user %></h1>
+<h1> Bienvenido/a <%=user %></h1>
 
 <!--  ingresar aqui despues el nombre del administrador -->
 
-<h2>elija una de las siguienes opciones:</h2>
+<h2>Elija una de las siguienes opciones:</h2>
 
-menu ABML de <a href="MenuCuentasAdmin.jsp">cuentas</a> a un cliente <br>
-menu ABML de <a href="MenuClientesAdmin.jsp">clientes</a><br>
-autorizacion de <a href= "MenuPrestamosAdmin.jsp">prestamos</a> <br>
-aqui encontrara los <a href="Reportes.jsp">informes/reportes</a><br> <br>
-<a href="Login.jsp">cerrar sesion</a>
+ <a href="MenuCuentasAdmin.jsp">Menú de cuentas</a> <br>
+ <a href="MenuClientesAdmin.jsp">Menú de clientes</a><br>
+<a href= "MenuPrestamosAdmin.jsp" >Autorizacion de prestamos</a> <br>
+<a href="Reportes.jsp"> Aqui encontrara los informes/reportes</a><br> <br>
+<a href="Login.jsp">Cerrar Sesion</a>
 
 <!-- <input type="submit" name = "btnCuentas" value = "Cuentas"/> 
 <input type="submit" name = "btnClientes" value = "Clientes"/>

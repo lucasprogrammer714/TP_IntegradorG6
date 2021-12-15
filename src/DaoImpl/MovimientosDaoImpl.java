@@ -241,6 +241,39 @@ public class MovimientosDaoImpl implements MovimientosDao {
 	   }
                
 	
+	
+	public float ingresosBancoMensual(int year, int month) {
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		
+		String query = "SELECT convert(sum(importe), decimal(12,2)) as reporte, YEAR(fecha_m) as anio FROM Movimientos WHERE YEAR(fecha_m) = '" + year + "'and MONTH(fecha_m) ='"+month+"' and detalle like '%Pago de cuota%'";
+		float reporte = 0;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		
+		
+		try {
+			
+			Statement stm = conexion.createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			
+			while(rs.next())
+			{
+				reporte = rs.getFloat("reporte");
+				System.out.println(reporte);
+			}
+			
+		} catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return reporte;
+	   }
+	
 
 	
 	@Override
@@ -310,7 +343,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 	
 
 
-	public ArrayList<Float>  egresosMensual()
+	/*public ArrayList<Float>  egresosMensual()
 	{
 		
 		try {
@@ -336,22 +369,26 @@ public class MovimientosDaoImpl implements MovimientosDao {
 			Statement stm = conexion.createStatement();
 			ResultSet rs = stm.executeQuery(query);
 			
+		    
+		    
 			while(rs.next())
 			{
 				reporte = rs.getFloat("reporte");
 			    month = rs.getInt("mes");
 			    
-			    for(int i=0;i<12;i++)
+			    for(int i=1;i<=12;i++)
 			    {
 			    	if(i==month)
 			    	{
 			    		reporteMes += reporte;
 			    		System.out.println(reporteMes);
 			    		reporteMeses.add(reporteMes);
-			    	}
+			         }
+			    	
 			    }
+
 			}
-			
+		
 		} catch(Exception e)
 		{
 			e.printStackTrace();
@@ -360,7 +397,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 		
 	return reporteMeses;
 		
-	}
+	}*/
 	
 	
 public float gananciaPrestamos(String fechaInicio, String fechaFin) {
@@ -423,6 +460,39 @@ public float ingresoPrestamoAnual(int year) {
 	}
 	return reporte;
    }
+
+@Override
+public float egresosBancoMensual(int year, int month) {
+	try {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
+	}catch(ClassNotFoundException e){
+		e.printStackTrace();
+	}
+	
+	String query = "SELECT  convert(sum(importe), decimal(12,2)) as reporte FROM Movimientos WHERE YEAR(fecha_m) ='"+year+"' and tipo_movimiento = 'Deposito' and MONTH(fecha_m) ='"+month+"'"; 
+			
+	float reporte = 0;
+	Connection conexion = Conexion.getConexion().getSQLConexion();
+	
+	
+	try {
+		
+		Statement stm = conexion.createStatement();
+		ResultSet rs = stm.executeQuery(query);
+		
+		while(rs.next())
+		{
+			reporte = rs.getFloat("reporte");
+			System.out.println(reporte);
+		}
+		
+	} catch(Exception e)
+	{
+		e.printStackTrace();
+	}
+	return reporte;
+}
 
 
 }

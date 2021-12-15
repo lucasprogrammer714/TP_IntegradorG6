@@ -77,9 +77,9 @@ text-align: center;}
 
 
 <% if (existe == 0) { %>
+ <b>No existe el DNI ingresado</b> 
   
-  
-  <%}%>
+  <%}%><br>
  <a href="MenuClientesAdmin.jsp">Volver al menú</a>
  <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <footer>Golden Age</footer>

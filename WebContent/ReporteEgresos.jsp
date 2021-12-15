@@ -12,7 +12,8 @@
 
 <%float reporte = 0;
 float reporteAnual = 0;
-ArrayList<Float>reporteMensual = new ArrayList<Float>();
+float reporteMensual =0;
+
 
 
 if(request.getAttribute("reporteFechas")!=null){
@@ -26,11 +27,12 @@ reporteAnual = Float.parseFloat(request.getAttribute("reporteAnual").toString())
 
 }
 
-if(request.getAttribute("reporteMensual")!=null){
+if(request.getAttribute("ReporteMes")!=null){
 
-reporteMensual = (ArrayList<Float>)request.getAttribute("reporteMensual");
+reporteMensual = (Float)request.getAttribute("ReporteMes");
 
 }
+
 
 %>
 
@@ -50,34 +52,48 @@ reporteMensual = (ArrayList<Float>)request.getAttribute("reporteMensual");
             <td> <%if(reporte == 0) {%>
                     Sin resultados <%} else{%>
             <%=reporte %><%} %></td>
-    
 </tr>
-</table>
+<tr><td></td><td></td></tr>
+<tr>
+<td style="width: 162px; ">Reporte Mensual:</td>
+<td>
+<select name="Meses">
+
+<option  value=1>Enero</option>
+<option  value=2>Febrero</option>
+<option  value=3>Marzo</option>
+<option  value=4>Abril</option>
+<option  value=5>Mayo</option>
+<option  value=6>Junio</option>
+<option  value=7>Julio</option>
+<option  value=8>Agosto</option>
+<option  value=9>Septiembre</option>
+<option  value=10>Octubre</option>
+<option  value=11>Noviembre</option>
+<option  value=12>Diciembre</option>
+
+</select>
+     </td>
+     <td><%=reporteMensual %></td>
+     <td style="width: 601px; "><input type = "submit" value = "Aceptar"  name = "btnReporteEgresoMensual" ></td>
+          </tr> 
+                   </table>
 
 
 <table>
 <tr><tr><td>Egreso anual:</td>
-         <td><input></input></td>
+                <td> <%if(reporteAnual == 0) {%>
+                    Sin resultados <%} else{%>
+            <%=reporteAnual %><%} %></td>
          <td><input type = "submit" name = "btnReporteEgresoAnual" value = "Aceptar"></input></td>
 </tr>
 <tr><td></td>
-         <td> <%if(reporteAnual == 0) {%>
-                    Sin resultados <%} else{%>
-            <%=reporteAnual %><%} %></td><br>
-            
 
-        
-      
-</tr>
+ </tr>
 </table>
 
 </form>
 
-<%for(	int i =0;i<reporteMensual.size();i++){
-
-%>
-<%=reporteMensual.get(i) %>
-<% }%>
 
 </body>
 </html>

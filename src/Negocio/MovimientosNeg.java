@@ -13,12 +13,12 @@ public interface MovimientosNeg {
 	public int contarPagoCuota(String dni, int cuota, int idPrestamo);
 	public float reporteIngresoFecha(String fechaInicio, String fechaFin);
 	public float reporteIngresoAnual(int year);
+	public float reporteIngresoMensual(int year, int month);
 	public float reporte_egresoFecha(String fechaInicio, String fechaFin);
 	public float reporte_egresoAnual(int year);
-	
-    public ArrayList<Float> egresosMensual(); 
-	//public Float[] ingresosMensual();
-    
+    public float egresosBancoMensual(int year, int month);
+
+
     public float gananciaPrestamos(String fechaInicio, String fechaFin);
     public float ingresoPrestamoAnual(int year);
 }

@@ -80,6 +80,23 @@ text-align: center;
    
 </form>
 
+
+
+<%
+
+int existeDNI=1;
+if (request.getAttribute("DNIEXISTE")!=null){
+	existeDNI=(Integer)request.getAttribute("DNIEXISTE");
+}
+
+if(existeDNI==0){
+	%>
+	<h2>EL DNI INGRESADO NO EXISTE</h2>
+	<%
+}
+
+%>
+
 <%
 
 boolean maxCuentas = false;

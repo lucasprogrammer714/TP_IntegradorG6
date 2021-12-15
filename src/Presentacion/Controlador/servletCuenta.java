@@ -48,45 +48,66 @@ public class servletCuenta extends HttpServlet {
 		if(request.getParameter("btnAgregarCuenta")!=null)
 		{
 			int contcuentas=cuenta_N.contarCuentasAdmin(request.getParameter("txtDniAltaCuenta"));
-			///System.out.println("NUMERO DE CUENTAS: " + contcuentas);
-			if(contcuentas<=2) {
-				
-				boolean cuentaAgregada = false;
-			    cuenta.setDni_cuenta(request.getParameter("txtDniAltaCuenta"));
-				cuenta.setNumero_cuenta(Integer.parseInt(request.getParameter("txtNroCuenta")));
-				cuenta.setTipo_cuenta(request.getParameter(("ddlTipoCuenta").toString()));
-				cuenta.setCbu(request.getParameter("txtCBU"));
-				cuenta.setCreacion(LocalDate.parse(request.getParameter("txtFechaCreacionCuenta").toString()));
-				cuenta.setSaldo(Float.parseFloat(request.getParameter("txtSaldo")));
-				cuenta.setEstado_cuenta(true);
-				
-				System.out.println("USUARIO: " + cuenta.getDni_cuenta());
-				System.out.println("N CUENTA: " + cuenta.getNumero_cuenta());
-				System.out.println("CBU: " + cuenta.getCbu());
-				System.out.println("FECHA: " + cuenta.getCreacion());
-				System.out.println("TIPO CUENTA: " + cuenta.getTipo_cuenta());
-				System.out.println("SALDO: " + cuenta.getSaldo());
-				System.out.println("ESTADO: " + cuenta.getEstado_cuenta());
-				
-				cuentaAgregada = cuenta_N.insert(cuenta);
-				
-				if (cuentaAgregada == true)
-				{
-					request.setAttribute("cuentaAgregada", cuentaAgregada);
-				}
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaCuentaAdmin.jsp");
-				dispatcher.forward(request, response);
+			int existeCliente=0;
+			String dniCliente=request.getParameter("txtDniAltaCuenta");
+			
+			try {
+				existeCliente =cliente_N.buscar_un_cliente(dniCliente);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
+			if(existeCliente==1) {
+				
+				if(contcuentas<=2) {
+					
+					boolean cuentaAgregada = false;
+				    cuenta.setDni_cuenta(request.getParameter("txtDniAltaCuenta"));
+					cuenta.setNumero_cuenta(Integer.parseInt(request.getParameter("txtNroCuenta")));
+					cuenta.setTipo_cuenta(request.getParameter(("ddlTipoCuenta").toString()));
+					cuenta.setCbu(request.getParameter("txtCBU"));
+					cuenta.setCreacion(LocalDate.parse(request.getParameter("txtFechaCreacionCuenta").toString()));
+					cuenta.setSaldo(Float.parseFloat(request.getParameter("txtSaldo")));
+					cuenta.setEstado_cuenta(true);
+					
+					System.out.println("USUARIO: " + cuenta.getDni_cuenta());
+					System.out.println("N CUENTA: " + cuenta.getNumero_cuenta());
+					System.out.println("CBU: " + cuenta.getCbu());
+					System.out.println("FECHA: " + cuenta.getCreacion());
+					System.out.println("TIPO CUENTA: " + cuenta.getTipo_cuenta());
+					System.out.println("SALDO: " + cuenta.getSaldo());
+					System.out.println("ESTADO: " + cuenta.getEstado_cuenta());
+					
+					cuentaAgregada = cuenta_N.insert(cuenta);
+					
+					if (cuentaAgregada == true)
+					{
+						request.setAttribute("cuentaAgregada", cuentaAgregada);
+					}
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaCuentaAdmin.jsp");
+					dispatcher.forward(request, response);
+				}
+				
+				else {
+					request.setAttribute("NCuentasExcedida", contcuentas);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaCuentaAdmin.jsp");
+					dispatcher.forward(request, response);
+				}
+				
+				
+			}
 			else {
-				request.setAttribute("NCuentasExcedida", contcuentas);
+				request.setAttribute("DNIEXISTE", existeCliente);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaCuentaAdmin.jsp");
 				dispatcher.forward(request, response);
 			}
+			///System.out.println("NUMERO DE CUENTAS: " + contcuentas);
+			
 			
 			
 		}
-	
+
 	
 	
 	

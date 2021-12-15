@@ -76,6 +76,6 @@ if (request.getAttribute("listaTodosPrestamos")!=null)
    <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <footer>Golden Age</footer>
 </div>
-   <a href = "MenuPrestamosAdmin.jsp">Volver
+   <a href = "MenuPrestamosAdmin.jsp">Volver</a>
 </body>
 </html>
