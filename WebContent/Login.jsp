@@ -38,7 +38,7 @@ text-align: center;}
 <%
 String user="";
 if(request.getAttribute("Usuario")!=null)
-user="EL USUARIO NO EXISTE";
+user="Los datos ingresados no son válidos. Por favor vuelva a intentarlo";
 %>
 
 <form method="post" action = "servletLogin">

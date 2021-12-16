@@ -31,6 +31,9 @@ if(request.getAttribute("ESTADOPRESTAMO")!=null)
 <%}%>
 <%if (contarPrestamos==2){ %> 
 <b>TIENE UN PRESTAMO PENDIENTE SIN SALDAR</b><br>
-<%}%>
+<%}%><br><br>
+
+
+<a href="UsuarioCliente.jsp">Volver</a>
 </body>
 </html>
