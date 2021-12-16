@@ -14,8 +14,8 @@
 <style type="text/css">
 body {
 font-family: arial;
+background-color: lightblue;
 }
-
   
 div{
 text-align: center;}
@@ -80,6 +80,6 @@ if (request.getAttribute("listaPrestamos")!=null)
    <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <footer>Golden Age</footer>
 </div>
-   <a href = "MenuPrestamosAdmin.jsp">Volve
+   <a href = "MenuPrestamosAdmin.jsp">Volver al menú principal</a>
 </body>
 </html>

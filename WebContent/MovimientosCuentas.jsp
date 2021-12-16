@@ -21,7 +21,8 @@ $(document).ready( function () {
 <style type="text/css">
 body {
 font-family: arial;
-}
+ background-color: lightblue;
+} 
 
   
 div{
@@ -48,7 +49,7 @@ if(session.getAttribute("usuariolog")!=null)
 user=session.getAttribute("usuariolog").toString();
 }
 %>
-<h1>bienvenido/a <%=user %> </h1>
+<h1>Bienvenido/a <%=user %> </h1>
 
 <%
 List<Cuentas> listaCuentas = new ArrayList<Cuentas>();

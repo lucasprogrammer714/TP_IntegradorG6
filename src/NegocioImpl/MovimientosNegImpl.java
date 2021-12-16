@@ -87,6 +87,13 @@ public class MovimientosNegImpl implements MovimientosNeg {
 		// TODO Auto-generated method stub
 		return movDao.ingresosBancoMensual(year, month);
 	}
+
+
+	/*@Override
+	public ArrayList<Float> egresosMensual() {
+		// TODO Auto-generated method stub
+		return movDao.egresosMensual();
+	}
 	
 	
 

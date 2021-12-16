@@ -62,7 +62,7 @@ public class servletTransferencia extends HttpServlet {
 			Movimientos movimiento = new Movimientos();
 			boolean registro = false;
 			boolean registroF=true;
-			
+			boolean busquedaCBU = false;
 			
 			movimiento.setDni_movimiento(user_dni);
 			movimiento.setNro_cuenta_movimiento(Integer.parseInt(request.getParameter("cuentassaldo").toString()));
@@ -72,11 +72,12 @@ public class servletTransferencia extends HttpServlet {
 			movimiento.setTipo_movimiento(tipo_movimiento);
 			dniDepo=cuentaNeg.Dni_de_Cuenta(CBU);
 			ncuentaDepo=cuentaNeg.Numero_de_Cuenta(CBU);
+			busquedaCBU = cuentaNeg.busqueda_cbu(CBU);
 			
 			System.out.println("DNI DEPO: " + dniDepo + ", CUENTA DEPO: " + ncuentaDepo);
 			ArrayList <Cuentas> list = cuentaNeg.ListarCuentaxCliente(user_dni);
 			
-			
+			request.setAttribute("cbuEncontrado", busquedaCBU);
 			
 			for(int i=0; i<list.size();i++) {
 				if(list.get(i).getNumero_cuenta() == Integer.parseInt(request.getParameter("cuentassaldo"))) {

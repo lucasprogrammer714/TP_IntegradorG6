@@ -306,6 +306,30 @@ public class CuentasDaoImpl implements CuentasDao {
 
 
 
+	public boolean cbu_Busqueda (String CBU) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+        }catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+       // System.out.println("CBU: " + CBU);
+        boolean  encontrado=false;
+        Connection conexion = Conexion.getConexion().getSQLConexion();
+        Statement statement;
+        try {
+            statement = conexion.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM cuentas WHERE CBU='" + CBU+"'");
+            if(rs.next()) {
+               // System.out.println("RESULTADO: " + rs.getString("num_cuenta"));
+                encontrado = true;
+            }
+            //System.out.println("Ncuenta: " + ncuenta);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return encontrado;
+    }
 
 
 

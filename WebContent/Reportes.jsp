@@ -8,6 +8,35 @@
 <style type="text/css">
 body {
 font-family: arial;
+ background-color: lightblue;
+} 
+
+a {
+  outline: none;
+  text-decoration: none;
+  display: inline-block;
+  width: 25%;
+  margin-right: 0.625%;
+  text-align: left;
+  line-height: 3;
+  color: black;
+}
+ a.back
+ {
+ margin: 20px;
+ }
+
+a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: red;
 }
 
   
@@ -39,13 +68,13 @@ user=session.getAttribute("adminlog").toString();
 
 <h2>REPORTES</h2>
 
-<a href=ReporteIngresos.jsp>Reporte de ingresos bancarios</a>
-<a href=ReporteEgresos.jsp>Reporte de egresos bancarios</a>
-<a href=ReportePrestamos.jsp>Reporte de Prestamos</a>
+<a href=ReporteIngresos.jsp>Reporte de ingresos bancarios</a><br>
+<a href=ReporteEgresos.jsp>Reporte de egresos bancarios</a><br>
+<a href=ReportePrestamos.jsp>Reporte de Prestamos</a><br><br>
 
 
 
-<a href="UsuarioAdmin.jsp">Volver al menu anterior</a>
+<a href="UsuarioAdmin.jsp">Volver al menú anterior</a>
 
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <footer>Golden Age</footer>

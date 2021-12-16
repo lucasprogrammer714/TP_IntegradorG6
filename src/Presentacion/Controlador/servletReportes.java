@@ -137,6 +137,8 @@ public class servletReportes extends HttpServlet {
 			float reporteMensual = movNeg.egresosBancoMensual(year, month);
 			
 			request.setAttribute("ReporteMes", reporteMensual);
+
+			
 			RequestDispatcher disptacher = request.getRequestDispatcher("/ReporteEgresos.jsp");
 			disptacher.forward(request, response);
 			

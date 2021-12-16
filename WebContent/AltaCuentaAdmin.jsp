@@ -9,8 +9,19 @@
 <style type="text/css">
 body {
 font-family: arial;
+background-color: lightblue;
 }
 
+form {
+  /* Centrar el formulario en la página */
+  margin: 0 auto;
+  width: 400px;
+  /* Esquema del formulario */
+  padding: 1em;
+  border: 5px solid #CCC;
+  border-radius: 1em;
+}
+  
 
 table{
 aling-items: center;
@@ -130,7 +141,7 @@ if (request.getAttribute("cuentaAgregada")!=null)
 <h2>La cuenta fue agregada exitosamente</h2>
 
 <% } %>
-<a href="MenuCuentasAdmin.jsp">Volver al menú</a>
+<a href="MenuCuentasAdmin.jsp">Volver al menú anterior</a>
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <footer>Golden Age</footer>
 </div>

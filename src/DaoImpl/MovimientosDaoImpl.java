@@ -343,7 +343,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 	
 
 
-	/*public ArrayList<Float>  egresosMensual()
+/*	public ArrayList<Float>  egresosMensual()
 	{
 		
 		try {
@@ -358,38 +358,55 @@ public class MovimientosDaoImpl implements MovimientosDao {
 	   String query = "SELECT importe as reporte, MONTH(fecha_m) as mes FROM Movimientos WHERE YEAR(fecha_m) ='2021' and tipo_movimiento = 'Deposito'";
 		float reporte = 0;
 
-	int month = 0;
+	   int month = 0;
 	   ArrayList<Float> reporteMeses = new ArrayList();
-		float reporteMes = 0;
+		float reporteMes = 0; 
+		
+		for(int i=0;i<12;i++) {
+			reporteMeses.add(reporteMes);
 
+	}
+
+		
+		
 	Connection conexion = Conexion.getConexion().getSQLConexion();
 		
 		try {
 
 			Statement stm = conexion.createStatement();
 			ResultSet rs = stm.executeQuery(query);
-			
-		    
-		    
+		
 			while(rs.next())
 			{
 				reporte = rs.getFloat("reporte");
 			    month = rs.getInt("mes");
+	
+		    if(month==11) {
+			reporteMes += reporte;
+		   // reporteMeses.add(i, reporteMes);
+		    System.out.println(reporteMes);
+		}
+		
+		
 			    
-			    for(int i=1;i<=12;i++)
-			    {
-			    	if(i==month)
-			    	{
-			    		reporteMes += reporte;
-			    		System.out.println(reporteMes);
-			    		reporteMeses.add(reporteMes);
-			         }
-			    	
+			  for(int i =0; i<12;i++) {
+			    	 if(month==i+1) {
+			    		    reporteMes += reporte;
+						    reporteMeses.add(i, reporteMes);
+						    System.out.println(reporteMes);
+					}
 			    }
+			   
+		 } 
+			
+			
+			}
+			for(int i=0;i<12;i++) {
+				System.out.println("AAA: "  + reporteMeses.get(i));
 
 			}
-		
-		} catch(Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}

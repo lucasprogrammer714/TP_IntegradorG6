@@ -6,7 +6,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Prestamos avisos</title>
+
+<style  type = "text/css">
+
+body{
+
+font-family: arial;
+ background-color: lightblue;
+
+}
+
+
+</style>
+
 </head>
 <body>
 
@@ -44,7 +57,7 @@ if(request.getAttribute("updateprestamo")!=null){
 <%if (update==true){ %> 
 <b>Su prestamo fue saldado correctamente</b><br>
 <%}%>
-
+<br>
 <a href="UsuarioCliente.jsp">Volver</a>
 
 </body>

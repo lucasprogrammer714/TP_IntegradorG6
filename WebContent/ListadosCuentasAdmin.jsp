@@ -19,6 +19,7 @@ $(document).ready( function () {
 <style type="text/css">
 body {
 font-family: arial;
+ background-color: lightblue;
 }
 
   
@@ -82,11 +83,9 @@ if(request.getAttribute("listaCue")!=null){
 
 	</table>
 
-<a href= "MenuCuentasAdmin.jsp">Volver</a>
+<a href= "MenuCuentasAdmin.jsp">Volver al menú anterior</a>
 
-<div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
-<footer>Golden Age</footer>
-</div>
+
 
 </body>
 </html>

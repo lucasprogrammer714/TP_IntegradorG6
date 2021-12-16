@@ -8,8 +8,18 @@
 <style type="text/css">
 body {
 font-family: arial;
+background-color: lightblue;
 }
-
+form {
+  /* Centrar el formulario en la página */
+  margin: 0 auto;
+  width: 400px;
+  /* Esquema del formulario */
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
+}
+  
   
 div{
 text-align: center;}
@@ -64,12 +74,12 @@ if (request.getAttribute("baja_cuenta")!=null)
 
 <% if (existe == 0){ %>
  
-<h1>La cuenta no se encuentra registrada</h1>
+<h3>La cuenta no se encuentra registrada</h3>
 <%} %>
 
 <% if (baja == 1){ %>
  
-<h1>La cuenta fue dada de baja exitosamente</h1>
+<h3>La cuenta fue dada de baja exitosamente</h3>
 <%} %>
 
 <a href="MenuCuentasAdmin.jsp">Volver al menú</a>

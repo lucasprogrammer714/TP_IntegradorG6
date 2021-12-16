@@ -8,6 +8,35 @@
 <style type="text/css">
 body {
 font-family: arial;
+ background-color: lightblue;
+} 
+
+a {
+  outline: none;
+  text-decoration: none;
+  display: inline-block;
+  width: 20%;
+  margin-right: 0.625%;
+  text-align: left;
+  line-height: 3;
+  color: black;
+}
+ a.back
+ {
+ margin: 20px;
+ }
+
+a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: red;
 }
 
   
@@ -35,15 +64,15 @@ if(session.getAttribute("usuariolog")!=null)
 user=session.getAttribute("usuariolog").toString();
 }
 %>
-<h1>bienvenido/a <%=user %> </h1>
+<h1>Bienvenido/a <%=user %> </h1>
 <!--  ingresar aqui despues el nombre del administrador   session.setAttribute("User", user) %> -->
-
-seleccione y observe el historial de movimientos de sus <a href="servletCliente?Param=movCuentas">cuentas</a> <br>
-realizar <a href="servletCliente?Param=listCuentasUser">tranferencias</a> <br>
-pida un <a href="servletCliente?Param=solicitarPrestamo">prestamo</a> ahora!<br>
-<a href="servletPrestamos?Param=PagarCuotasPrestamos">pague sus prestamos</a> pendientes<br>
-visualizar <a href="servletCliente?Param=mostrarDatos">mis datos</a><br> <br>
-<a href="Login.jsp">cerrar sesion</a>
+ <a href="servletCliente?Param=listCuentasUserSaldo">Mis cuentas</a> <br>
+ <a href="servletCliente?Param=movCuentas">Movimientos</a> <br>
+ <a href="servletCliente?Param=listCuentasUser">Transferencias</a> <br>
+<a href="servletCliente?Param=solicitarPrestamo">Solicitud de prestamo</a> <br>
+<a href="servletPrestamos?Param=PagarCuotasPrestamos">Pago de prestamo</a> <br>
+ <a href="servletCliente?Param=mostrarDatos">Mis Datos Personales</a><br> <br>
+<a href="Login.jsp">Cerrar Sesion</a>
 <!--
 <input type="submit" name="btnCuentas" value="Cuentas"/>
 <input type="submit" name="btnTransferencias" value="Transferencias"/>

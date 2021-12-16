@@ -100,6 +100,22 @@ public class servletCliente extends HttpServlet {
 			
 			break;
 			}
+			case "listCuentasUserSaldo":
+			{
+				
+					String user = request.getSession().getAttribute("usuariolog").toString();
+					
+					user_dni = clienteNeg.Dni_de_Usuario(user).toString();
+					
+					ArrayList <Cuentas> list = cuentaNeg.ListarCuentaxCliente(user_dni);
+				
+					request.setAttribute("listaCuentasUserSaldo", list);	
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/SaldoCuentasCliente.jsp");
+					dispatcher.forward(request, response);
+			
+			break;	
+			}
+
 			
 			case "solicitarPrestamo":
 			{

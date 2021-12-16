@@ -8,6 +8,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Buscar/Filtrar Clientes</title>
+
+<style  type = "text/css">
+
+body{
+font-family: arial;
+ background-color: lightblue;
+}
+
+
+</style>
+
+
 </head>
 <body>
 <form method="post" action="servletCliente">
@@ -77,7 +89,7 @@ Filtrar clientes por fecha de nacimiento: DESDE <input type="date" name="fechain
 			
 		</tr>
 	<%  } %>
-    </table>
-    <a href= "MenuClientesAdmin.jsp">Volver</a>
+    </table><br>
+    <a href= "MenuClientesAdmin.jsp">Volver al menú anterior</a>
 </body>
 </html>

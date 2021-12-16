@@ -9,12 +9,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Transferencias</title>
 <style type="text/css">
 body {
+
 font-family: arial;
+ background-color: lightblue;
+
 }
 
+h1{
+
+  margin: 0 auto;
+  width: 400px;
+
+}
+
+form {
+  /* Centrar el formulario en la página */
+  margin: 0 auto;
+  width: 400px;
+  /* Esquema del formulario */
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
+}
   
 div{
 text-align: center;}
@@ -41,7 +60,7 @@ if(session.getAttribute("usuariolog")!=null)
 user=session.getAttribute("usuariolog").toString();
 }
 %>
-<h1>bienvenido/a <%=user %> </h1>
+<h1>Bienvenido/a <%=user %> </h1>
 <!--  ingresar aqui despues el nombre del administrador -->
 
 <% 
@@ -49,6 +68,8 @@ user=session.getAttribute("usuariolog").toString();
 	List<Cuentas> listaCuentas = new ArrayList<Cuentas>();
 boolean registrado=false;
 boolean registradoF=false;
+boolean cbuEncontrado = true;
+
 
 if(request.getAttribute("listaCuentasUser")!=null){
    listaCuentas = (List<Cuentas>) request.getAttribute("listaCuentasUser");
@@ -64,6 +85,12 @@ if (request.getAttribute("registroExitoso")!=null)
 if (request.getAttribute("registroFallido")!=null)
 {
 	registradoF = Boolean.parseBoolean(request.getAttribute("registroFallido").toString());
+}
+
+
+if (request.getAttribute("cbuEncontrado")!=null)
+{
+cbuEncontrado = Boolean.parseBoolean(request.getAttribute("cbuEncontrado").toString());
 }
     
 %>
@@ -120,7 +147,10 @@ if(registradoF==true){
 	<%
 }
 %>
-<a href="UsuarioCliente.jsp">cancelar transferencia</a>
+<%if(cbuEncontrado==false){ %>
+<h2>CBU no encontrado</h2>
+<%} %>
+<a href="UsuarioCliente.jsp">Cancelar transferencia</a>
 
 
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">

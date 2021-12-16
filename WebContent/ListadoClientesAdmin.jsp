@@ -104,8 +104,7 @@ text-align: center;}
 	</tbody>
 </table>
 <%///aca termina la tabla antes de la paginacion %>
-    <a href= "MenuClientesAdmin.jsp">Volver</a>
-    <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
-<footer>Golden Age</footer>
-</div>
+    <a href= "MenuClientesAdmin.jsp">Volver al menú anterior</a>
+ 
+
 </body>

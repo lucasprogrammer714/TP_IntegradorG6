@@ -9,11 +9,25 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Solicitud de prestamos</title>
 <style type="text/css">
+
 body {
 font-family: arial;
+ background-color: lightblue;
+
+} 
+
+form {
+  /* Centrar el formulario en la página */
+  margin: 0 auto;
+  width: 400px;
+  /* Esquema del formulario */
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
 }
+  
 
   
 div{
@@ -39,10 +53,10 @@ if(session.getAttribute("usuariolog")!=null)
 user=session.getAttribute("usuariolog").toString();
 }
 %>
-<h1>bienvenido/a <%=user %> </h1> 
+<h1>Bienvenido/a <%=user %> </h1> 
 
 <!--  ingresar aqui despues el nombre del administrador -->
-<p>solicite aqui su prestamo y aguarde su aprobacion o declinacion</p>
+<p>Solicite aqui su prestamo y aguarde su aprobacion o declinacion</p>
 <%
 
 	List<Cuentas> listaCuentas = new ArrayList<Cuentas>();
@@ -51,6 +65,12 @@ boolean registrado = false;
 if(request.getAttribute("listaCuentasUser")!=null){
    listaCuentas = (List<Cuentas>) request.getAttribute("listaCuentasUser");
     
+}
+
+if(request.getAttribute("RegistroExitoso")!=null)
+{
+registrado = (Boolean)request.getAttribute("RegistroExitoso");
+
 }
 
  %>
@@ -95,7 +115,12 @@ if(request.getAttribute("listaCuentasUser")!=null){
 	</table>
 <input type="submit" name="btnSolicitarPrestamo" value="Solicitar Prestamo">
 </form>
-<a href="UsuarioCliente.jsp">volver atras</a>
+<br>
+<%if(registrado==true)
+{ %>
+<h3>Solicitud de prestamo exitosa, aguarde aviso de autorización en el menú de pago</h3>
+<%} %>
+<a href="UsuarioCliente.jsp">Volver al menú anterior</a>
 </body>
 </html>
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">

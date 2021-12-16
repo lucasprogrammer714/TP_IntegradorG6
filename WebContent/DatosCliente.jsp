@@ -7,10 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>DatosCliente</title>
 <style type="text/css">
-body {
-font-family: arial;
+body{font-family: arial;
+ background-color: lightblue;
 }
-
   
 div{
 text-align: center;}
@@ -41,7 +40,7 @@ user=session.getAttribute("usuariolog").toString();
 }
 %>
 <%usuario=(Cliente)session.getAttribute("datosusuario");%>
-<h1>bienvenido/a <%=user %> </h1>
+<h1>Bienvenido/a <%=user %> </h1>
 
 <table class="table" border="1">
   <thead>
@@ -74,10 +73,8 @@ user=session.getAttribute("usuariolog").toString();
       <td><%=usuario.getTelefono_fijo().toString() %></td>
     </tr>
   </tbody>
-</table>
-<a href="UsuarioCliente.jsp">Volver</a>
-<div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
-<footer>Golden Age</footer>
-</div>
+</table><br>
+<a href="UsuarioCliente.jsp">Volver al menú anterior</a>
+
 </body>
 </html>

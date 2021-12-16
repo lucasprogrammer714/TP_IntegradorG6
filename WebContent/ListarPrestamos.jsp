@@ -16,6 +16,18 @@ $(document).ready( function () {
     $('#tablaPrestamos').DataTable();
 } );
 </script>
+
+<style type = "text/css">
+
+
+body{
+font-family: arial;
+ background-color: lightblue;
+}
+
+
+}
+</style>
 </head>
 <body>
 
@@ -73,9 +85,8 @@ if (request.getAttribute("listaTodosPrestamos")!=null)
 
 
   
-   <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
-<footer>Golden Age</footer>
+
 </div>
-   <a href = "MenuPrestamosAdmin.jsp">Volver</a>
+   <a href = "MenuPrestamosAdmin.jsp">Volver al menú anterior</a>
 </body>
 </html>

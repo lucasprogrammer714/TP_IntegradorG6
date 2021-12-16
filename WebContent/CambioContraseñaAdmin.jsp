@@ -8,8 +8,18 @@
 <style type="text/css">
 body {
 font-family: arial;
+ background-color: lightblue;
 }
-
+form {
+  /* Centrar el formulario en la página */
+  margin: 0 auto;
+  width: 400px;
+  /* Esquema del formulario */
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
+}
+  
   
 div{
 text-align: center;}

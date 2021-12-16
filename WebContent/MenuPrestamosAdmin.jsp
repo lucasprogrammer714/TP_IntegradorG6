@@ -8,6 +8,35 @@
 <style type="text/css">
 body {
 font-family: arial;
+ background-color: lightblue;
+} 
+
+a {
+  outline: none;
+  text-decoration: none;
+  display: inline-block;
+  width: 25%;
+  margin-right: 0.625%;
+  text-align: left;
+  line-height: 3;
+  color: black;
+}
+ a.back
+ {
+ margin: 20px;
+ }
+
+a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: left;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: red;
 }
 
   
@@ -34,11 +63,11 @@ if(session.getAttribute("adminlog")!=null)
 user=session.getAttribute("adminlog").toString();
 %>
 
-<h1> bienvenido/a <%=user %></h1> <br> 
+<h1> Bienvenido/a <%=user %></h1> <br> 
 <!-- ingresar aqui el usuario conectado -->
 <a href="servletPrestamos?Param=ListadoPrestamos">Autorizar prestamos</a><br>
 <a href="servletPrestamos?Param=listarTodosLosPrestamos">Lista de solicitudes  de prestamos</a><br><br>
-<a href="UsuarioAdmin.jsp">Volver al menu anterior</a>
+<a href="UsuarioAdmin.jsp">Volver al menú anterior</a>
  <!-- deberia ser un negar prestamos porque el administrador puede ver las solicitudes de prestamos que le llegaron
  	  de los clientes aceptarlas o rechazarlas -->		<!--   <input type="submit" name="btnAsignarMonto" value="Asignar Monto"/> -->
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">

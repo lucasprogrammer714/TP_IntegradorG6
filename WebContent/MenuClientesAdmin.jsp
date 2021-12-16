@@ -15,7 +15,7 @@ a {
   outline: none;
   text-decoration: none;
   display: inline-block;
-  width: 20%;
+  width: 25%;
   margin-right: 0.625%;
   text-align: left;
   line-height: 3;

@@ -8,7 +8,12 @@
 <style type="text/css">
 body {
 font-family: arial;
-background-color: #000000;}
+background-color:lightbue;}
+
+form{
+  margin: 0 auto;
+}
+
 h1 {
 color: rgb(184, 134, 11);}
 input {
@@ -47,10 +52,11 @@ user="EL USUARIO NO EXISTE";
 <h2>Home Banking</h2>
 </div>
 <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
-<img alt="Home" src="C:\Users\lucas\OneDrive\Escritorio\Facultad\Lab. IV\TP_IntegradorG6-master\Imagenes\home.JPG" width="100%" height="200">
+<img alt="Home" src="C:\Users\lucas\OneDrive\Escritorio\Facultad\Lab. IV\TP_IntegradorG6-master\Imagenes\interna-homebanking.JPG" width="100%" height="200">
 </div>
-<div id="Blanco2" style="background-color:teal;" class="x">
-Usuario:     <input type="text" name="txtUsuario" required/> <br><br>
+<div id="Blanco2" style="background-color:teal;" class="x"><br>
+
+Usuario:     <input type="text" name="txtUsuario" required/><br><br>
 Contraseña: <input type="password" name="txtContraseña" required /><br><br>
 
 

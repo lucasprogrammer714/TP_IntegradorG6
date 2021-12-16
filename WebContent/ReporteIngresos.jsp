@@ -7,6 +7,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Reporte de Ingresos</title>
+
+<style type = "text/css">
+
+body{
+font-family: arial;
+ background-color: lightblue;
+}
+form {
+  /* Centrar el formulario en la página */
+  margin: 0 auto;
+  width: 400px;
+  /* Esquema del formulario */
+  padding: 1em;
+  border: 5px solid #CCC;
+  border-radius: 1em;
+}
+</style>
 </head>
 <body>
 
@@ -35,35 +52,43 @@ reporteMensual = Float.parseFloat(request.getAttribute("ReporteMes").toString())
 %>
 
 
+<%
+String user="";
+if(session.getAttribute("usuariolog")!=null)
+{
+user=session.getAttribute("usuariolog").toString();
+}
+%>
+<h1>Bienvenido/a <%=user %> </h1> 
 
-
-
-
-
-<form method = "post" action = "servletReportes">
+<form name="reporteFechaEgresos" method = "post" action = "servletReportes">
 <table>
-<tr><td>Ingresos por fecha:</td></tr>
+<h3>INGRESOS POR FECHA:</h3>
 <tr>
-         <td>Fecha Inicio:   <input type = "text" name = "txtFechaInicio"></input></td>
-         <td>Fecha Fin: <input type = "text" name = "txtFechaFin"></input></td>
-          <td><input type = "submit"  name="btnReporteFechas" value="Aceptar"></td>
-</tr>
-<tr>   <td>  </td>
-            <td> <%if(reporte == 0) {%>
-                    Sin resultados <%} else{%>
-            <%=reporte %><%} %></td>
-            
-           
+         <td>FECHA DE INICIO: </td>
+         <td>FECHA DE FIN: </td>
+        </tr>
+        <tr><td style="width: 270px; "><input type = "text" name = "txtFechaInicio" required></input>
+        </td><td><input type = "text" name = "txtFechaFin" required></input></td></tr>
+  <tr>
+  <td><input type = "submit"  name="btnReporteEgresoFechas" value="Calcular">  </td>
+  </tr>
+      <tr>   
+        <td>Resultado: <%if(reporte == 0) {%>
+                    SIN RESULTADOS <%} else{%>
+            <%=reporte %><%} %>
+            </td>
 </tr>
 </table>
+</form>
 
-
+<form name="reporteAnualEgresos" method = "post" action = "servletReportes">
+<h3>REPORTE  MENSUAL:</h3>
 <table>
 <tr>
-<td style="width: 162px; ">Reporte Mensual:</td>
 <td>
-<select name="MesesReporte">
-
+<select name="Meses">
+<option>Seleccionar mes</option>
 <option  value=1>Enero</option>
 <option  value=2>Febrero</option>
 <option  value=3>Marzo</option>
@@ -76,26 +101,43 @@ reporteMensual = Float.parseFloat(request.getAttribute("ReporteMes").toString())
 <option  value=10>Octubre</option>
 <option  value=11>Noviembre</option>
 <option  value=12>Diciembre</option>
-
 </select>
      </td>
-     <td><%=reporteMensual %></td>
-     <td style="width: 601px; "><input type = "submit" value = "Aceptar"  name = "btnReporteIngresoMensual" ></td>
-          </tr> 
-<tr><tr><td>Ingreso anual:</td>
-         <td><input></input></td>
-         <td><input type = "submit" name = "btnReporteAnual" value = "Aceptar"></input></td>
-</tr>
-<tr><td></td>
-   <td> <%if(reporte == 0) {%>
-                    Sin resultados <%} else{%>
-            <%=reporteAnual %><%} %></td>
-</tr>
+     </tr>
+     <tr>
+      <td><input type = "submit" value = "Calcular"  name = "btnReporteEgresoMensual" ></td>
+ </tr> 
+    <tr>
+      <td>Resultado:<%if(reporteMensual==0){ %>
+      SIN RESULTADO
+      <%}else{ %>
+      <%=reporteMensual %>
+      <%} %>
+      </td>
+    </tr>
+                   </table>
+</form>
 
+<form name="reporteEgresoAnual" method = "post" action = "servletReportes">
+<table>
+<h3>INGRESO ANUAL:</h3>
+<tr>
+<td><input type = "submit" name = "btnReporteEgresoAnual" value = "Calcular"></input></td>
+</tr>
+<tr>
+                <td> <%if(reporteAnual == 0) {%>
+                    SIN RESULTADOS<%} else{%>
+            <%=reporteAnual %><%} %></td>
+         
+</tr>
+<tr>
+
+ </tr>
 </table>
 
 </form>
 
+<a href="Reportes.jsp">Volver al menú principal</a>
 
 </body>
 </html>

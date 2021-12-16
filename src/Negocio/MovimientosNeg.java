@@ -17,7 +17,7 @@ public interface MovimientosNeg {
 	public float reporte_egresoFecha(String fechaInicio, String fechaFin);
 	public float reporte_egresoAnual(int year);
     public float egresosBancoMensual(int year, int month);
-
+  //  public ArrayList<Float> egresosMensual();
 
     public float gananciaPrestamos(String fechaInicio, String fechaFin);
     public float ingresoPrestamoAnual(int year);

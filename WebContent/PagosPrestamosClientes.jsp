@@ -13,6 +13,23 @@
 <style type="text/css">
 body {
 font-family: arial;
+ background-color: lightblue;
+
+} 
+
+h1{
+  margin: 0 auto;
+  width: 400px;
+}
+
+form {
+  /* Centrar el formulario en la página */
+  margin: 0 auto;
+  width: 400px;
+  /* Esquema del formulario */
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
 }
 
   
@@ -32,6 +49,16 @@ text-align: center;}
 <img alt="golden age" src="C:\Users\usuario\Desktop\TP5_AaronMeza\TP_IntegradorG6\Imagenes\Golden age.JPEG">
 </a>
 </div>
+
+<%
+String user="";
+if(session.getAttribute("usuariolog")!=null)
+{
+user=session.getAttribute("usuariolog").toString();
+}
+%>
+<h1>Bienvenido/a <%=user %> </h1> 
+
 
 <%
 Prestamos prestamo = new Prestamos();
@@ -112,12 +139,12 @@ Seleccione la cuenta con la que desea pagar su cuota:
 <%} 
 
 if(pagoNoExitoso==true){%>
-	no se pudo realizar el pago de cuota
+	No se pudo realizar el pago de cuota
 	<% 
 }
 %>
 <br><br>
-    <a href= "UsuarioCliente.jsp">Volver</a>
+    <a href= "UsuarioCliente.jsp">Volver al menú anterior</a>
   <div id="negro" style="background-color: black;" class="Bienvenida" lign="right">
 <footer>Golden Age</footer>
 </div>
